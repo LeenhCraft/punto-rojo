@@ -30,7 +30,7 @@ class PermisosExtrasMiddleware
         }
 
         // Verificar permisos
-        if (!$this->hasPermission($_SESSION["app_r"], $idrecurso)) {
+        if (!$this->hasPermission($_SESSION["app_r"], $idrecurso,"read")) {
             return $this->createErrorResponse("No tiene permisos para acceder a esta funcionalidad.");
         }
 
@@ -54,7 +54,7 @@ class PermisosExtrasMiddleware
     /**
      * Verifica si el usuario tiene permisos para el recurso y acción dados.
      */
-    private function hasPermission(int $roleId, string $resource): bool
+    private function hasPermission(int $roleId, string $resource, string $accion): bool
     {
         $model = new TableModel;
         $sql = "SELECT r.identificador as recurso, a.identificador as accion, pe.* 
@@ -62,7 +62,7 @@ class PermisosExtrasMiddleware
             INNER JOIN sis_recursos r ON pe.idrecurso = r.idrecurso 
             INNER JOIN sis_acciones a ON pe.idaccion = a.idaccion 
             WHERE pe.idrol = ? AND pe.estado = ? AND r.identificador = ? AND a.identificador = ?";
-        $datos = [$roleId, "1", $resource, "view"];
+        $datos = [$roleId, "1", $resource, $accion];
         $permisos = $model->query($sql, $datos)->first();
 
         return !empty($permisos);

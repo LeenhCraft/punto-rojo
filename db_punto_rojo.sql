@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 14-05-2025 a las 03:10:02
+-- Tiempo de generación: 17-06-2025 a las 10:19:17
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -35,6 +35,16 @@ CREATE TABLE `sis_acciones` (
   `estado` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `sis_acciones`
+--
+
+INSERT INTO `sis_acciones` (`idaccion`, `nombre`, `identificador`, `descripcion`, `estado`) VALUES
+(1, 'Crear', 'create', '', 1),
+(2, 'Leer', 'read', '', 1),
+(3, 'Actualizar', 'update', '', 1),
+(4, 'Eliminar', 'delete', '', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -56,172 +66,112 @@ CREATE TABLE `sis_centinela` (
 --
 
 INSERT INTO `sis_centinela` (`idcentinela`, `codigo`, `ip`, `agente`, `method`, `url`, `fecha_registro`) VALUES
-(1, 5145, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:49:34'),
-(2, 9815, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/boxicons.css', '2025-05-13 21:49:34'),
-(3, 7123, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/fonts/iconify-icons.css', '2025-05-13 21:49:34'),
-(4, 5198, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/pickr/pickr-themes.css', '2025-05-13 21:49:34'),
-(5, 5345, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/core.css', '2025-05-13 21:49:34'),
-(6, 1643, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/css/demo.css', '2025-05-13 21:49:34'),
-(7, 1561, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/pages/front-page.css', '2025-05-13 21:49:34'),
-(8, 2431, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/nouislider/nouislider.css', '2025-05-13 21:49:34'),
-(9, 6608, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.css', '2025-05-13 21:49:34'),
-(10, 9103, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/pages/front-page-landing.css', '2025-05-13 21:49:34'),
-(11, 1357, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/pages/ui-carousel.css', '2025-05-13 21:49:34'),
-(12, 4766, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/helpers.js', '2025-05-13 21:49:34'),
-(13, 2971, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/template-customizer.js', '2025-05-13 21:49:34'),
-(14, 9407, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/front-config.js', '2025-05-13 21:49:34'),
-(15, 4174, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/img/front-pages/backgrounds/hero-bg.png', '2025-05-13 21:49:34'),
-(16, 1429, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/img/front-pages/landing-page/cta-dashboard.png', '2025-05-13 21:49:34'),
-(17, 8455, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/helpers.js', '2025-05-13 21:49:34'),
-(18, 1722, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/img/front-pages/backgrounds/footer-bg.png', '2025-05-13 21:49:34'),
-(19, 1746, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/template-customizer.js', '2025-05-13 21:49:34'),
-(20, 7159, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/front-config.js', '2025-05-13 21:49:34'),
-(21, 4042, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.min.js', '2025-05-13 21:49:34'),
-(22, 4837, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js', '2025-05-13 21:49:34'),
-(23, 8595, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.dataTables.min.js', '2025-05-13 21:49:35'),
-(24, 2150, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.min.js', '2025-05-13 21:49:35'),
-(25, 3182, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js', '2025-05-13 21:49:35'),
-(26, 8180, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/dataTables.bootstrap.min.js', '2025-05-13 21:49:35'),
-(27, 3076, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/popper/popper.js', '2025-05-13 21:49:35'),
-(28, 3657, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.dataTables.min.js', '2025-05-13 21:49:35'),
-(29, 3627, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/bootstrap.js', '2025-05-13 21:49:35'),
-(30, 1874, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/@algolia/autocomplete-js.js', '2025-05-13 21:49:35'),
-(31, 9291, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/node_modules/sweetalert2/dist/sweetalert2.all.min.js', '2025-05-13 21:49:35'),
-(32, 3213, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/pickr/pickr.js', '2025-05-13 21:49:35'),
-(33, 7085, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/dataTables.bootstrap.min.js', '2025-05-13 21:49:35'),
-(34, 9825, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/nouislider/nouislider.js', '2025-05-13 21:49:35'),
-(35, 8748, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/popper/popper.js', '2025-05-13 21:49:35'),
-(36, 4321, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/bootstrap.js', '2025-05-13 21:49:35'),
-(37, 4868, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.js', '2025-05-13 21:49:35'),
-(38, 6194, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/@algolia/autocomplete-js.js', '2025-05-13 21:49:35'),
-(39, 9406, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/node_modules/sweetalert2/dist/sweetalert2.all.min.js', '2025-05-13 21:49:35'),
-(40, 4662, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/pickr/pickr.js', '2025-05-13 21:49:35'),
-(41, 5127, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/front-main.js', '2025-05-13 21:49:35'),
-(42, 1242, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/nouislider/nouislider.js', '2025-05-13 21:49:35'),
-(43, 1144, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/ui-carousel.js', '2025-05-13 21:49:35'),
-(44, 2274, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.js', '2025-05-13 21:49:35'),
-(45, 7543, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/front-main.js', '2025-05-13 21:49:35'),
-(46, 4339, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/ui-carousel.js', '2025-05-13 21:49:35'),
-(47, 2808, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.css', '2025-05-13 21:49:35'),
-(48, 7284, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.js', '2025-05-13 21:49:35'),
-(49, 5445, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/images/Hero/DIABETES-MELLITUS-2022-M.jpg', '2025-05-13 21:49:35'),
-(50, 8457, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/images/Hero/herramintas-cuidado-diabetes-mellitus-redes.jpg', '2025-05-13 21:49:35'),
-(51, 7504, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.js', '2025-05-13 21:49:35'),
-(52, 4068, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:49:35'),
-(53, 4378, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:49:38'),
-(54, 1680, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/boxicons.css', '2025-05-13 21:49:39'),
-(55, 3493, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/pickr/pickr-themes.css', '2025-05-13 21:49:39'),
-(56, 6574, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/fonts/iconify-icons.css', '2025-05-13 21:49:39'),
-(57, 7987, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/core.css', '2025-05-13 21:49:39'),
-(58, 5309, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/pages/front-page.css', '2025-05-13 21:49:39'),
-(59, 4159, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/css/demo.css', '2025-05-13 21:49:39'),
-(60, 4392, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/nouislider/nouislider.css', '2025-05-13 21:49:39'),
-(61, 1753, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.css', '2025-05-13 21:49:39'),
-(62, 2468, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/pages/front-page-landing.css', '2025-05-13 21:49:39'),
-(63, 8151, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/css/pages/ui-carousel.css', '2025-05-13 21:49:39'),
-(64, 4704, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/helpers.js', '2025-05-13 21:49:39'),
-(65, 5312, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/template-customizer.js', '2025-05-13 21:49:39'),
-(66, 3106, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/front-config.js', '2025-05-13 21:49:39'),
-(67, 7822, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/img/front-pages/backgrounds/hero-bg.png', '2025-05-13 21:49:39'),
-(68, 6029, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/img/front-pages/landing-page/cta-dashboard.png', '2025-05-13 21:49:39'),
-(69, 9936, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/helpers.js', '2025-05-13 21:49:39'),
-(70, 9042, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/template-customizer.js', '2025-05-13 21:49:39'),
-(71, 9572, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/front-config.js', '2025-05-13 21:49:39'),
-(72, 8374, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.css', '2025-05-13 21:49:39'),
-(73, 3175, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.min.js', '2025-05-13 21:49:39'),
-(74, 3002, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/img/front-pages/backgrounds/footer-bg.png', '2025-05-13 21:49:39'),
-(75, 6681, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js', '2025-05-13 21:49:39'),
-(76, 5884, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.dataTables.min.js', '2025-05-13 21:49:39'),
-(77, 4663, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/dataTables.bootstrap.min.js', '2025-05-13 21:49:39'),
-(78, 7065, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/popper/popper.js', '2025-05-13 21:49:39'),
-(79, 4922, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/js/bootstrap.js', '2025-05-13 21:49:39'),
-(80, 7770, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/images/Hero/DIABETES-MELLITUS-2022-M.jpg', '2025-05-13 21:49:39'),
-(81, 8963, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/images/Hero/herramintas-cuidado-diabetes-mellitus-redes.jpg', '2025-05-13 21:49:39'),
-(82, 4737, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.min.js', '2025-05-13 21:49:39'),
-(83, 3673, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js', '2025-05-13 21:49:39'),
-(84, 1719, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/jquery.dataTables.min.js', '2025-05-13 21:49:39'),
-(85, 6554, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/@algolia/autocomplete-js.js', '2025-05-13 21:49:39'),
-(86, 1911, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/node_modules/sweetalert2/dist/sweetalert2.all.min.js', '2025-05-13 21:49:39'),
-(87, 1539, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/dataTables.bootstrap.min.js', '2025-05-13 21:49:39'),
-(88, 1550, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/pickr/pickr.js', '2025-05-13 21:49:39'),
-(89, 7365, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/nouislider/nouislider.js', '2025-05-13 21:49:39'),
-(90, 2049, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.js', '2025-05-13 21:49:39'),
-(91, 4502, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/front-main.js', '2025-05-13 21:49:39'),
-(92, 8669, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/js/ui-carousel.js', '2025-05-13 21:49:39'),
-(93, 8843, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/assets/vendor/libs/swiper/swiper.js', '2025-05-13 21:49:39'),
-(94, 3724, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:49:39'),
-(95, 7798, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:52:23'),
-(96, 3395, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:52:24'),
-(97, 2813, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:52:28'),
-(98, 4846, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:52:28'),
-(99, 1857, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:54:16'),
-(100, 1282, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:54:16'),
-(101, 1830, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:55:27'),
-(102, 6255, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:55:27'),
-(103, 1728, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 21:55:29'),
-(104, 3533, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/iniciar-sesion', '2025-05-13 21:55:36'),
-(105, 2724, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:56:22'),
-(106, 3160, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 21:56:22'),
-(107, 7047, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:56:23'),
-(108, 5822, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/iniciar-sesion', '2025-05-13 21:56:32'),
-(109, 6940, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:57:28'),
-(110, 2100, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 21:57:28'),
-(111, 1270, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:57:28'),
-(112, 2792, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:58:00'),
-(113, 6262, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 21:58:00'),
-(114, 6777, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 21:58:01'),
-(115, 6428, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:58:01'),
-(116, 9649, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/login', '2025-05-13 21:58:03'),
-(117, 6181, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-13 21:58:05'),
-(118, 2447, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 21:58:05'),
-(119, 9374, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 21:58:05'),
-(120, 9742, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 21:58:05'),
-(121, 4033, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:58:05'),
-(122, 5279, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 21:58:28'),
-(123, 3508, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 21:58:28'),
-(124, 9857, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 21:58:28'),
-(125, 1077, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:58:28'),
-(126, 6012, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 21:59:18'),
-(127, 6959, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 21:59:19'),
-(128, 6501, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 22:00:58'),
-(129, 4818, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:00:59'),
-(130, 5645, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 22:01:00'),
-(131, 5441, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 22:01:00'),
-(132, 8886, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 22:01:01'),
-(133, 9219, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:01:01'),
-(134, 5086, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:04:44'),
-(135, 6447, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 22:04:46'),
-(136, 2824, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 22:04:46'),
-(137, 4345, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 22:04:46'),
-(138, 9932, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:04:46'),
-(139, 8667, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 22:04:52'),
-(140, 8792, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:04:52'),
-(141, 2441, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-13 22:08:32'),
-(142, 1706, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 22:08:32'),
-(143, 4762, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 22:08:33'),
-(144, 7672, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:08:33'),
-(145, 6853, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos', '2025-05-13 22:08:56'),
-(146, 1283, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 22:08:56'),
-(147, 6865, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 22:08:56'),
-(148, 8891, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos', '2025-05-13 22:08:56'),
-(149, 9153, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:08:56'),
-(150, 2453, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/usuarios', '2025-05-13 22:09:34'),
-(151, 3913, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 22:09:34'),
-(152, 1185, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 22:09:35'),
-(153, 6671, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/usuarios/personal', '2025-05-13 22:09:35'),
-(154, 4545, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/usuarios', '2025-05-13 22:09:35'),
-(155, 8093, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:09:35'),
-(156, 5799, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/personas', '2025-05-13 22:09:36'),
-(157, 8473, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 22:09:36'),
-(158, 1420, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/img/no-photo.jpg', '2025-05-13 22:09:37'),
-(159, 2327, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 22:09:37'),
-(160, 1395, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/personas', '2025-05-13 22:09:37'),
-(161, 1896, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:09:37'),
-(162, 2793, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/roles', '2025-05-13 22:09:38'),
-(163, 2436, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-05-13 22:09:38'),
-(164, 8523, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-05-13 22:09:38'),
-(165, 8753, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/roles', '2025-05-13 22:09:38'),
-(166, 8995, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-13 22:09:38');
+(240, 3253, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/usuarios', '2025-05-24 11:45:02'),
+(241, 5742, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/usuarios/personal', '2025-05-24 11:45:03'),
+(242, 6948, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/usuarios', '2025-05-24 11:45:03'),
+(243, 1412, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 11:45:03'),
+(244, 1711, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:02:49'),
+(245, 9633, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/', '2025-05-24 12:02:56'),
+(246, 5879, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:02:57'),
+(247, 2777, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-24 12:03:00'),
+(248, 5661, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:00'),
+(249, 6639, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos', '2025-05-24 12:03:02'),
+(250, 4823, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos', '2025-05-24 12:03:02'),
+(251, 5602, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:02'),
+(252, 2730, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:03:04'),
+(253, 4826, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:03:04'),
+(254, 7454, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:03:04'),
+(255, 6122, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:03:05'),
+(256, 5165, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:05'),
+(257, 6438, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:05'),
+(258, 8228, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:05'),
+(259, 4843, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:05'),
+(260, 9793, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:05'),
+(261, 3767, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:23'),
+(262, 7719, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:23'),
+(263, 9350, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:31'),
+(264, 9302, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:31'),
+(265, 2080, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:40'),
+(266, 7965, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:40'),
+(267, 6397, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:48'),
+(268, 4565, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:48'),
+(269, 7092, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:03:56'),
+(270, 9790, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:03:56'),
+(271, 6460, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:03:56'),
+(272, 7101, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:03:56'),
+(273, 7379, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:56'),
+(274, 4411, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:56'),
+(275, 8337, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:56'),
+(276, 9004, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:57'),
+(277, 6280, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:57'),
+(278, 6689, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:06:11'),
+(279, 3567, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:06:11'),
+(280, 6701, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:06:11'),
+(281, 6932, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:12'),
+(282, 5582, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:06:12'),
+(283, 9362, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:12'),
+(284, 6058, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:12'),
+(285, 2385, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:12'),
+(286, 5346, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:06:12'),
+(287, 6882, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saverecurso', '2025-05-24 12:06:26'),
+(288, 4819, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:26'),
+(289, 3992, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:06:30'),
+(290, 7431, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:06:31'),
+(291, 8190, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:06:31'),
+(292, 3122, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:31'),
+(293, 8960, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:31'),
+(294, 7737, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:06:31'),
+(295, 5163, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:31'),
+(296, 7172, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:31'),
+(297, 1864, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:06:31'),
+(298, 8598, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/savepermiso', '2025-05-24 12:06:37'),
+(299, 7625, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getpermisosporrol/1', '2025-05-24 12:06:37'),
+(300, 1242, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:06:53'),
+(301, 1912, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:06:54'),
+(302, 7794, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:06:54'),
+(303, 2578, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:06:54'),
+(304, 7194, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:54'),
+(305, 1433, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:54'),
+(306, 2360, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:54'),
+(307, 6747, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:55'),
+(308, 7480, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:06:55'),
+(309, 8883, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:07:01'),
+(310, 1954, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:07:05'),
+(311, 8836, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:07:05'),
+(312, 9974, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:07:05'),
+(313, 8355, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:07:06'),
+(314, 1778, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:07:06'),
+(315, 3830, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:07:06'),
+(316, 3085, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:07:06'),
+(317, 6915, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:07:06'),
+(318, 8209, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:07:07'),
+(319, 4861, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getpermisosporrol/1', '2025-05-24 12:07:12'),
+(320, 9274, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-24 12:08:52'),
+(321, 3427, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-24 12:08:52'),
+(322, 6945, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:08:53'),
+(323, 1494, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:09:01'),
+(324, 5173, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/doc/dni/76144152', '2025-05-24 12:10:48'),
+(325, 1553, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:10:48'),
+(326, 1501, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/', '2025-06-17 05:15:10'),
+(327, 5961, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:11'),
+(328, 3406, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/login', '2025-06-17 05:15:13'),
+(329, 8718, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/', '2025-06-17 05:15:14'),
+(330, 8178, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin', '2025-06-17 05:15:14'),
+(331, 7363, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:14'),
+(332, 4010, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/menus', '2025-06-17 05:15:18'),
+(333, 8538, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/menus', '2025-06-17 05:15:18'),
+(334, 2150, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:19'),
+(335, 7734, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/usuarios', '2025-06-17 05:15:22'),
+(336, 4427, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/usuarios', '2025-06-17 05:15:22'),
+(337, 6058, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/usuarios/personal', '2025-06-17 05:15:22'),
+(338, 1722, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:22'),
+(339, 1390, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/personas', '2025-06-17 05:15:24'),
+(340, 5587, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/img/no-photo.jpg', '2025-06-17 05:15:25'),
+(341, 3488, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/personas', '2025-06-17 05:15:25'),
+(342, 7927, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:25'),
+(343, 3235, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/roles', '2025-06-17 05:15:25'),
+(344, 8200, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/roles', '2025-06-17 05:15:25'),
+(345, 3493, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:25');
 
 -- --------------------------------------------------------
 
@@ -247,11 +197,7 @@ CREATE TABLE `sis_menus` (
 
 INSERT INTO `sis_menus` (`idmenu`, `men_nombre`, `men_url`, `men_controlador`, `men_icono`, `men_url_si`, `men_orden`, `men_visible`, `men_fecha`) VALUES
 (1, 'Maestras', '#', NULL, 'bx bx-lock-open-alt', 0, 100, 1, '2023-03-06 12:39:09'),
-(4, 'Modulo Paciente', '#', NULL, 'bx bxs-user-badge bx-sm', 0, 3, 1, '2025-02-17 12:58:09'),
-(5, 'Modulo Personal Médico', '#', NULL, 'bx bx-user-plus bx-sm', 0, 5, 1, '2025-02-18 16:03:05'),
-(6, 'Modulo Usuario', '#', NULL, 'bx bxs-user-circle bx-sm', 0, 6, 1, '2025-02-18 18:02:04'),
-(7, 'Modulo Predicción', '#', NULL, 'bx bx-edit-alt bx-sm', 0, 1, 1, '2025-02-20 10:38:45'),
-(8, 'Citas Médicas', '#', NULL, 'bx bx-calendar-check bx-sm', 0, 2, 1, '2025-03-16 22:27:22');
+(6, 'Modulo Usuario', '#', NULL, 'bx bxs-user-circle bx-sm', 0, 6, 1, '2025-02-18 18:02:04');
 
 -- --------------------------------------------------------
 
@@ -278,17 +224,9 @@ INSERT INTO `sis_permisos` (`idpermisos`, `idrol`, `idsubmenu`, `perm_r`, `perm_
 (4, 1, 3, 1, 1, 1, 1),
 (5, 1, 1, 1, 1, 1, 1),
 (9, 1, 6, 1, 0, 0, 0),
-(10, 1, 7, 1, 0, 0, 0),
-(11, 1, 8, 1, 0, 0, 0),
 (12, 1, 9, 1, 0, 0, 0),
-(13, 1, 10, 1, 0, 0, 0),
 (14, 1, 11, 1, 0, 0, 0),
-(15, 1, 12, 1, 0, 0, 0),
-(16, 1, 13, 1, 0, 0, 0),
-(17, 1, 14, 1, 0, 0, 0),
-(18, 1, 15, 1, 0, 0, 0),
-(19, 1, 16, 1, 0, 0, 0),
-(20, 1, 17, 1, 0, 0, 0);
+(15, 1, 12, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -304,6 +242,13 @@ CREATE TABLE `sis_permisos_extras` (
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sis_permisos_extras`
+--
+
+INSERT INTO `sis_permisos_extras` (`idpermiso`, `idrol`, `idrecurso`, `idaccion`, `estado`, `fecha_registro`) VALUES
+(1, 1, 1, 2, 1, '2025-05-24 12:06:37');
 
 -- --------------------------------------------------------
 
@@ -346,6 +291,13 @@ CREATE TABLE `sis_recursos` (
   `estado` tinyint(1) NOT NULL DEFAULT '1',
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `sis_recursos`
+--
+
+INSERT INTO `sis_recursos` (`idrecurso`, `nombre`, `descripcion`, `tipo`, `identificador`, `estado`, `fecha_registro`) VALUES
+(1, 'Consultar Dni', NULL, 'ruta', 'doc.dni', 1, '2025-05-24 12:06:26');
 
 -- --------------------------------------------------------
 
@@ -419,7 +371,9 @@ CREATE TABLE `sis_sesiones` (
 --
 
 INSERT INTO `sis_sesiones` (`idsesion`, `idusuario`, `session_token`, `ip`, `fecha_registro`, `tiempo_expiracion`, `activo`) VALUES
-(1, 1, 'c36939088f5e7f63b3b890e4344f153a0c82a49c7658699a9f879db290407a5032450025df72dfd1', '::1', '2025-05-13 21:58:03', '1747195778', 1);
+(1, 1, 'c36939088f5e7f63b3b890e4344f153a0c82a49c7658699a9f879db290407a5032450025df72dfd1', '::1', '2025-05-13 21:58:03', '1747195778', 1),
+(2, 1, 'b3f811b719ab22d8846c500a5a70ebba0cb78256112c18ae4452d093fed157f46109f4d57e811200', '::1', '2025-05-24 11:18:57', '1748110248', 1),
+(3, 1, '14678ef0199586265bb23ad310157ad1830294226db660f5150677dcc3e1130ab53d95675b0aa320', '::1', '2025-06-17 05:15:13', '1750158925', 1);
 
 -- --------------------------------------------------------
 
@@ -450,17 +404,9 @@ INSERT INTO `sis_submenus` (`idsubmenu`, `idmenu`, `sub_nombre`, `sub_url`, `sub
 (2, 1, 'Submenús', '/admin/submenus', 0, 'SubMenusController', 'index', 'bx-menu-alt-right', 2, 1, '2023-03-06 12:41:44'),
 (3, 1, 'Permisos', '/admin/permisos', 0, 'PermisosController', 'index', 'bx-key', 4, 1, '2023-03-06 12:42:10'),
 (6, 1, 'P. Extras', '/admin/permisos-especiales', 0, 'PermisosEspecialesController', 'index', 'bx bx-key', 5, 1, '2025-02-17 11:52:57'),
-(7, 4, 'registrar', '/admin/pacientes', 0, 'PacientesController', 'index', 'bx-plus-medical text-success', 1, 1, '2025-02-17 12:59:00'),
-(8, 5, 'Registrar', '/admin/personal', 0, 'PersonalController', 'index', 'bx bx-plus-medical text-success', 1, 1, '2025-02-18 16:04:05'),
 (9, 6, 'Crear', '/admin/usuarios', 0, 'UsuariosController', 'index', 'bx bx-plus-medical text-success', 1, 1, '2025-02-18 18:02:34'),
-(10, 5, 'Especialidades', '/admin/especialidades', 0, 'EspecialidadController', 'index', 'bx-list-check text-info', 2, 1, '2025-02-19 00:57:01'),
 (11, 6, 'Registrar Personas', '/admin/personas', 0, 'PersonasController', 'index', 'bxs-user-plus text-info', 2, 1, '2025-02-19 14:20:04'),
-(12, 6, 'Roles', '/admin/roles', 0, 'RolesController', 'index', 'bx bx-plus-circle text-danger', 3, 1, '2025-02-19 14:22:27'),
-(13, 7, 'Análisis de Tendencias', '/admin/diagnosticos', 0, 'TestController', 'index', 'bx-book-add text-primary', 2, 1, '2025-02-20 10:40:37'),
-(14, 5, 'Horario Médico', '/admin/horario-medico', 0, 'HorarioController', 'index', 'bx bx-time', 3, 1, '2025-02-24 16:27:09'),
-(15, 7, 'Preguntas', '/admin/preguntas', 0, 'PreguntasController', 'index', 'bx-sm bx-question-mark text-info', 3, 1, '2025-02-25 17:19:26'),
-(16, 7, 'Lista de Test', '/admin/lista-test', 0, 'ListaTestController', 'index', 'bx-sm bx bx-list-ul text-success', 1, 1, '2025-03-04 12:41:55'),
-(17, 8, 'Agendar cita', '/admin/citas', 0, 'CitasController', 'index', 'bx-circle', 1, 1, '2025-03-16 22:29:58');
+(12, 6, 'Roles', '/admin/roles', 0, 'RolesController', 'index', 'bx bx-plus-circle text-danger', 3, 1, '2025-02-19 14:22:27');
 
 -- --------------------------------------------------------
 
@@ -576,13 +522,13 @@ ALTER TABLE `sis_usuarios`
 -- AUTO_INCREMENT de la tabla `sis_acciones`
 --
 ALTER TABLE `sis_acciones`
-  MODIFY `idaccion` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idaccion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_centinela`
 --
 ALTER TABLE `sis_centinela`
-  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=167;
+  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_menus`
@@ -600,7 +546,7 @@ ALTER TABLE `sis_permisos`
 -- AUTO_INCREMENT de la tabla `sis_permisos_extras`
 --
 ALTER TABLE `sis_permisos_extras`
-  MODIFY `idpermiso` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idpermiso` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_personal`
@@ -612,7 +558,7 @@ ALTER TABLE `sis_personal`
 -- AUTO_INCREMENT de la tabla `sis_recursos`
 --
 ALTER TABLE `sis_recursos`
-  MODIFY `idrecurso` int NOT NULL AUTO_INCREMENT;
+  MODIFY `idrecurso` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_rol`
@@ -630,7 +576,7 @@ ALTER TABLE `sis_server_email`
 -- AUTO_INCREMENT de la tabla `sis_sesiones`
 --
 ALTER TABLE `sis_sesiones`
-  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_submenus`
