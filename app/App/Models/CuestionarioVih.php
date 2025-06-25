@@ -84,7 +84,7 @@ class CuestionarioVIH extends Model
                 'data' => [
                     'cuestionario_id' => $cuestionario['id_cuestionario'],
                     'paciente_id' => $paciente['id_paciente'],
-                    'numero_cuestionario' => $cuestionario['numero_cuestionario']
+                    'numero_cuestionario' => $cuestionario['num_cuestionario']
                 ]
             ];
         } catch (Exception $e) {
