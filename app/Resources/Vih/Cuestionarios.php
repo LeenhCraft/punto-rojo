@@ -558,15 +558,14 @@
 </div>
 
 <!-- Modal de confirmación -->
-<div class="modal fade" id="confirmacionModal" tabindex="-1" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
+<div class="modal fade" id="confirmacionModal" tabindex="-1" style="display: none;" role="dialog" aria-labelledby="confirmacionModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="confirmacionModalLabel">
+                <h5 class="modal-title text-white" id="confirmacionModalLabel">
                     <i class="fas fa-check-circle"></i> Formulario Enviado
                 </h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                 </button>
             </div>
             <div class="modal-body text-center">
@@ -575,7 +574,7 @@
                 <p class="text-muted">Los datos del formulario han sido registrados correctamente en el sistema.</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-success" data-dismiss="modal">Entendido</button>
+                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Entendido</button>
             </div>
         </div>
     </div>
