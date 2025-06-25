@@ -1,7 +1,7 @@
 <?php header_web('Template.HeaderDashboard', $data); ?>
-<div class="row justify-content-center">
-    <div class="col-12">
-        <div class="form-container p-4">
+<div class="row justify-content-start">
+    <div class="col-12 col-lg-10">
+        <div class="form-container px-5 py-4 m-0">
             <div class="text-center mb-4">
                 <h1 class="display-4 font-weight-bold text-primary">
                     <i class="fas fa-heartbeat"></i>
@@ -16,27 +16,130 @@
             </div>
 
             <form id="formularioVIH">
+                <!-- Sección 0: Datos del Paciente -->
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-user"></i>
+                        1. Datos del Paciente
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6 mb-4">
+                            <div class="form-group">
+                                <label for="nombres" class="font-weight-bold">Nombres: <span class="required">*</span></label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="nombres"
+                                    name="nombres"
+                                    required />
+                                <div class="invalid-feedback">
+                                    Por favor ingrese los nombres del paciente.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                            <div class="form-group">
+                                <label for="apellidos" class="font-weight-bold">Apellidos: <span class="required">*</span></label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="apellidos"
+                                    name="apellidos"
+                                    required />
+                                <div class="invalid-feedback">
+                                    Por favor ingrese los apellidos del paciente.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 mb-4">
+                            <div class="form-group">
+                                <label for="tipo_documento" class="font-weight-bold">Tipo de Documento: <span class="required">*</span></label>
+                                <select
+                                    class="form-control"
+                                    id="tipo_documento"
+                                    name="tipo_documento"
+                                    required>
+                                    <option value="">Seleccione...</option>
+                                    <option value="DNI">DNI</option>
+                                    <option value="CE">Carné de Extranjería</option>
+                                    <option value="Pasaporte">Pasaporte</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    Por favor seleccione el tipo de documento.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-group">
+                                <label for="numero_documento" class="font-weight-bold">Número de Documento: <span class="required">*</span></label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    id="numero_documento"
+                                    name="numero_documento"
+                                    required />
+                                <div class="invalid-feedback">
+                                    Por favor ingrese el número de documento.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-4">
+                            <div class="form-group">
+                                <label for="fecha_nacimiento" class="font-weight-bold">Fecha de Nacimiento: <span class="required">*</span></label>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="fecha_nacimiento"
+                                    name="fecha_nacimiento"
+                                    required />
+                                <div class="invalid-feedback">
+                                    Por favor ingrese la fecha de nacimiento.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="font-weight-bold mb-3">Estado del Paciente:</label>
+                                <div class="form-check-inline mr-4">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="activo"
+                                        id="activo_si"
+                                        value="true"
+                                        checked />
+                                    <label class="form-check-label" for="activo_si">Activo</label>
+                                </div>
+                                <div class="form-check-inline">
+                                    <input
+                                        class="form-check-input"
+                                        type="radio"
+                                        name="activo"
+                                        id="activo_no"
+                                        value="false" />
+                                    <label class="form-check-label" for="activo_no">Inactivo</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Sección 1: Identificación Geográfica -->
                 <div class="section-header">
                     <i class="fas fa-map-marker-alt"></i>
-                    1. Identificación Geográfica y Establecimiento de Salud
+                    2. Identificación Geográfica y Establecimiento de Salud
                 </div>
 
                 <div class="d-flex mb-4">
                     <div class="form-group col-md-6">
-                        <label for="distrito">Distrito:</label>
-                        <select class="form-control" id="distrito" name="distrito" required>
-                            <option value="">Seleccione un distrito</option>
-                            <option value="moyobamba">Moyobamba</option>
-                            <option value="calzada">Calzada</option>
-                            <option value="habana">Habana</option>
-                            <option value="jepelacio">Jepelacio</option>
-                            <option value="soritor">Soritor</option>
-                            <option value="yantalo">Yantaló</option>
-                        </select>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label>Zona:</label>
+                        <label class="me-4 mb-0">Zona:</label>
                         <div class="form-check-inline">
                             <input class="form-check-input" type="radio" name="zona" id="urbana" value="urbana">
                             <label class="form-check-label" for="urbana">Urbana</label>
@@ -100,14 +203,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group mt-3">
+                    <div class="form-group mt-3 px-2">
                         <div class="form-check">
-                            <input class="form-check-input m-0" type="radio" name="establecimiento" id="otro_establecimiento" value="otro">
+                            <input class="form-check-input" type="radio" name="establecimiento" id="otro_establecimiento" value="otro">
                             <label class="form-check-label" for="otro_establecimiento">
                                 Otro (especifique):
                             </label>
                         </div>
-                        <input type="text" class="form-control mt-2" id="otro_especifique" name="otro_especifique" placeholder="Especifique el establecimiento">
+                        <input
+                            type="text"
+                            class="form-control mt-2"
+                            id="otro_especifique"
+                            name="otro_especifique"
+                            placeholder="Especifique el establecimiento"
+                            disabled
+                            style="display: none;">
                     </div>
                 </div>
 
@@ -117,27 +227,10 @@
                     2. Datos Sociodemográficos
                 </div>
 
-                <div class="d-flex">
-                    <div class="form-group col-md-4">
-                        <label>Edad:</label>
-                        <div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="edad" id="edad_15_29" value="15-29">
-                                <label class="form-check-label" for="edad_15_29">15-29 años</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="edad" id="edad_30_39" value="30-39">
-                                <label class="form-check-label" for="edad_30_39">30-39 años</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="edad" id="edad_40_59" value="40-59">
-                                <label class="form-check-label" for="edad_40_59">40-59 años</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-4">
+                <div class="d-flex gap-3 mb-4">
+                    <div class="form-group col-md-auto me-4">
                         <label>Sexo:</label>
-                        <div>
+                        <div class="ms-4 d-flex gap-5">
                             <div class="form-check">
                                 <input class="form-check-input" type="radio" name="sexo" id="masculino" value="masculino">
                                 <label class="form-check-label" for="masculino">Masculino</label>
@@ -150,6 +243,12 @@
                                 <input class="form-check-input" type="radio" name="sexo" id="otro_sexo" value="otro">
                                 <label class="form-check-label" for="otro_sexo">Otro</label>
                             </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <label>Inserte su edad:</label>
+                        <div>
+                            <input type="number" class="form-control" id="edad" name="edad" placeholder="Edad en años">
                         </div>
                     </div>
                     <div class="form-group col-md-4">
@@ -165,8 +264,8 @@
                     </div>
                 </div>
 
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
+                <div class="d-md-flex gap-4">
+                    <div class="form-group w-100 mb-4">
                         <label>Nivel educativo:</label>
                         <select class="form-control" name="nivel_educativo">
                             <option value="">Seleccione</option>
@@ -179,7 +278,7 @@
                             <option value="universitario">Universitario</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group w-100 mb-4">
                         <label for="ocupacion">Ocupación actual:</label>
                         <input type="text" class="form-control" id="ocupacion" name="ocupacion">
                     </div>
@@ -196,7 +295,7 @@
                     3. Comportamientos y Factores de Riesgo
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Usaba preservativos antes del diagnóstico?</label>
                     <div>
                         <div class="form-check-inline">
@@ -214,7 +313,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Ha tenido relaciones sexuales sin protección desde su diagnóstico?</label>
                     <div>
                         <div class="form-check-inline">
@@ -228,12 +327,12 @@
                     </div>
                 </div>
 
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
+                <div class="d-flex mb-4">
+                    <div class="form-group col-md-6 pe-2">
                         <label for="parejas_sexuales">Número estimado de parejas sexuales en el último año:</label>
                         <input type="number" class="form-control" id="parejas_sexuales" name="parejas_sexuales" min="0">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 ps-2">
                         <label>¿Ha tenido relaciones con personas del mismo sexo?</label>
                         <div>
                             <div class="form-check-inline">
@@ -248,8 +347,8 @@
                     </div>
                 </div>
 
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
+                <div class="d-flex mb-4">
+                    <div class="form-group col-md-6 pe-2">
                         <label>¿Ha usado drogas inyectables?</label>
                         <div>
                             <div class="form-check-inline">
@@ -262,7 +361,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 ps-2">
                         <label>¿Recibió transfusiones en los últimos 5 años?</label>
                         <div>
                             <div class="form-check-inline">
@@ -301,12 +400,12 @@
                     4. Información Clínica Relevante
                 </div>
 
-                <div class="d-flex">
-                    <div class="form-group col-md-6">
+                <div class="d-flex mb-4">
+                    <div class="form-group col-md-6 pe-2">
                         <label for="fecha_diagnostico">Fecha de diagnóstico de VIH:</label>
                         <input type="date" class="form-control" id="fecha_diagnostico" name="fecha_diagnostico">
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-6 ps-2">
                         <label>Tipo de prueba de diagnóstico:</label>
                         <select class="form-control" name="tipo_prueba">
                             <option value="">Seleccione</option>
@@ -318,12 +417,12 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label for="otro_prueba">Si seleccionó "Otro", especifique:</label>
                     <input type="text" class="form-control" id="otro_prueba" name="otro_prueba">
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Recibe tratamiento antirretroviral (TAR)?</label>
                     <div>
                         <div class="form-check-inline">
@@ -337,22 +436,22 @@
                     </div>
                 </div>
 
-                <div class="d-flex">
-                    <div class="form-group col-md-4">
+                <div class="d-flex mb-4">
+                    <div class="form-group col-md-4 pe-2">
                         <label for="fecha_inicio_tar">Fecha de inicio del TAR:</label>
                         <input type="date" class="form-control" id="fecha_inicio_tar" name="fecha_inicio_tar">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4 px-2">
                         <label for="cd4">Último conteo de CD4 (células/mm³):</label>
                         <input type="number" class="form-control" id="cd4" name="cd4" min="0">
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-4 ps-2">
                         <label for="carga_viral">Última carga viral (copias/mL):</label>
                         <input type="number" class="form-control" id="carga_viral" name="carga_viral" min="0">
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Presenta alguna ITS actualmente?</label>
                     <div>
                         <div class="form-check-inline">
@@ -376,7 +475,7 @@
                     5. Riesgo de Transmisión Actual
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Tiene pareja sexual activa actualmente?</label>
                     <div>
                         <div class="form-check-inline">
@@ -390,7 +489,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Informa a sus parejas sexuales que tiene VIH?</label>
                     <div>
                         <div class="form-check-inline">
@@ -408,7 +507,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Utiliza preservativo actualmente en sus relaciones sexuales?</label>
                     <div>
                         <div class="form-check-inline">
@@ -426,7 +525,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label>¿Sabe si su(s) pareja(s) se ha(n) realizado la prueba de VIH?</label>
                     <div>
                         <div class="form-check-inline">
@@ -445,12 +544,12 @@
                 </div>
 
                 <!-- Botones de acción -->
-                <div class="text-center mt-5">
+                <div class="text-center">
                     <button type="button" class="btn btn-secondary mr-3" onclick="limpiarFormulario()">
-                        <i class="fas fa-eraser"></i> Limpiar Formulario
+                        <i class="fas fa-eraser me-2"></i> Limpiar Formulario
                     </button>
                     <button type="submit" class="btn btn-submit">
-                        <i class="fas fa-save"></i> Guardar Información
+                        <i class="fas fa-save me-2"></i> Guardar Información
                     </button>
                 </div>
             </form>

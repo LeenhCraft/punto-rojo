@@ -98,3 +98,7 @@
     border: none;
     border-radius: 15px;
 }
+
+.required {
+    color: #dc3545;
+}

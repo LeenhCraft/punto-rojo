@@ -68,8 +68,8 @@
                         <div class="app-brand justify-content-center mb-3">
                             <a href="/admin/login" class="app-brand-link gap-2">
                                 <picture>
-                                    <source srcset="/img/logo-dark.png" type="image/webp">
-                                    <img src="/img/logo-dark.png" alt="<?= $_ENV["APP_NAME"]; ?>" class="app-brand-logo w-px-150">
+                                    <source srcset="/img/logo.png" type="image/webp">
+                                    <img src="/img/logo.png" alt="<?= $_ENV["APP_NAME"]; ?>" class="app-brand-logo w-px-150">
                                 </picture>
                             </a>
                         </div>
@@ -104,8 +104,8 @@
                         <div class="app-brand justify-content-center">
                             <a href="/admin/login" class="app-brand-link gap-2">
                                 <picture>
-                                    <source srcset="/img/logo-dark.png" type="image/webp">
-                                    <img src="/img/logo-dark.png" alt="<?= $_ENV["APP_NAME"]; ?>" class="app-brand-logo w-px-150">
+                                    <source srcset="/img/logo.png" type="image/webp">
+                                    <img src="/img/logo.png" alt="<?= $_ENV["APP_NAME"]; ?>" class="app-brand-logo w-px-150">
                                 </picture>
                             </a>
                         </div>
