@@ -417,7 +417,7 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-4">
+                <div class="form-group mb-4" style="display: none;">
                     <label for="otro_prueba">Si seleccionó "Otro", especifique:</label>
                     <input type="text" class="form-control" id="otro_prueba" name="otro_prueba">
                 </div>

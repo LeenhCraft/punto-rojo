@@ -19,7 +19,7 @@ class CuestionarioVIH extends Model
     {
         try {
             // Iniciar transacción
-            // $this->beginTransaction();
+            $this->beginTransaction();
 
             // dep($id_personal_medico);
             // 1. Registrar o buscar paciente
@@ -237,14 +237,14 @@ class CuestionarioVIH extends Model
 
         return $clinicaModel->create([
             'id_cuestionario' => $id_cuestionario,
-            'fecha_diagnostico_vih' => $data['fecha_diagnostico'],
+            'fecha_diagnostico_vih' => empty($data['fecha_diagnostico']) ? null : $data['fecha_diagnostico'],
             'tipo_prueba_diagnostico' => ucfirst(str_replace('_', ' ', $data['tipo_prueba'])),
             'otro_tipo_prueba' => $data['otro_prueba'] ?? '',
             'recibe_tar' => $data['tar'] === 'si' ? 1 : 0,
             'fecha_inicio_tar' => !empty($data['fecha_inicio_tar']) ? $data['fecha_inicio_tar'] : null,
-            'ultimo_cd4' => !empty($data['cd4']) ? (int)$data['cd4'] : null,
+            'ultimo_cd4' => !empty($data['cd4']) ? (int)$data['cd4'] : 0,
             'unidad_cd4' => 'células/μL',
-            'ultima_carga_viral' => !empty($data['carga_viral']) ? (int)$data['carga_viral'] : null,
+            'ultima_carga_viral' => !empty($data['carga_viral']) ? (int)$data['carga_viral'] : 0,
             'unidad_carga_viral' => 'copias/mL',
             'presenta_its_actual' => $data['its_actual'] === 'si' ? 1 : 0,
             'conoce_its_actual' => $data['its_actual'] === 'si' ? 'Si' : 'No'

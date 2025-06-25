@@ -21,11 +21,13 @@ $app->group('/admin', function (RouteCollectorProxy $group) {
     })->add(PermissionMiddleware::class);
 
     $group->group('/cuestionarios', function (RouteCollectorProxy $group) {
-        $group->get('', CuestionariosController::class . ':index');
+        $group->get('', CuestionariosController::class . ':indexLista');
         $group->post('', CuestionariosController::class . ':list');
-        $group->post('/save', CuestionariosController::class . ':store');
+        $group->get('/nuevo', CuestionariosController::class . ':index');
+        $group->post('/nuevo', CuestionariosController::class . ':store');
         $group->post('/update', CuestionariosController::class . ':update');
-        $group->post('/search', CuestionariosController::class . ':search');
+        $group->get('/search/{id}', CuestionariosController::class . ':search');
         $group->post('/delete', CuestionariosController::class . ':delete');
     })->add(PermissionMiddleware::class);
+
 })->add(new LoginAdminMiddleware());

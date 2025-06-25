@@ -5,6 +5,7 @@ namespace App\Controllers\Vih;
 use App\Core\Controller;
 use App\Core\Logger;
 use App\Models\CuestionarioVIH;
+use App\Models\TableModel;
 use DateTime;
 use Exception;
 
@@ -37,6 +38,104 @@ class CuestionariosController extends Controller
                 "/js/vih/cuestionarios.js?v=" . time(),
             ],
         ]);
+    }
+
+    public function indexLista($request,  $response, $args)
+    {
+        return $this->render($response, "Vih.ListaCuestionarios", [
+            "titulo_web" => "Lista Cuestionarios",
+            "url" => $request->getUri()->getPath(),
+            "js" => [
+                "/js/vih/lista.js?v=" . time(),
+            ],
+        ]);
+    }
+
+    public function list($request, $response)
+    {
+        $model = new TableModel();
+        // Obtener parámetros de DataTables
+        $draw = $request->getParsedBody()['draw'] ?? 1;
+        $start = $request->getParsedBody()['start'] ?? 0;
+        $length = $request->getParsedBody()['length'] ?? 10;
+        $searchValue = $request->getParsedBody()['search']['value'] ?? '';
+        $orderColumn = $request->getParsedBody()['order'][0]['column'] ?? 0;
+        $orderDir = $request->getParsedBody()['order'][0]['dir'] ?? 'desc';
+
+        // Mapeo de columnas para ordenamiento
+        $columns = [
+            0 => 'c.num_cuestionario',
+            1 => 'nombre_completo',
+            2 => 'c.fecha_aplicacion',
+            3 => 'c.id' // Para acciones, no ordena realmente
+        ];
+
+        $orderBy = $columns[$orderColumn] ?? 'c.fecha_aplicacion';
+
+        // Query base con JOIN para obtener datos del paciente
+        $baseQuery = "FROM vih_cuestionario_vih c 
+                     INNER JOIN vih_paciente p ON c.id_paciente = p.id_paciente";
+
+        // Construir búsqueda si existe
+        $searchQuery = "";
+        $searchParams = [];
+
+        if (!empty($searchValue)) {
+            $searchQuery = " AND (
+                c.num_cuestionario LIKE :search1 OR 
+                p.nombre_completo LIKE :search2
+            )";
+
+            $searchTerm = "%{$searchValue}%";
+            $searchParams = [
+                ':search1' => $searchTerm,
+                ':search2' => $searchTerm
+            ];
+        }
+
+        // Query para contar total de registros (sin filtros)
+        $totalQuery = "SELECT COUNT(*) as total " . $baseQuery;
+        $totalResult = $model->query($totalQuery)->first();
+        $totalRecords = $totalResult['total'];
+
+        // Query para contar registros filtrados
+        $filteredQuery = "SELECT COUNT(*) as total " . $baseQuery . $searchQuery;
+        $filteredResult = $model->query($filteredQuery, $searchParams)->first();
+        $filteredRecords = $filteredResult['total'];
+
+        // Query principal para obtener los datos
+        $dataQuery = "SELECT 
+                        c.id_cuestionario as id,
+                        c.num_cuestionario,
+                        p.nombre_completo,
+                        c.fecha_aplicacion AS fecha_cuestionario
+                     " . $baseQuery . $searchQuery . "
+                     ORDER BY {$orderBy} {$orderDir}
+                     LIMIT {$start}, {$length}";
+
+        $dataResult = $model->query($dataQuery, $searchParams)->get();
+
+        // Formatear los datos para DataTables
+        // $formattedData = [];
+        // foreach ($dataResult as $row) {
+        //     $formattedData[] = [
+        //         'id' => $row['id_cuestionario'],
+        //         'num_cuestionario' => $row['num_cuestionario'],
+        //         'nombre_completo' => $row['nombre_completo'],
+        //         'fecha_cuestionario' => $row['fecha_cuestionario'],
+        //     ];
+        // }
+
+        // Respuesta en formato DataTables
+        $responseData = [
+            'draw' => intval($draw),
+            'recordsTotal' => intval($totalRecords),
+            'recordsFiltered' => intval($filteredRecords),
+            'data' => $dataResult
+            // 'data' => $formattedData
+        ];
+
+        return $this->respondWithJson($response, $responseData);
     }
 
     public function store($request, $response, $args)
@@ -198,9 +297,7 @@ class CuestionariosController extends Controller
         }
 
         // 4. VALIDACIONES DE INFORMACIÓN CLÍNICA
-        if (empty($data['fecha_diagnostico'])) {
-            $errors[] = 'Debe ingresar la fecha de diagnóstico';
-        } else {
+        if (!empty($data['fecha_diagnostico'])) {
             // Validar formato de fecha
             $fecha = DateTime::createFromFormat('Y-m-d', $data['fecha_diagnostico']);
             if (!$fecha || $fecha->format('Y-m-d') !== $data['fecha_diagnostico']) {
@@ -217,19 +314,20 @@ class CuestionariosController extends Controller
                     $errors[] = 'La fecha de diagnóstico no puede ser anterior a 1980';
                 }
             }
-        }
 
-        $tiposPrueba = ['prueba_rapida', 'elisa', 'western_blot', 'otro'];
-        if (empty($data['tipo_prueba']) || !in_array($data['tipo_prueba'], $tiposPrueba)) {
-            $errors[] = 'Debe seleccionar un tipo de prueba válido';
-        }
+            $tiposPrueba = ['prueba_rapida', 'elisa', 'western_blot', 'otro'];
+            if (empty($data['tipo_prueba']) || !in_array($data['tipo_prueba'], $tiposPrueba)) {
+                $errors[] = 'Debe seleccionar un tipo de prueba válido';
+            }
 
-        // Validar especificación si seleccionó "otro" tipo de prueba
-        if (isset($data['tipo_prueba']) && $data['tipo_prueba'] === 'otro') {
-            if (empty($data['otro_prueba']) || strlen(trim($data['otro_prueba'])) < 3) {
-                $errors[] = 'Debe especificar el tipo de prueba (mínimo 3 caracteres)';
+            // Validar especificación si seleccionó "otro" tipo de prueba
+            if (isset($data['tipo_prueba']) && $data['tipo_prueba'] === 'otro') {
+                if (empty($data['otro_prueba']) || strlen(trim($data['otro_prueba'])) < 3) {
+                    $errors[] = 'Debe especificar el tipo de prueba (mínimo 3 caracteres)';
+                }
             }
         }
+
 
         if (empty($data['tar']) || !in_array($data['tar'], ['si', 'no'])) {
             $errors[] = 'Debe indicar si recibe tratamiento TAR';
@@ -324,5 +422,41 @@ class CuestionariosController extends Controller
 
         // Valor por defecto para testing (remover en producción) */
         return 1;
+    }
+
+    public function search($request, $response, $args)
+    {
+        try {
+            $model = new TableModel();
+            $id = $args['id'] ?? null;
+
+            if (!$id) {
+                return $this->respondWithError($response, 'ID de cuestionario no proporcionado');
+            }
+
+            // Query para obtener el detalle completo del cuestionario
+            $query = "SELECT 
+                    c.*,
+                    p.nombre_completo,
+                    p.tipo_documento,
+                    p.numero_documento,
+                    p.fecha_nacimiento
+                 FROM vih_cuestionario_vih c 
+                 INNER JOIN vih_paciente p ON c.id_paciente = p.id_paciente
+                 WHERE c.id_cuestionario = ?";
+
+            $result = $model->query($query, [$id])->first();
+
+            if (!$result) {
+                return $this->respondWithError($response, 'Cuestionario no encontrado');
+            }
+
+            // Aquí puedes agregar más lógica para obtener las respuestas del cuestionario
+            // si tienes una tabla de respuestas relacionada
+
+            return $this->respondWithJson($response, ['success' => true, 'data' => $result]);
+        } catch (Exception $e) {
+            return $this->respondWithJson($response, ['error' => 'Error interno del servidor\n' . $e->getMessage()]);
+        }
     }
 }

@@ -48,7 +48,7 @@ async function enviarFormulario(datos) {
       },
     });
 
-    const response = await fetch("/admin/cuestionarios/save", {
+    const response = await fetch("/admin/cuestionarios/nuevo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -92,10 +92,11 @@ async function enviarFormulario(datos) {
         // window.location.href = '/admin/cuestionarios';
       });
 
+      /* 
       // Mostrar modal de confirmación si existe
-      if (typeof $ !== "undefined" && $("#confirmacionModal").length) {
+      if (typeof resultado !== "undefined" && $("#confirmacionModal").length) {
         $("#confirmacionModal").modal("show");
-      }
+      } */
     } else {
       // Manejar errores del servidor
       throw new Error(resultado.message || "Error desconocido del servidor");
@@ -275,10 +276,7 @@ function validarFormulario() {
 
   // 4. Validar Información Clínica Relevante
   const fechaDiagnostico = document.getElementById("fecha_diagnostico").value;
-  if (!fechaDiagnostico) {
-    mensajeError += "- Debe ingresar la fecha de diagnóstico de VIH\n";
-    valido = false;
-  } else {
+  if (fechaDiagnostico) {
     // Validar que la fecha no sea futura
     const fechaIngresada = new Date(fechaDiagnostico);
     const fechaActual = new Date();
@@ -287,20 +285,22 @@ function validarFormulario() {
         "- La fecha de diagnóstico no puede ser posterior a la fecha actual\n";
       valido = false;
     }
-  }
 
-  const tipoPrueba = document.querySelector('select[name="tipo_prueba"]').value;
-  if (!tipoPrueba) {
-    mensajeError += "- Debe seleccionar el tipo de prueba de diagnóstico\n";
-    valido = false;
-  }
-
-  // Validar especificación si seleccionó "Otro" tipo de prueba
-  if (tipoPrueba === "otro") {
-    const otroPrueba = document.getElementById("otro_prueba").value.trim();
-    if (!otroPrueba) {
-      mensajeError += "- Debe especificar el tipo de prueba\n";
+    const tipoPrueba = document.querySelector(
+      'select[name="tipo_prueba"]'
+    ).value;
+    if (!tipoPrueba) {
+      mensajeError += "- Debe seleccionar el tipo de prueba de diagnóstico\n";
       valido = false;
+    }
+
+    // Validar especificación si seleccionó "Otro" tipo de prueba
+    if (tipoPrueba === "otro") {
+      const otroPrueba = document.getElementById("otro_prueba").value.trim();
+      if (!otroPrueba) {
+        mensajeError += "- Debe especificar el tipo de prueba\n";
+        valido = false;
+      }
     }
   }
 
@@ -452,13 +452,17 @@ document
   .addEventListener("change", function () {
     const otroInput = document.getElementById("otro_prueba");
     if (this.value === "otro") {
-      otroInput.style.display = "block";
+      // otroInput.style.display = "block";
+      // otroInput.required = true;
+      // otroInput.focus();
+      // al div padre de otroInput agregar el display block
+      otroInput.parentElement.style.display = "block";
       otroInput.required = true;
-      otroInput.focus();
+      otroInput.focus(); // Enfocar automáticamente el campo
     } else {
-      otroInput.style.display = "none";
+      otroInput.parentElement.style.display = "none";
       otroInput.required = false;
-      otroInput.value = "";
+      otroInput.value = ""; // Limpiar el campo
     }
   });
 
@@ -492,7 +496,7 @@ function guardarProgreso() {
     formData[key] = value;
   }
 
-  console.log("Progreso guardado en memoria:", formData);
+  // console.log("Progreso guardado en memoria:", formData);
 }
 
 // Guardar progreso cada vez que se modifica un campo

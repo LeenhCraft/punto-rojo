@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 25-06-2025 a las 05:57:15
+-- Tiempo de generación: 25-06-2025 a las 21:41:10
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -60,50 +60,6 @@ CREATE TABLE `sis_centinela` (
   `url` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `sis_centinela`
---
-
-INSERT INTO `sis_centinela` (`idcentinela`, `codigo`, `ip`, `agente`, `method`, `url`, `fecha_registro`) VALUES
-(1097, 5494, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-24 21:50:11'),
-(1098, 9744, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-24 21:54:16'),
-(1099, 8604, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/login', '2025-06-24 23:19:51'),
-(1100, 1874, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:19:51'),
-(1101, 6140, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:19:52'),
-(1102, 5973, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/login', '2025-06-24 23:20:57'),
-(1103, 8673, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/login', '2025-06-24 23:20:58'),
-(1104, 9241, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin', '2025-06-24 23:20:58'),
-(1105, 3150, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:20:59'),
-(1106, 7579, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:20:59'),
-(1107, 3020, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-24 23:21:27'),
-(1108, 5615, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:21:28'),
-(1109, 1482, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:21:28'),
-(1110, 4238, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-24 23:42:02'),
-(1111, 7498, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:42:02'),
-(1112, 5142, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:42:03'),
-(1113, 1162, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:04:37'),
-(1114, 2051, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:04:59'),
-(1115, 1238, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-25 00:09:06'),
-(1116, 8440, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-25 00:09:06'),
-(1117, 9943, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-25 00:09:07'),
-(1118, 4700, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:10:39'),
-(1119, 4796, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:11:23'),
-(1120, 5161, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-25 00:28:26'),
-(1121, 4916, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-25 00:28:26'),
-(1122, 5963, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-25 00:28:27'),
-(1123, 5869, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:30:31'),
-(1124, 5707, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:31:29'),
-(1125, 8688, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:32:26'),
-(1126, 2243, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:34:04'),
-(1127, 3532, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:34:24'),
-(1128, 1770, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:34:59'),
-(1129, 5043, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:35:26'),
-(1130, 9310, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:40:54'),
-(1131, 4596, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:41:36'),
-(1132, 5196, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:54:00'),
-(1133, 5166, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:54:32'),
-(1134, 6784, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:56:00');
 
 -- --------------------------------------------------------
 
@@ -328,7 +284,8 @@ INSERT INTO `sis_sesiones` (`idsesion`, `idusuario`, `session_token`, `ip`, `fec
 (13, 1, 'dc5efae594f7dc8f7f741b695f48e221a11c37064d849fa3efdd7440f242f68e86fef3273e91f47c', '::1', '2025-06-22 10:28:20', '1750609702', 1),
 (14, 1, 'e6d0c93cda305259c84385b95d50d0374bd60d0f5a239c15df28ca0b44bb5d2dbb35a44d1b09dba3', '::1', '2025-06-22 19:37:53', '1750645834', 1),
 (15, 1, 'f5e94d076be6cf372c60d94a03a21afa9c339401819eb895f99a5da3981d6d685fb4d431aa0d693d', '::1', '2025-06-24 21:33:54', '1750823656', 0),
-(16, 1, 'fd2f04ba85eafd13621fae1a2fa6d6da314fc79de0c6f310fc64ca7563b5f15843ec4e4d5dc79dc7', '::1', '2025-06-24 23:20:57', '1750834560', 1);
+(16, 1, 'fd2f04ba85eafd13621fae1a2fa6d6da314fc79de0c6f310fc64ca7563b5f15843ec4e4d5dc79dc7', '::1', '2025-06-24 23:20:57', '1750834560', 1),
+(17, 1, '9e7d0f6930262316f4615c83be653bfaa42979c5cf830fe51e4c32f45b01f5b885b60463a611c484', '::1', '2025-06-25 13:10:34', '1750891222', 1);
 
 -- --------------------------------------------------------
 
@@ -363,8 +320,8 @@ INSERT INTO `sis_submenus` (`idsubmenu`, `idmenu`, `sub_nombre`, `sub_url`, `sub
 (11, 6, 'Registrar Personas', '/admin/personas', 0, 'PersonasController', 'index', 'bxs-user-plus text-info', 2, 1, '2025-02-19 14:20:04'),
 (12, 6, 'Roles', '/admin/roles', 0, 'RolesController', 'index', 'bx bx-plus-circle text-danger', 3, 1, '2025-02-19 14:22:27'),
 (18, 9, 'Pacientes', '/admin/pacientes', 0, 'PacientesController', 'index', 'bx-circle', 1, 1, '2025-06-18 18:54:07'),
-(19, 10, 'Nuevo', '/admin/cuestionarios', 0, 'CuestionariosController', 'index', 'bx-circle', 1, 1, '2025-06-18 19:52:47'),
-(20, 10, 'Lista', '#', 0, '#', 'index', 'bx-circle', 2, 1, '2025-06-18 21:02:55');
+(19, 10, 'Nuevo', '/admin/cuestionarios/nuevo', 0, 'CuestionariosController', 'index', 'bx-circle', 1, 1, '2025-06-18 19:52:47'),
+(20, 10, 'Lista', '/admin/cuestionarios', 0, 'CuestionariosController', 'index', 'bx-circle', 2, 1, '2025-06-18 21:02:55');
 
 -- --------------------------------------------------------
 
@@ -431,10 +388,17 @@ CREATE TABLE `vih_cuestionario_vih` (
   `id_personal` int NOT NULL,
   `id_establecimiento` int NOT NULL,
   `fecha_aplicacion` datetime DEFAULT NULL,
-  `num_cuestionario` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `observaciones_generales` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `num_cuestionario` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observaciones_generales` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_cuestionario_vih`
+--
+
+INSERT INTO `vih_cuestionario_vih` (`id_cuestionario`, `id_paciente`, `id_personal`, `id_establecimiento`, `fecha_aplicacion`, `num_cuestionario`, `estado`, `observaciones_generales`) VALUES
+(1, 1, 1, 4, '2025-06-25 15:22:02', 'CVIH20250625152202473', 'Completo', '');
 
 -- --------------------------------------------------------
 
@@ -446,12 +410,19 @@ CREATE TABLE `vih_datos_sociodemograficos` (
   `id_sociodemografico` int NOT NULL,
   `id_cuestionario` int NOT NULL,
   `edad` int NOT NULL,
-  `sexo` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estado_civil` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nivel_educativo` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ocupacion_actual` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lugar_residencia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `sexo` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_civil` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nivel_educativo` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ocupacion_actual` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lugar_residencia` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_datos_sociodemograficos`
+--
+
+INSERT INTO `vih_datos_sociodemograficos` (`id_sociodemografico`, `id_cuestionario`, `edad`, `sexo`, `estado_civil`, `nivel_educativo`, `ocupacion_actual`, `lugar_residencia`) VALUES
+(1, 1, 24, 'Masculino', 'Soltero', 'Universitario', 'docente', 'nueva cajamarca');
 
 -- --------------------------------------------------------
 
@@ -483,11 +454,11 @@ CREATE TABLE `vih_demograficos_distrito` (
 
 CREATE TABLE `vih_distrito` (
   `id_distrito` int NOT NULL,
-  `nombre_distrito` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `distrito_codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_distrito` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `distrito_codigo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `poblacion_total` int NOT NULL,
   `area_km2` double NOT NULL,
-  `capital_distrito` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `capital_distrito` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -512,11 +483,11 @@ INSERT INTO `vih_distrito` (`id_distrito`, `nombre_distrito`, `distrito_codigo`,
 CREATE TABLE `vih_establecimiento_salud` (
   `id_establecimiento` int NOT NULL,
   `id_distrito` int NOT NULL,
-  `nombre_establecimiento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `codigo_establecimiento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `zona` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `microred` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_establecimiento` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_establecimiento` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zona` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `microred` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `direccion` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -528,7 +499,7 @@ INSERT INTO `vih_establecimiento_salud` (`id_establecimiento`, `id_distrito`, `n
 (1, 1, 'Hospital II-1 Moyobamba', 'hospital_moyobamba', 'Urbana', 'Barrio Calvario', 'Barrio Calvario, Moyobamba', 1),
 (2, 1, 'Puesto de Salud Tahuishco', 'ps_tahuishco', 'Rural', 'Lluyllucucha', 'Sector Tahuishco, Moyobamba', 1),
 (3, 2, 'Puesto de Salud Calzada', 'ps_calzada', 'Urbana', 'Calzada', 'Plaza de Armas, Calzada', 1),
-(4, 5, 'Puesto de Salud San Marcos', 'ps_soritor', 'Rural', 'Soritor', 'Caserío San Marcos, Soritor', 1),
+(4, 5, 'Puesto de Salud San Marcos', 'ps_san_marcos', 'Rural', 'Soritor', 'Caserío San Marcos, Soritor', 1),
 (5, 3, 'Centro de Salud Habana', 'cs_habana', 'Rural', 'Habana', 'Plaza Principal, Habana', 1),
 (6, 4, 'Centro de Salud Jerillo', 'cs_jerillo', 'Urbana', 'Jerillo', 'Jr. Principal, Jepelacio', 1);
 
@@ -549,7 +520,7 @@ CREATE TABLE `vih_factores_distrito` (
   `cobertura_preservativos` double NOT NULL,
   `eventos_riesgos` int NOT NULL,
   `accesibilidad_servicios` double NOT NULL,
-  `observaciones` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observaciones` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_registro` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -562,16 +533,23 @@ CREATE TABLE `vih_factores_distrito` (
 CREATE TABLE `vih_factores_riesgo` (
   `id_factores_riesgo` int NOT NULL,
   `id_cuestionario` int NOT NULL,
-  `uso_preservativos_pre_diagnostico` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uso_preservativos_pre_diagnostico` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `relaciones_sin_proteccion_post_diagnostico` tinyint(1) NOT NULL,
   `numero_parejas_ultimo_anio` int NOT NULL,
   `relaciones_mismo_sexo` tinyint(1) NOT NULL,
   `uso_drogas_inyectables` tinyint(1) NOT NULL,
   `transfusiones_ultimos_5_anios` tinyint(1) NOT NULL,
   `antecedentes_its` tinyint(1) NOT NULL,
-  `detalle_its_previas` text COLLATE utf8mb4_unicode_ci,
+  `detalle_its_previas` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `relaciones_ocasionales_post_diagnostico` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_factores_riesgo`
+--
+
+INSERT INTO `vih_factores_riesgo` (`id_factores_riesgo`, `id_cuestionario`, `uso_preservativos_pre_diagnostico`, `relaciones_sin_proteccion_post_diagnostico`, `numero_parejas_ultimo_anio`, `relaciones_mismo_sexo`, `uso_drogas_inyectables`, `transfusiones_ultimos_5_anios`, `antecedentes_its`, `detalle_its_previas`, `relaciones_ocasionales_post_diagnostico`) VALUES
+(1, 1, 'A_veces', 0, 1, 0, 0, 0, 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -582,18 +560,25 @@ CREATE TABLE `vih_factores_riesgo` (
 CREATE TABLE `vih_informacion_clinica` (
   `id_clinica` int NOT NULL,
   `id_cuestionario` int NOT NULL,
-  `fecha_diagnostico_vih` date NOT NULL,
-  `tipo_prueba_diagnostico` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `otro_tipo_prueba` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_diagnostico_vih` date DEFAULT NULL,
+  `tipo_prueba_diagnostico` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `otro_tipo_prueba` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `recibe_tar` tinyint(1) NOT NULL,
   `fecha_inicio_tar` date DEFAULT NULL,
   `ultimo_cd4` int NOT NULL,
-  `unidad_cd4` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `unidad_cd4` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ultima_carga_viral` int NOT NULL,
-  `unidad_carga_viral` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `unidad_carga_viral` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `presenta_its_actual` tinyint(1) NOT NULL,
-  `conoce_its_actual` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
+  `conoce_its_actual` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_informacion_clinica`
+--
+
+INSERT INTO `vih_informacion_clinica` (`id_clinica`, `id_cuestionario`, `fecha_diagnostico_vih`, `tipo_prueba_diagnostico`, `otro_tipo_prueba`, `recibe_tar`, `fecha_inicio_tar`, `ultimo_cd4`, `unidad_cd4`, `ultima_carga_viral`, `unidad_carga_viral`, `presenta_its_actual`, `conoce_its_actual`) VALUES
+(1, 1, NULL, '', '', 0, NULL, 0, 'células/μL', 0, 'copias/mL', 0, 'No');
 
 -- --------------------------------------------------------
 
@@ -603,10 +588,10 @@ CREATE TABLE `vih_informacion_clinica` (
 
 CREATE TABLE `vih_modelo_prediccion_distrito` (
   `id_modelo` int NOT NULL,
-  `nombre_modelo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `version_modelo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `algoritmo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `parametros_xgboost` text COLLATE utf8mb4_unicode_ci,
+  `nombre_modelo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version_modelo` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `algoritmo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parametros_xgboost` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `accuracy` double DEFAULT NULL,
   `mae_casos` double NOT NULL,
   `rmse_casos` double NOT NULL,
@@ -615,7 +600,7 @@ CREATE TABLE `vih_modelo_prediccion_distrito` (
   `fecha_actualizacion` datetime DEFAULT NULL,
   `modelo_activo` tinyint(1) NOT NULL DEFAULT '0',
   `horizonte_prediccion_meses` int NOT NULL,
-  `descripcion` text COLLATE utf8mb4_unicode_ci
+  `descripcion` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -633,13 +618,20 @@ INSERT INTO `vih_modelo_prediccion_distrito` (`id_modelo`, `nombre_modelo`, `ver
 
 CREATE TABLE `vih_paciente` (
   `id_paciente` int NOT NULL,
-  `nombre_completo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `numero_documento` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_documento` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_completo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_documento` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_documento` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_nacimiento` date NOT NULL,
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `activo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_paciente`
+--
+
+INSERT INTO `vih_paciente` (`id_paciente`, `nombre_completo`, `numero_documento`, `tipo_documento`, `fecha_nacimiento`, `fecha_registro`, `activo`) VALUES
+(1, 'Leenh Alexander Bustamante Fernandez', '76144152', 'DNI', '2001-07-23', '2025-06-25 15:22:02', 1);
 
 -- --------------------------------------------------------
 
@@ -649,9 +641,9 @@ CREATE TABLE `vih_paciente` (
 
 CREATE TABLE `vih_personal_medico` (
   `id_personal` int NOT NULL,
-  `nombre_completo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `especialidad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cargo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nombre_completo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `especialidad` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cargo` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_establecimiento` int NOT NULL,
   `activo` tinyint(1) NOT NULL,
   `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
@@ -693,10 +685,10 @@ CREATE TABLE `vih_prediccion_casos_distrito` (
   `casos_minimos_ic95` int NOT NULL,
   `casos_maximos_ic95` int NOT NULL,
   `probabilidad_incremento` double NOT NULL,
-  `tendencia_esperada` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nivel_alerta` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tendencia_esperada` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nivel_alerta` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `fecha_prediccion` datetime NOT NULL,
-  `factores_influyentes` text COLLATE utf8mb4_unicode_ci NOT NULL
+  `factores_influyentes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -709,11 +701,11 @@ CREATE TABLE `vih_reentrenaminto_modelo` (
   `id_reentrenamiento` int NOT NULL,
   `id_modelo` int NOT NULL,
   `fecha_reentrenamiento` datetime NOT NULL,
-  `motivo_reentrenamiento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `motivo_reentrenamiento` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `registros_entrenamiento` int NOT NULL,
   `meses_datos_utilizados` int NOT NULL,
   `mejora_accuracy` double NOT NULL,
-  `cambios_hiperparametros` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cambios_hiperparametros` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `reentrenamiento_exitoso` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -727,9 +719,9 @@ CREATE TABLE `vih_riesgo_transmision` (
   `id_riesgo` int NOT NULL,
   `id_cuestionario` int NOT NULL,
   `tiene_pareja_activa` tinyint(1) NOT NULL,
-  `informa_estado_vih` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `uso_preservativo_actual` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pareja_prueba_vih` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
+  `informa_estado_vih` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uso_preservativo_actual` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pareja_prueba_vih` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -737,7 +729,7 @@ CREATE TABLE `vih_riesgo_transmision` (
 --
 
 INSERT INTO `vih_riesgo_transmision` (`id_riesgo`, `id_cuestionario`, `tiene_pareja_activa`, `informa_estado_vih`, `uso_preservativo_actual`, `pareja_prueba_vih`) VALUES
-(1, 1, 0, 'A_veces', 'A_veces', 'No');
+(1, 1, 0, 'Nunca', 'A_veces', 'No');
 
 --
 -- Índices para tablas volcadas
@@ -919,7 +911,7 @@ ALTER TABLE `sis_acciones`
 -- AUTO_INCREMENT de la tabla `sis_centinela`
 --
 ALTER TABLE `sis_centinela`
-  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1135;
+  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1406;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_menus`
@@ -967,7 +959,7 @@ ALTER TABLE `sis_server_email`
 -- AUTO_INCREMENT de la tabla `sis_sesiones`
 --
 ALTER TABLE `sis_sesiones`
-  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_submenus`
@@ -991,13 +983,13 @@ ALTER TABLE `vih_casos_distrito_mensual`
 -- AUTO_INCREMENT de la tabla `vih_cuestionario_vih`
 --
 ALTER TABLE `vih_cuestionario_vih`
-  MODIFY `id_cuestionario` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cuestionario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_datos_sociodemograficos`
 --
 ALTER TABLE `vih_datos_sociodemograficos`
-  MODIFY `id_sociodemografico` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sociodemografico` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_demograficos_distrito`
@@ -1027,13 +1019,13 @@ ALTER TABLE `vih_factores_distrito`
 -- AUTO_INCREMENT de la tabla `vih_factores_riesgo`
 --
 ALTER TABLE `vih_factores_riesgo`
-  MODIFY `id_factores_riesgo` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factores_riesgo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_informacion_clinica`
 --
 ALTER TABLE `vih_informacion_clinica`
-  MODIFY `id_clinica` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_clinica` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_modelo_prediccion_distrito`
@@ -1045,7 +1037,7 @@ ALTER TABLE `vih_modelo_prediccion_distrito`
 -- AUTO_INCREMENT de la tabla `vih_paciente`
 --
 ALTER TABLE `vih_paciente`
-  MODIFY `id_paciente` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id_paciente` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_personal_medico`
