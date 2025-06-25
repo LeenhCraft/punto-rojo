@@ -40,5 +40,6 @@ $errorMiddleware->setErrorHandler(
 
 require_once __DIR__ . '/../app/Routes/Web.php';
 require_once __DIR__ . '/../app/Routes/Admin.php';
+require_once __DIR__ . '/../app/Routes/Vih.php';
 
 $app->run();

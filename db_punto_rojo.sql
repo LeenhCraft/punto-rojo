@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 17-06-2025 a las 10:19:17
+-- Tiempo de generación: 25-06-2025 a las 05:57:15
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -66,112 +66,44 @@ CREATE TABLE `sis_centinela` (
 --
 
 INSERT INTO `sis_centinela` (`idcentinela`, `codigo`, `ip`, `agente`, `method`, `url`, `fecha_registro`) VALUES
-(240, 3253, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/usuarios', '2025-05-24 11:45:02'),
-(241, 5742, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/usuarios/personal', '2025-05-24 11:45:03'),
-(242, 6948, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/usuarios', '2025-05-24 11:45:03'),
-(243, 1412, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 11:45:03'),
-(244, 1711, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:02:49'),
-(245, 9633, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/', '2025-05-24 12:02:56'),
-(246, 5879, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:02:57'),
-(247, 2777, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-24 12:03:00'),
-(248, 5661, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:00'),
-(249, 6639, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos', '2025-05-24 12:03:02'),
-(250, 4823, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos', '2025-05-24 12:03:02'),
-(251, 5602, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:02'),
-(252, 2730, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:03:04'),
-(253, 4826, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:03:04'),
-(254, 7454, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:03:04'),
-(255, 6122, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:03:05'),
-(256, 5165, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:05'),
-(257, 6438, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:05'),
-(258, 8228, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:05'),
-(259, 4843, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:05'),
-(260, 9793, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:05'),
-(261, 3767, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:23'),
-(262, 7719, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:23'),
-(263, 9350, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:31'),
-(264, 9302, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:31'),
-(265, 2080, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:40'),
-(266, 7965, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:40'),
-(267, 6397, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saveaccion', '2025-05-24 12:03:48'),
-(268, 4565, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:48'),
-(269, 7092, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:03:56'),
-(270, 9790, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:03:56'),
-(271, 6460, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:03:56'),
-(272, 7101, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:03:56'),
-(273, 7379, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:56'),
-(274, 4411, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:56'),
-(275, 8337, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:03:56'),
-(276, 9004, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:03:57'),
-(277, 6280, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:03:57'),
-(278, 6689, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:06:11'),
-(279, 3567, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:06:11'),
-(280, 6701, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:06:11'),
-(281, 6932, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:12'),
-(282, 5582, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:06:12'),
-(283, 9362, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:12'),
-(284, 6058, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:12'),
-(285, 2385, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:12'),
-(286, 5346, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:06:12'),
-(287, 6882, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/saverecurso', '2025-05-24 12:06:26'),
-(288, 4819, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:26'),
-(289, 3992, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:06:30'),
-(290, 7431, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:06:31'),
-(291, 8190, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:06:31'),
-(292, 3122, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:31'),
-(293, 8960, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:31'),
-(294, 7737, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:06:31'),
-(295, 5163, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:31'),
-(296, 7172, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:31'),
-(297, 1864, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:06:31'),
-(298, 8598, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/savepermiso', '2025-05-24 12:06:37'),
-(299, 7625, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getpermisosporrol/1', '2025-05-24 12:06:37'),
-(300, 1242, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:06:53'),
-(301, 1912, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:06:54'),
-(302, 7794, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:06:54'),
-(303, 2578, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:06:54'),
-(304, 7194, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:54'),
-(305, 1433, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:54'),
-(306, 2360, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:06:54'),
-(307, 6747, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:06:55'),
-(308, 7480, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:06:55'),
-(309, 8883, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:07:01'),
-(310, 1954, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales', '2025-05-24 12:07:05'),
-(311, 8836, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2-bootstrap4.min.css', '2025-05-24 12:07:05'),
-(312, 9974, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/css/select2.min.css', '2025-05-24 12:07:05'),
-(313, 8355, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getroles', '2025-05-24 12:07:06'),
-(314, 1778, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:07:06'),
-(315, 3830, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getacciones', '2025-05-24 12:07:06'),
-(316, 3085, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getrecursos', '2025-05-24 12:07:06'),
-(317, 6915, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'POST', '/admin/permisos-especiales/getacciones', '2025-05-24 12:07:06'),
-(318, 8209, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:07:07'),
-(319, 4861, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/permisos-especiales/getpermisosporrol/1', '2025-05-24 12:07:12'),
-(320, 9274, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/', '2025-05-24 12:08:52'),
-(321, 3427, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin', '2025-05-24 12:08:52'),
-(322, 6945, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:08:53'),
-(323, 1494, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:09:01'),
-(324, 5173, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/admin/doc/dni/76144152', '2025-05-24 12:10:48'),
-(325, 1553, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-05-24 12:10:48'),
-(326, 1501, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/', '2025-06-17 05:15:10'),
-(327, 5961, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:11'),
-(328, 3406, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/login', '2025-06-17 05:15:13'),
-(329, 8718, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/', '2025-06-17 05:15:14'),
-(330, 8178, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin', '2025-06-17 05:15:14'),
-(331, 7363, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:14'),
-(332, 4010, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/menus', '2025-06-17 05:15:18'),
-(333, 8538, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/menus', '2025-06-17 05:15:18'),
-(334, 2150, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:19'),
-(335, 7734, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/usuarios', '2025-06-17 05:15:22'),
-(336, 4427, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/usuarios', '2025-06-17 05:15:22'),
-(337, 6058, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/usuarios/personal', '2025-06-17 05:15:22'),
-(338, 1722, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:22'),
-(339, 1390, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/personas', '2025-06-17 05:15:24'),
-(340, 5587, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/img/no-photo.jpg', '2025-06-17 05:15:25'),
-(341, 3488, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/personas', '2025-06-17 05:15:25'),
-(342, 7927, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:25'),
-(343, 3235, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/roles', '2025-06-17 05:15:25'),
-(344, 8200, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/roles', '2025-06-17 05:15:25'),
-(345, 3493, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/favicon.ico', '2025-06-17 05:15:25');
+(1097, 5494, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-24 21:50:11'),
+(1098, 9744, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-24 21:54:16'),
+(1099, 8604, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/login', '2025-06-24 23:19:51'),
+(1100, 1874, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:19:51'),
+(1101, 6140, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:19:52'),
+(1102, 5973, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/login', '2025-06-24 23:20:57'),
+(1103, 8673, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/login', '2025-06-24 23:20:58'),
+(1104, 9241, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin', '2025-06-24 23:20:58'),
+(1105, 3150, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:20:59'),
+(1106, 7579, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:20:59'),
+(1107, 3020, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-24 23:21:27'),
+(1108, 5615, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:21:28'),
+(1109, 1482, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:21:28'),
+(1110, 4238, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-24 23:42:02'),
+(1111, 7498, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-24 23:42:02'),
+(1112, 5142, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-24 23:42:03'),
+(1113, 1162, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:04:37'),
+(1114, 2051, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:04:59'),
+(1115, 1238, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-25 00:09:06'),
+(1116, 8440, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-25 00:09:06'),
+(1117, 9943, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-25 00:09:07'),
+(1118, 4700, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:10:39'),
+(1119, 4796, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:11:23'),
+(1120, 5161, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/admin/cuestionarios', '2025-06-25 00:28:26'),
+(1121, 4916, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/.well-known/appspecific/com.chrome.devtools.json', '2025-06-25 00:28:26'),
+(1122, 5963, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'GET', '/js/popper.min.js.map', '2025-06-25 00:28:27'),
+(1123, 5869, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:30:31'),
+(1124, 5707, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:31:29'),
+(1125, 8688, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:32:26'),
+(1126, 2243, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:34:04'),
+(1127, 3532, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:34:24'),
+(1128, 1770, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:34:59'),
+(1129, 5043, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:35:26'),
+(1130, 9310, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:40:54'),
+(1131, 4596, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:41:36'),
+(1132, 5196, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:54:00'),
+(1133, 5166, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:54:32'),
+(1134, 6784, ' IP: ::1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/137.0.0.0 Safari/537.36', 'POST', '/admin/cuestionarios/save', '2025-06-25 00:56:00');
 
 -- --------------------------------------------------------
 
@@ -197,7 +129,9 @@ CREATE TABLE `sis_menus` (
 
 INSERT INTO `sis_menus` (`idmenu`, `men_nombre`, `men_url`, `men_controlador`, `men_icono`, `men_url_si`, `men_orden`, `men_visible`, `men_fecha`) VALUES
 (1, 'Maestras', '#', NULL, 'bx bx-lock-open-alt', 0, 100, 1, '2023-03-06 12:39:09'),
-(6, 'Modulo Usuario', '#', NULL, 'bx bxs-user-circle bx-sm', 0, 6, 1, '2025-02-18 18:02:04');
+(6, 'Modulo Usuario', '#', NULL, 'bx bxs-user-circle bx-sm', 0, 6, 1, '2025-02-18 18:02:04'),
+(9, 'Modulo Paciente', '#', NULL, 'bx bx-plus-medical', 0, 2, 1, '2025-06-18 18:53:44'),
+(10, 'Modulo Predicción', '#', NULL, 'bx bx-circle', 0, 1, 1, '2025-06-18 19:52:07');
 
 -- --------------------------------------------------------
 
@@ -226,7 +160,10 @@ INSERT INTO `sis_permisos` (`idpermisos`, `idrol`, `idsubmenu`, `perm_r`, `perm_
 (9, 1, 6, 1, 0, 0, 0),
 (12, 1, 9, 1, 0, 0, 0),
 (14, 1, 11, 1, 0, 0, 0),
-(15, 1, 12, 1, 0, 0, 0);
+(15, 1, 12, 1, 0, 0, 0),
+(21, 1, 18, 1, 0, 0, 0),
+(22, 1, 19, 1, 0, 0, 0),
+(23, 1, 20, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -248,7 +185,11 @@ CREATE TABLE `sis_permisos_extras` (
 --
 
 INSERT INTO `sis_permisos_extras` (`idpermiso`, `idrol`, `idrecurso`, `idaccion`, `estado`, `fecha_registro`) VALUES
-(1, 1, 1, 2, 1, '2025-05-24 12:06:37');
+(1, 1, 1, 2, 1, '2025-05-24 12:06:37'),
+(2, 1, 2, 1, 1, '2025-06-18 18:55:14'),
+(3, 1, 2, 2, 1, '2025-06-18 18:55:18'),
+(4, 1, 2, 3, 1, '2025-06-18 18:55:20'),
+(5, 1, 2, 4, 1, '2025-06-18 18:55:24');
 
 -- --------------------------------------------------------
 
@@ -297,7 +238,8 @@ CREATE TABLE `sis_recursos` (
 --
 
 INSERT INTO `sis_recursos` (`idrecurso`, `nombre`, `descripcion`, `tipo`, `identificador`, `estado`, `fecha_registro`) VALUES
-(1, 'Consultar Dni', NULL, 'ruta', 'doc.dni', 1, '2025-05-24 12:06:26');
+(1, 'Consultar Dni', NULL, 'ruta', 'doc.dni', 1, '2025-05-24 12:06:26'),
+(2, 'Pacientes', NULL, 'ruta', 'pacientes', 1, '2025-06-18 18:55:02');
 
 -- --------------------------------------------------------
 
@@ -373,7 +315,20 @@ CREATE TABLE `sis_sesiones` (
 INSERT INTO `sis_sesiones` (`idsesion`, `idusuario`, `session_token`, `ip`, `fecha_registro`, `tiempo_expiracion`, `activo`) VALUES
 (1, 1, 'c36939088f5e7f63b3b890e4344f153a0c82a49c7658699a9f879db290407a5032450025df72dfd1', '::1', '2025-05-13 21:58:03', '1747195778', 1),
 (2, 1, 'b3f811b719ab22d8846c500a5a70ebba0cb78256112c18ae4452d093fed157f46109f4d57e811200', '::1', '2025-05-24 11:18:57', '1748110248', 1),
-(3, 1, '14678ef0199586265bb23ad310157ad1830294226db660f5150677dcc3e1130ab53d95675b0aa320', '::1', '2025-06-17 05:15:13', '1750158925', 1);
+(3, 1, '14678ef0199586265bb23ad310157ad1830294226db660f5150677dcc3e1130ab53d95675b0aa320', '::1', '2025-06-17 05:15:13', '1750158925', 1),
+(4, 1, 'db8808f4a036b25fe3477bee9a6144c8e13adf671c32bff778ae298c1819f111775a9642b6ad4413', '::1', '2025-06-17 20:19:51', '1750213192', 1),
+(5, 1, '51bfc82fb3bfbd00da8f010678be41e1eb8dfd3335dc88ff5d83c54fd7bee13c9c4e0bb4154fb6d6', '::1', '2025-06-18 18:52:15', '1750302317', 1),
+(6, 1, 'ed0803fb2763f56853191c22be10f1a90e5ebf84324d2b8034c42290f2b32480b24ae4520ad5991d', '::1', '2025-06-20 20:22:42', '1750477691', 1),
+(7, 1, '5541f2dd311ae5be7666aaca83de8ba7815d2b3dd1f017ef3abea328b84a7e6a495e040d0fdec53a', '::1', '2025-06-21 12:25:46', '1750530656', 0),
+(8, 1, 'a822efbd5dc7e0c1f9d62352f473a0698bcd84597f8f44ad956f3307483554ec3dcd5963ad4b43b7', '::1', '2025-06-21 13:34:48', '1750534649', 1),
+(9, 1, 'df419044afb41444f004063dbad13a32c35582b86c6d11b291283965a1f5dfd4775633a86de4c5b3', '::1', '2025-06-21 18:32:18', '1750552695', 0),
+(10, 1, 'ed771772db0baa6957001d75e985f9458ebe731a41f296824a78aeff043ec98df89d2e8e69928719', '::1', '2025-06-21 18:40:34', '1750555549', 1),
+(11, 1, '0f2a25f0cd857f550469e1175da4cd4dac09e6eeef4c797e6be84e3612587f51e9486120fcd0dc36', '::1', '2025-06-21 23:09:44', '1750569329', 1),
+(12, 1, '68b8ad34837f81844dad4b1626ba079caccb0e32e34eec3710b66a277038702713ed541d49699b3e', '::1', '2025-06-22 09:20:35', '1750605639', 0),
+(13, 1, 'dc5efae594f7dc8f7f741b695f48e221a11c37064d849fa3efdd7440f242f68e86fef3273e91f47c', '::1', '2025-06-22 10:28:20', '1750609702', 1),
+(14, 1, 'e6d0c93cda305259c84385b95d50d0374bd60d0f5a239c15df28ca0b44bb5d2dbb35a44d1b09dba3', '::1', '2025-06-22 19:37:53', '1750645834', 1),
+(15, 1, 'f5e94d076be6cf372c60d94a03a21afa9c339401819eb895f99a5da3981d6d685fb4d431aa0d693d', '::1', '2025-06-24 21:33:54', '1750823656', 0),
+(16, 1, 'fd2f04ba85eafd13621fae1a2fa6d6da314fc79de0c6f310fc64ca7563b5f15843ec4e4d5dc79dc7', '::1', '2025-06-24 23:20:57', '1750834560', 1);
 
 -- --------------------------------------------------------
 
@@ -406,7 +361,10 @@ INSERT INTO `sis_submenus` (`idsubmenu`, `idmenu`, `sub_nombre`, `sub_url`, `sub
 (6, 1, 'P. Extras', '/admin/permisos-especiales', 0, 'PermisosEspecialesController', 'index', 'bx bx-key', 5, 1, '2025-02-17 11:52:57'),
 (9, 6, 'Crear', '/admin/usuarios', 0, 'UsuariosController', 'index', 'bx bx-plus-medical text-success', 1, 1, '2025-02-18 18:02:34'),
 (11, 6, 'Registrar Personas', '/admin/personas', 0, 'PersonasController', 'index', 'bxs-user-plus text-info', 2, 1, '2025-02-19 14:20:04'),
-(12, 6, 'Roles', '/admin/roles', 0, 'RolesController', 'index', 'bx bx-plus-circle text-danger', 3, 1, '2025-02-19 14:22:27');
+(12, 6, 'Roles', '/admin/roles', 0, 'RolesController', 'index', 'bx bx-plus-circle text-danger', 3, 1, '2025-02-19 14:22:27'),
+(18, 9, 'Pacientes', '/admin/pacientes', 0, 'PacientesController', 'index', 'bx-circle', 1, 1, '2025-06-18 18:54:07'),
+(19, 10, 'Nuevo', '/admin/cuestionarios', 0, 'CuestionariosController', 'index', 'bx-circle', 1, 1, '2025-06-18 19:52:47'),
+(20, 10, 'Lista', '#', 0, '#', 'index', 'bx-circle', 2, 1, '2025-06-18 21:02:55');
 
 -- --------------------------------------------------------
 
@@ -437,6 +395,349 @@ CREATE TABLE `sis_usuarios` (
 INSERT INTO `sis_usuarios` (`idusuario`, `idrol`, `idpersona`, `usu_usuario`, `usu_pass`, `usu_token`, `usu_activo`, `usu_estado`, `usu_primera`, `usu_twoauth`, `usu_code_twoauth`, `usu_fecha`, `ultima_actualizacion`) VALUES
 (1, 1, 1, 'developer', '$2y$10$Fit/2psoTtAP.pctt2qiluYnf4vYcKqbGvFbZa.8/ngskf1HlwZvW', NULL, 1, 1, 0, 0, '', '2022-07-22 01:10:31', NULL),
 (2, 4, 2, 'leenhcraft', '$2y$10$iTsh3NcBhufyfCBNG15NyuSsdAgfCsy.V1GMWa2wAeB1DaeVmqKIC', NULL, 1, 1, 1, 0, '', '2025-03-10 18:12:53', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_casos_distrito_mensual`
+--
+
+CREATE TABLE `vih_casos_distrito_mensual` (
+  `id_casos_distrito` int NOT NULL,
+  `id_distrito` int NOT NULL,
+  `anio` int NOT NULL,
+  `mes` int NOT NULL,
+  `casos_nuevos_vih` int NOT NULL,
+  `casos_confirmados` int NOT NULL,
+  `casos_sospechosos` int NOT NULL,
+  `total_cuestionarios_aplicados` int NOT NULL,
+  `casos_riesgo_alto` int NOT NULL,
+  `casos_riesgo_medio` int NOT NULL,
+  `casos_riesgo_bajo` int NOT NULL,
+  `tasa_incidencia_100k` double NOT NULL,
+  `tasa_positividad` double NOT NULL,
+  `fecha_calculo` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_cuestionario_vih`
+--
+
+CREATE TABLE `vih_cuestionario_vih` (
+  `id_cuestionario` int NOT NULL,
+  `id_paciente` int NOT NULL,
+  `id_personal` int NOT NULL,
+  `id_establecimiento` int NOT NULL,
+  `fecha_aplicacion` datetime DEFAULT NULL,
+  `num_cuestionario` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `observaciones_generales` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_datos_sociodemograficos`
+--
+
+CREATE TABLE `vih_datos_sociodemograficos` (
+  `id_sociodemografico` int NOT NULL,
+  `id_cuestionario` int NOT NULL,
+  `edad` int NOT NULL,
+  `sexo` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `estado_civil` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nivel_educativo` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ocupacion_actual` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lugar_residencia` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_demograficos_distrito`
+--
+
+CREATE TABLE `vih_demograficos_distrito` (
+  `id_demografico_distrito` int NOT NULL,
+  `id_distrito` int NOT NULL,
+  `anio` int NOT NULL,
+  `mes` int NOT NULL,
+  `poblacion_15_29_m` int NOT NULL,
+  `poblacion_15_29_f` int NOT NULL,
+  `poblacion_30_39_m` int NOT NULL,
+  `poblacion_30_39_f` int NOT NULL,
+  `poblacion_40_59_m` int NOT NULL,
+  `poblacion_40_59_f` int NOT NULL,
+  `tasa_alfabetizacion` double NOT NULL,
+  `centros_salud_activos` int NOT NULL,
+  `fecha_actualizacion` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_distrito`
+--
+
+CREATE TABLE `vih_distrito` (
+  `id_distrito` int NOT NULL,
+  `nombre_distrito` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `distrito_codigo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `poblacion_total` int NOT NULL,
+  `area_km2` double NOT NULL,
+  `capital_distrito` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `activo` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_distrito`
+--
+
+INSERT INTO `vih_distrito` (`id_distrito`, `nombre_distrito`, `distrito_codigo`, `poblacion_total`, `area_km2`, `capital_distrito`, `activo`) VALUES
+(1, 'Moyobamba', 'Moyobamba', 62000, 365.42, 'Moyobamba', 1),
+(2, 'Calzada', 'Calzada', 8500, 234.15, 'Calzada', 1),
+(3, 'Habana', 'Habana', 4200, 178.9, 'Habana', 1),
+(4, 'Jepelacio', 'Jepelacio', 12800, 409.33, 'Jepelacio', 1),
+(5, 'Soritor', 'Soritor', 18500, 665.48, 'Soritor', 1),
+(6, 'Yantaló', 'Yantalo', 3100, 112.67, 'Yantaló', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_establecimiento_salud`
+--
+
+CREATE TABLE `vih_establecimiento_salud` (
+  `id_establecimiento` int NOT NULL,
+  `id_distrito` int NOT NULL,
+  `nombre_establecimiento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `codigo_establecimiento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `zona` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `microred` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `activo` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_establecimiento_salud`
+--
+
+INSERT INTO `vih_establecimiento_salud` (`id_establecimiento`, `id_distrito`, `nombre_establecimiento`, `codigo_establecimiento`, `zona`, `microred`, `direccion`, `activo`) VALUES
+(1, 1, 'Hospital II-1 Moyobamba', 'hospital_moyobamba', 'Urbana', 'Barrio Calvario', 'Barrio Calvario, Moyobamba', 1),
+(2, 1, 'Puesto de Salud Tahuishco', 'ps_tahuishco', 'Rural', 'Lluyllucucha', 'Sector Tahuishco, Moyobamba', 1),
+(3, 2, 'Puesto de Salud Calzada', 'ps_calzada', 'Urbana', 'Calzada', 'Plaza de Armas, Calzada', 1),
+(4, 5, 'Puesto de Salud San Marcos', 'ps_soritor', 'Rural', 'Soritor', 'Caserío San Marcos, Soritor', 1),
+(5, 3, 'Centro de Salud Habana', 'cs_habana', 'Rural', 'Habana', 'Plaza Principal, Habana', 1),
+(6, 4, 'Centro de Salud Jerillo', 'cs_jerillo', 'Urbana', 'Jerillo', 'Jr. Principal, Jepelacio', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_factores_distrito`
+--
+
+CREATE TABLE `vih_factores_distrito` (
+  `id_factor_distrito` int NOT NULL,
+  `id_distrito` int NOT NULL,
+  `anio` int NOT NULL,
+  `mes` int NOT NULL,
+  `indice_pobreza` double NOT NULL,
+  `programas_prevencion_activos` int NOT NULL,
+  `campanias_vih_mes` tinyint(1) NOT NULL,
+  `cobertura_preservativos` double NOT NULL,
+  `eventos_riesgos` int NOT NULL,
+  `accesibilidad_servicios` double NOT NULL,
+  `observaciones` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_registro` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_factores_riesgo`
+--
+
+CREATE TABLE `vih_factores_riesgo` (
+  `id_factores_riesgo` int NOT NULL,
+  `id_cuestionario` int NOT NULL,
+  `uso_preservativos_pre_diagnostico` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `relaciones_sin_proteccion_post_diagnostico` tinyint(1) NOT NULL,
+  `numero_parejas_ultimo_anio` int NOT NULL,
+  `relaciones_mismo_sexo` tinyint(1) NOT NULL,
+  `uso_drogas_inyectables` tinyint(1) NOT NULL,
+  `transfusiones_ultimos_5_anios` tinyint(1) NOT NULL,
+  `antecedentes_its` tinyint(1) NOT NULL,
+  `detalle_its_previas` text COLLATE utf8mb4_unicode_ci,
+  `relaciones_ocasionales_post_diagnostico` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_informacion_clinica`
+--
+
+CREATE TABLE `vih_informacion_clinica` (
+  `id_clinica` int NOT NULL,
+  `id_cuestionario` int NOT NULL,
+  `fecha_diagnostico_vih` date NOT NULL,
+  `tipo_prueba_diagnostico` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `otro_tipo_prueba` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `recibe_tar` tinyint(1) NOT NULL,
+  `fecha_inicio_tar` date DEFAULT NULL,
+  `ultimo_cd4` int NOT NULL,
+  `unidad_cd4` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ultima_carga_viral` int NOT NULL,
+  `unidad_carga_viral` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `presenta_its_actual` tinyint(1) NOT NULL,
+  `conoce_its_actual` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_modelo_prediccion_distrito`
+--
+
+CREATE TABLE `vih_modelo_prediccion_distrito` (
+  `id_modelo` int NOT NULL,
+  `nombre_modelo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `version_modelo` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `algoritmo` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `parametros_xgboost` text COLLATE utf8mb4_unicode_ci,
+  `accuracy` double DEFAULT NULL,
+  `mae_casos` double NOT NULL,
+  `rmse_casos` double NOT NULL,
+  `mape_porcentual` double NOT NULL,
+  `fecha_entrenamiento` datetime DEFAULT NULL,
+  `fecha_actualizacion` datetime DEFAULT NULL,
+  `modelo_activo` tinyint(1) NOT NULL DEFAULT '0',
+  `horizonte_prediccion_meses` int NOT NULL,
+  `descripcion` text COLLATE utf8mb4_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_modelo_prediccion_distrito`
+--
+
+INSERT INTO `vih_modelo_prediccion_distrito` (`id_modelo`, `nombre_modelo`, `version_modelo`, `algoritmo`, `parametros_xgboost`, `accuracy`, `mae_casos`, `rmse_casos`, `mape_porcentual`, `fecha_entrenamiento`, `fecha_actualizacion`, `modelo_activo`, `horizonte_prediccion_meses`, `descripcion`) VALUES
+(1, 'Predictor VIH San Martín v1.0', '1.0.0', 'XGBoost', '{\"n_estimators\": 100, \"max_depth\": 6, \"learning_rate\": 0.1, \"subsample\": 0.8, \"colsample_bytree\": 0.8, \"random_state\": 42}', 0.85, 2.3, 3.1, 15.2, '2024-01-15 10:00:00', '2024-01-15 10:00:00', 1, 3, 'Modelo inicial para predicción de casos de VIH en distritos de San Martín usando XGBoost con características demográficas y epidemiológicas');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_paciente`
+--
+
+CREATE TABLE `vih_paciente` (
+  `id_paciente` int NOT NULL,
+  `nombre_completo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `numero_documento` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_documento` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_nacimiento` date NOT NULL,
+  `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `activo` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_personal_medico`
+--
+
+CREATE TABLE `vih_personal_medico` (
+  `id_personal` int NOT NULL,
+  `nombre_completo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `especialidad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cargo` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_establecimiento` int NOT NULL,
+  `activo` tinyint(1) NOT NULL,
+  `fecha_registro` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_personal_medico`
+--
+
+INSERT INTO `vih_personal_medico` (`id_personal`, `nombre_completo`, `especialidad`, `cargo`, `id_establecimiento`, `activo`, `fecha_registro`) VALUES
+(1, 'Carlos Alberto Pérez Ramírez', 'Medicina Interna', 'Médico Asistente', 1, 1, '2025-06-25 00:29:33'),
+(2, 'María Elena García Vásquez', 'Infectología', 'Médico Especialista', 1, 1, '2025-06-25 00:29:33'),
+(3, 'José Luis Mendoza Torres', 'Medicina General', 'Médico General', 1, 1, '2025-06-25 00:29:33'),
+(4, 'Ana Patricia Silva Rojas', 'Enfermería', 'Enfermera Jefe', 1, 1, '2025-06-25 00:29:33'),
+(5, 'Roberto Carlos Chávez Luna', 'Medicina General', 'Médico General', 2, 1, '2025-06-25 00:29:33'),
+(6, 'Lucía Mercedes Fernández Díaz', 'Enfermería', 'Enfermera', 2, 1, '2025-06-25 00:29:33'),
+(7, 'Patricia Rocío Vargas Pinedo', 'Medicina General', 'Médico General', 3, 1, '2025-06-25 00:29:33'),
+(8, 'Carmen Rosa Paredes Hidalgo', 'Enfermería', 'Enfermera', 3, 1, '2025-06-25 00:29:33'),
+(9, 'Fernando José Ríos Campos', 'Medicina General', 'Médico General', 4, 1, '2025-06-25 00:29:33'),
+(10, 'Gladys Maribel Torres Vela', 'Enfermería', 'Enfermera', 4, 1, '2025-06-25 00:29:33'),
+(11, 'Daniel Augusto Morales Cruz', 'Medicina Familiar', 'Médico Jefe', 5, 1, '2025-06-25 00:29:33'),
+(12, 'Rosa María Delgado Ruiz', 'Enfermería', 'Enfermera', 5, 1, '2025-06-25 00:29:33'),
+(13, 'Víctor Manuel Aquino Sandoval', 'Medicina General', 'Médico General', 6, 1, '2025-06-25 00:29:33'),
+(14, 'Nelly Esperanza Cárdenas Flores', 'Enfermería', 'Enfermera', 6, 1, '2025-06-25 00:29:33');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_prediccion_casos_distrito`
+--
+
+CREATE TABLE `vih_prediccion_casos_distrito` (
+  `id_prediccion` int NOT NULL,
+  `id_modelo` int NOT NULL,
+  `id_distrito` int NOT NULL,
+  `anio_prediccion` int NOT NULL,
+  `mes_prediccion` int NOT NULL,
+  `casos_predichos` int NOT NULL,
+  `casos_minimos_ic95` int NOT NULL,
+  `casos_maximos_ic95` int NOT NULL,
+  `probabilidad_incremento` double NOT NULL,
+  `tendencia_esperada` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nivel_alerta` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fecha_prediccion` datetime NOT NULL,
+  `factores_influyentes` text COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_reentrenaminto_modelo`
+--
+
+CREATE TABLE `vih_reentrenaminto_modelo` (
+  `id_reentrenamiento` int NOT NULL,
+  `id_modelo` int NOT NULL,
+  `fecha_reentrenamiento` datetime NOT NULL,
+  `motivo_reentrenamiento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `registros_entrenamiento` int NOT NULL,
+  `meses_datos_utilizados` int NOT NULL,
+  `mejora_accuracy` double NOT NULL,
+  `cambios_hiperparametros` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reentrenamiento_exitoso` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vih_riesgo_transmision`
+--
+
+CREATE TABLE `vih_riesgo_transmision` (
+  `id_riesgo` int NOT NULL,
+  `id_cuestionario` int NOT NULL,
+  `tiene_pareja_activa` tinyint(1) NOT NULL,
+  `informa_estado_vih` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uso_preservativo_actual` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pareja_prueba_vih` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `vih_riesgo_transmision`
+--
+
+INSERT INTO `vih_riesgo_transmision` (`id_riesgo`, `id_cuestionario`, `tiene_pareja_activa`, `informa_estado_vih`, `uso_preservativo_actual`, `pareja_prueba_vih`) VALUES
+(1, 1, 0, 'A_veces', 'A_veces', 'No');
 
 --
 -- Índices para tablas volcadas
@@ -515,6 +816,96 @@ ALTER TABLE `sis_usuarios`
   ADD PRIMARY KEY (`idusuario`);
 
 --
+-- Indices de la tabla `vih_casos_distrito_mensual`
+--
+ALTER TABLE `vih_casos_distrito_mensual`
+  ADD PRIMARY KEY (`id_casos_distrito`);
+
+--
+-- Indices de la tabla `vih_cuestionario_vih`
+--
+ALTER TABLE `vih_cuestionario_vih`
+  ADD PRIMARY KEY (`id_cuestionario`);
+
+--
+-- Indices de la tabla `vih_datos_sociodemograficos`
+--
+ALTER TABLE `vih_datos_sociodemograficos`
+  ADD PRIMARY KEY (`id_sociodemografico`);
+
+--
+-- Indices de la tabla `vih_demograficos_distrito`
+--
+ALTER TABLE `vih_demograficos_distrito`
+  ADD PRIMARY KEY (`id_demografico_distrito`);
+
+--
+-- Indices de la tabla `vih_distrito`
+--
+ALTER TABLE `vih_distrito`
+  ADD PRIMARY KEY (`id_distrito`);
+
+--
+-- Indices de la tabla `vih_establecimiento_salud`
+--
+ALTER TABLE `vih_establecimiento_salud`
+  ADD PRIMARY KEY (`id_establecimiento`);
+
+--
+-- Indices de la tabla `vih_factores_distrito`
+--
+ALTER TABLE `vih_factores_distrito`
+  ADD PRIMARY KEY (`id_factor_distrito`);
+
+--
+-- Indices de la tabla `vih_factores_riesgo`
+--
+ALTER TABLE `vih_factores_riesgo`
+  ADD PRIMARY KEY (`id_factores_riesgo`);
+
+--
+-- Indices de la tabla `vih_informacion_clinica`
+--
+ALTER TABLE `vih_informacion_clinica`
+  ADD PRIMARY KEY (`id_clinica`);
+
+--
+-- Indices de la tabla `vih_modelo_prediccion_distrito`
+--
+ALTER TABLE `vih_modelo_prediccion_distrito`
+  ADD PRIMARY KEY (`id_modelo`);
+
+--
+-- Indices de la tabla `vih_paciente`
+--
+ALTER TABLE `vih_paciente`
+  ADD PRIMARY KEY (`id_paciente`);
+
+--
+-- Indices de la tabla `vih_personal_medico`
+--
+ALTER TABLE `vih_personal_medico`
+  ADD PRIMARY KEY (`id_personal`);
+
+--
+-- Indices de la tabla `vih_prediccion_casos_distrito`
+--
+ALTER TABLE `vih_prediccion_casos_distrito`
+  ADD PRIMARY KEY (`id_prediccion`);
+
+--
+-- Indices de la tabla `vih_reentrenaminto_modelo`
+--
+ALTER TABLE `vih_reentrenaminto_modelo`
+  ADD PRIMARY KEY (`id_reentrenamiento`);
+
+--
+-- Indices de la tabla `vih_riesgo_transmision`
+--
+ALTER TABLE `vih_riesgo_transmision`
+  ADD PRIMARY KEY (`id_riesgo`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -528,25 +919,25 @@ ALTER TABLE `sis_acciones`
 -- AUTO_INCREMENT de la tabla `sis_centinela`
 --
 ALTER TABLE `sis_centinela`
-  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=346;
+  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1135;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_menus`
 --
 ALTER TABLE `sis_menus`
-  MODIFY `idmenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idmenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_permisos`
 --
 ALTER TABLE `sis_permisos`
-  MODIFY `idpermisos` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idpermisos` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_permisos_extras`
 --
 ALTER TABLE `sis_permisos_extras`
-  MODIFY `idpermiso` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idpermiso` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_personal`
@@ -558,7 +949,7 @@ ALTER TABLE `sis_personal`
 -- AUTO_INCREMENT de la tabla `sis_recursos`
 --
 ALTER TABLE `sis_recursos`
-  MODIFY `idrecurso` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idrecurso` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_rol`
@@ -576,19 +967,109 @@ ALTER TABLE `sis_server_email`
 -- AUTO_INCREMENT de la tabla `sis_sesiones`
 --
 ALTER TABLE `sis_sesiones`
-  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_submenus`
 --
 ALTER TABLE `sis_submenus`
-  MODIFY `idsubmenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idsubmenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_usuarios`
 --
 ALTER TABLE `sis_usuarios`
   MODIFY `idusuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_casos_distrito_mensual`
+--
+ALTER TABLE `vih_casos_distrito_mensual`
+  MODIFY `id_casos_distrito` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_cuestionario_vih`
+--
+ALTER TABLE `vih_cuestionario_vih`
+  MODIFY `id_cuestionario` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_datos_sociodemograficos`
+--
+ALTER TABLE `vih_datos_sociodemograficos`
+  MODIFY `id_sociodemografico` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_demograficos_distrito`
+--
+ALTER TABLE `vih_demograficos_distrito`
+  MODIFY `id_demografico_distrito` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_distrito`
+--
+ALTER TABLE `vih_distrito`
+  MODIFY `id_distrito` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_establecimiento_salud`
+--
+ALTER TABLE `vih_establecimiento_salud`
+  MODIFY `id_establecimiento` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_factores_distrito`
+--
+ALTER TABLE `vih_factores_distrito`
+  MODIFY `id_factor_distrito` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_factores_riesgo`
+--
+ALTER TABLE `vih_factores_riesgo`
+  MODIFY `id_factores_riesgo` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_informacion_clinica`
+--
+ALTER TABLE `vih_informacion_clinica`
+  MODIFY `id_clinica` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_modelo_prediccion_distrito`
+--
+ALTER TABLE `vih_modelo_prediccion_distrito`
+  MODIFY `id_modelo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_paciente`
+--
+ALTER TABLE `vih_paciente`
+  MODIFY `id_paciente` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_personal_medico`
+--
+ALTER TABLE `vih_personal_medico`
+  MODIFY `id_personal` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_prediccion_casos_distrito`
+--
+ALTER TABLE `vih_prediccion_casos_distrito`
+  MODIFY `id_prediccion` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_reentrenaminto_modelo`
+--
+ALTER TABLE `vih_reentrenaminto_modelo`
+  MODIFY `id_reentrenamiento` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `vih_riesgo_transmision`
+--
+ALTER TABLE `vih_riesgo_transmision`
+  MODIFY `id_riesgo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

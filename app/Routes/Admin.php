@@ -14,15 +14,6 @@ use App\Controllers\Admin\PersonasController;
 use App\Controllers\Admin\RolesController;
 use App\Controllers\Admin\SubMenusController;
 use App\Controllers\Admin\UsuariosController;
-use App\Controllers\Chio\CitasController;
-use App\Controllers\Chio\EspecialidadController;
-use App\Controllers\Chio\HorarioController;
-use App\Controllers\Chio\ListaTestController;
-use App\Controllers\Chio\PacientesController;
-use App\Controllers\Chio\PersonalController;
-use App\Controllers\Chio\PreguntasController;
-use App\Controllers\Chio\TestController;
-use App\Controllers\Chio\TestWebController;
 use App\Controllers\Login\LoginController;
 use App\Controllers\Login\LogoutController;
 
