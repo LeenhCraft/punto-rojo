@@ -8,6 +8,7 @@ use App\Models\CuestionarioVIH;
 use App\Models\TableModel;
 use DateTime;
 use Exception;
+use stdClass;
 
 class CuestionariosController extends Controller
 {
@@ -428,33 +429,147 @@ class CuestionariosController extends Controller
     {
         try {
             $model = new TableModel();
-            $id = $args['id'] ?? null;
+            $num_cuestionario = $args['id'] ?? null;
 
-            if (!$id) {
+            if (!$num_cuestionario) {
                 return $this->respondWithError($response, 'ID de cuestionario no proporcionado');
             }
 
-            // Query para obtener el detalle completo del cuestionario
-            $query = "SELECT 
-                    c.*,
-                    p.nombre_completo,
-                    p.tipo_documento,
-                    p.numero_documento,
-                    p.fecha_nacimiento
-                 FROM vih_cuestionario_vih c 
-                 INNER JOIN vih_paciente p ON c.id_paciente = p.id_paciente
-                 WHERE c.id_cuestionario = ?";
+            // 1. Query principal - Obtener datos del cuestionario
+            $queryPrincipal = "SELECT 
+                            c.id_cuestionario,
+                            c.id_paciente,
+                            c.id_personal,
+                            c.id_establecimiento,
+                            c.num_cuestionario,
+                            c.fecha_aplicacion,
+                            c.estado,
+                            c.observaciones_generales
+                         FROM vih_cuestionario_vih c 
+                         WHERE c.num_cuestionario = ?";
 
-            $result = $model->query($query, [$id])->first();
+            $cuestionario = $model->query($queryPrincipal, [$num_cuestionario])->first();
 
-            if (!$result) {
+            if (!$cuestionario) {
                 return $this->respondWithError($response, 'Cuestionario no encontrado');
             }
 
-            // Aquí puedes agregar más lógica para obtener las respuestas del cuestionario
-            // si tienes una tabla de respuestas relacionada
+            $id_cuestionario = $cuestionario["id_cuestionario"];
+            $id_paciente = $cuestionario["id_paciente"];
+            $id_establecimiento = $cuestionario["id_establecimiento"];
 
-            return $this->respondWithJson($response, ['success' => true, 'data' => $result]);
+            // 2. Query para datos del paciente
+            $queryPaciente = "SELECT 
+                            p.nombre_completo,
+                            p.numero_documento,
+                            p.tipo_documento,
+                            p.fecha_nacimiento,
+                            p.fecha_registro as paciente_fecha_registro,
+                            p.activo as paciente_activo
+                         FROM vih_paciente p 
+                         WHERE p.id_paciente = ?";
+
+            $paciente = $model->query($queryPaciente, [$id_paciente])->first();
+
+            // 3. Query para datos del establecimiento
+            $queryEstablecimiento = "SELECT 
+                                    e.nombre_establecimiento,
+                                    e.codigo_establecimiento,
+                                    e.zona,
+                                    e.microred,
+                                    e.direccion,
+                                    e.activo as establecimiento_activo
+                                 FROM vih_establecimiento_salud e 
+                                 WHERE e.id_establecimiento = ?";
+
+            $establecimiento = $model->query($queryEstablecimiento, [$id_establecimiento])->first();
+
+            // 4. Query para riesgo de transmisión
+            $queryRiesgoTransmision = "SELECT 
+                                     rt.id_riesgo,
+                                     rt.tiene_pareja_activa,
+                                     rt.informa_estado_vih,
+                                     rt.uso_preservativo_actual,
+                                     rt.pareja_prueba_vih
+                                   FROM vih_riesgo_transmision rt 
+                                   WHERE rt.id_cuestionario = ?";
+
+            $riesgoTransmision = $model->query($queryRiesgoTransmision, [$id_cuestionario])->first();
+
+            // 5. Query para información clínica
+            $queryInformacionClinica = "SELECT 
+                                      ic.id_clinica,
+                                      ic.fecha_diagnostico_vih,
+                                      ic.tipo_prueba_diagnostico,
+                                      ic.otro_tipo_prueba,
+                                      ic.recibe_tar,
+                                      ic.fecha_inicio_tar,
+                                      ic.ultimo_cd4,
+                                      ic.unidad_cd4,
+                                      ic.ultima_carga_viral,
+                                      ic.unidad_carga_viral,
+                                      ic.presenta_its_actual,
+                                      ic.conoce_its_actual
+                                    FROM vih_informacion_clinica ic 
+                                    WHERE ic.id_cuestionario = ?";
+
+            $informacionClinica = $model->query($queryInformacionClinica, [$id_cuestionario])->first();
+
+            // 6. Query para factores de riesgo
+            $queryFactoresRiesgo = "SELECT 
+                                  fr.id_factores_riesgo,
+                                  fr.uso_preservativos_pre_diagnostico,
+                                  fr.relaciones_sin_proteccion_post_diagnostico,
+                                  fr.numero_parejas_ultimo_anio,
+                                  fr.relaciones_mismo_sexo,
+                                  fr.uso_drogas_inyectables,
+                                  fr.transfusiones_ultimos_5_anios,
+                                  fr.antecedentes_its,
+                                  fr.detalle_its_previas,
+                                  fr.relaciones_ocasionales_post_diagnostico
+                                FROM vih_factores_riesgo fr 
+                                WHERE fr.id_cuestionario = ?";
+
+            $factoresRiesgo = $model->query($queryFactoresRiesgo, [$id_cuestionario])->first();
+
+            // 7. Query para datos sociodemográficos
+            $querySociodemograficos = "SELECT 
+                                     ds.id_sociodemografico,
+                                     ds.edad,
+                                     ds.sexo,
+                                     ds.estado_civil,
+                                     ds.nivel_educativo,
+                                     ds.ocupacion_actual,
+                                     ds.lugar_residencia
+                                   FROM vih_datos_sociodemograficos ds 
+                                   WHERE ds.id_cuestionario = ?";
+
+            $sociodemograficos = $model->query($querySociodemograficos, [$id_cuestionario])->first();
+
+            // Combinar todos los resultados en un solo objeto
+            $resultado = array_merge(
+                (array) $cuestionario,
+                (array) ($paciente ?: new stdClass()),
+                (array) ($establecimiento ?: new stdClass()),
+                (array) ($riesgoTransmision ?: new stdClass()),
+                (array) ($informacionClinica ?: new stdClass()),
+                (array) ($factoresRiesgo ?: new stdClass()),
+                (array) ($sociodemograficos ?: new stdClass())
+            );
+
+            // return $this->respondWithJson($response, ['success' => true, 'data' => $resultado]);
+            return $this->render($response, "Vih.VisualizarCuestionario", [
+                "titulo_web" => "Cuestionario VIH " . $resultado["num_cuestionario"],
+                "url" => $request->getUri()->getPath(),
+                "cuestionario" => $resultado,
+                "css" => [
+                    "/css/vih/cuestionario.css",
+                ],
+                "js" => [
+                    "/js/vih/visualizar.js?v=" . time(),
+                ],
+                "resultado" => $resultado,
+            ]);
         } catch (Exception $e) {
             return $this->respondWithJson($response, ['error' => 'Error interno del servidor\n' . $e->getMessage()]);
         }

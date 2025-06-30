@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost:3306
--- Tiempo de generación: 25-06-2025 a las 21:41:10
+-- Tiempo de generación: 30-06-2025 a las 05:32:36
 -- Versión del servidor: 8.0.30
 -- Versión de PHP: 8.1.10
 
@@ -119,7 +119,8 @@ INSERT INTO `sis_permisos` (`idpermisos`, `idrol`, `idsubmenu`, `perm_r`, `perm_
 (15, 1, 12, 1, 0, 0, 0),
 (21, 1, 18, 1, 0, 0, 0),
 (22, 1, 19, 1, 0, 0, 0),
-(23, 1, 20, 1, 0, 0, 0);
+(23, 1, 20, 1, 0, 0, 0),
+(24, 1, 21, 1, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -285,7 +286,12 @@ INSERT INTO `sis_sesiones` (`idsesion`, `idusuario`, `session_token`, `ip`, `fec
 (14, 1, 'e6d0c93cda305259c84385b95d50d0374bd60d0f5a239c15df28ca0b44bb5d2dbb35a44d1b09dba3', '::1', '2025-06-22 19:37:53', '1750645834', 1),
 (15, 1, 'f5e94d076be6cf372c60d94a03a21afa9c339401819eb895f99a5da3981d6d685fb4d431aa0d693d', '::1', '2025-06-24 21:33:54', '1750823656', 0),
 (16, 1, 'fd2f04ba85eafd13621fae1a2fa6d6da314fc79de0c6f310fc64ca7563b5f15843ec4e4d5dc79dc7', '::1', '2025-06-24 23:20:57', '1750834560', 1),
-(17, 1, '9e7d0f6930262316f4615c83be653bfaa42979c5cf830fe51e4c32f45b01f5b885b60463a611c484', '::1', '2025-06-25 13:10:34', '1750891222', 1);
+(17, 1, '9e7d0f6930262316f4615c83be653bfaa42979c5cf830fe51e4c32f45b01f5b885b60463a611c484', '::1', '2025-06-25 13:10:34', '1750891222', 1),
+(18, 1, 'c08ba35f5663b1d0405850c533fce3495e1e5ac2e282576115c887cc3aba5475cffd964266e27e02', '::1', '2025-06-25 20:13:29', '1750904015', 1),
+(19, 1, 'aa8a9d3781115b3a19bffed2429f4314c5e4d79bce36adc42fa1fa358a97f9e5ec06d37901aabb7a', '::1', '2025-06-27 18:25:21', '1751071983', 0),
+(20, 1, 'c94e304d5ce095cec7757ef056319d92704ec615d92d88778fe2a57b806350d6e5e9483fc3015415', '::1', '2025-06-27 22:30:42', '1751087344', 1),
+(21, 1, '1e11df35e97dd5b8edd355f4e948453a3a37c8218a83e2e07142b97bdccdb4080ed879492cd7abdc', '::1', '2025-06-28 15:37:37', '1751156606', 0),
+(22, 1, 'd555e35709e12fea3980d70d846a3ec5b6f84939418a1fcdf49c32aec96fe273e774297339ea0974', '::1', '2025-06-29 01:17:21', '1751183105', 0);
 
 -- --------------------------------------------------------
 
@@ -321,7 +327,8 @@ INSERT INTO `sis_submenus` (`idsubmenu`, `idmenu`, `sub_nombre`, `sub_url`, `sub
 (12, 6, 'Roles', '/admin/roles', 0, 'RolesController', 'index', 'bx bx-plus-circle text-danger', 3, 1, '2025-02-19 14:22:27'),
 (18, 9, 'Pacientes', '/admin/pacientes', 0, 'PacientesController', 'index', 'bx-circle', 1, 1, '2025-06-18 18:54:07'),
 (19, 10, 'Nuevo', '/admin/cuestionarios/nuevo', 0, 'CuestionariosController', 'index', 'bx-circle', 1, 1, '2025-06-18 19:52:47'),
-(20, 10, 'Lista', '/admin/cuestionarios', 0, 'CuestionariosController', 'index', 'bx-circle', 2, 1, '2025-06-18 21:02:55');
+(20, 10, 'Lista', '/admin/cuestionarios', 0, 'CuestionariosController', 'index', 'bx-circle', 2, 1, '2025-06-18 21:02:55'),
+(21, 10, 'Entrenar modelo', '/admin/entrenamiento', 0, 'EntrenarController', 'index', 'bx-circle', 3, 1, '2025-06-27 18:25:51');
 
 -- --------------------------------------------------------
 
@@ -398,7 +405,8 @@ CREATE TABLE `vih_cuestionario_vih` (
 --
 
 INSERT INTO `vih_cuestionario_vih` (`id_cuestionario`, `id_paciente`, `id_personal`, `id_establecimiento`, `fecha_aplicacion`, `num_cuestionario`, `estado`, `observaciones_generales`) VALUES
-(1, 1, 1, 4, '2025-06-25 15:22:02', 'CVIH20250625152202473', 'Completo', '');
+(1, 1, 1, 4, '2025-06-25 15:22:02', 'CVIH20250625152202473', 'Completo', ''),
+(2, 1, 1, 1, '2025-06-29 01:45:05', 'CVIH20250629014505412', 'Completo', '');
 
 -- --------------------------------------------------------
 
@@ -422,7 +430,8 @@ CREATE TABLE `vih_datos_sociodemograficos` (
 --
 
 INSERT INTO `vih_datos_sociodemograficos` (`id_sociodemografico`, `id_cuestionario`, `edad`, `sexo`, `estado_civil`, `nivel_educativo`, `ocupacion_actual`, `lugar_residencia`) VALUES
-(1, 1, 24, 'Masculino', 'Soltero', 'Universitario', 'docente', 'nueva cajamarca');
+(1, 1, 24, 'Masculino', 'Soltero', 'Universitario', 'docente', 'nueva cajamarca'),
+(2, 2, 33, 'Masculino', 'Soltero', 'Tecnico', 'asd', 'asd');
 
 -- --------------------------------------------------------
 
@@ -549,7 +558,8 @@ CREATE TABLE `vih_factores_riesgo` (
 --
 
 INSERT INTO `vih_factores_riesgo` (`id_factores_riesgo`, `id_cuestionario`, `uso_preservativos_pre_diagnostico`, `relaciones_sin_proteccion_post_diagnostico`, `numero_parejas_ultimo_anio`, `relaciones_mismo_sexo`, `uso_drogas_inyectables`, `transfusiones_ultimos_5_anios`, `antecedentes_its`, `detalle_its_previas`, `relaciones_ocasionales_post_diagnostico`) VALUES
-(1, 1, 'A_veces', 0, 1, 0, 0, 0, 0, '', 0);
+(1, 1, 'A_veces', 0, 1, 0, 0, 0, 0, '', 0),
+(2, 2, 'Nunca', 1, 3, 0, 0, 0, 1, 'chancro', 0);
 
 -- --------------------------------------------------------
 
@@ -569,7 +579,7 @@ CREATE TABLE `vih_informacion_clinica` (
   `unidad_cd4` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `ultima_carga_viral` int NOT NULL,
   `unidad_carga_viral` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `presenta_its_actual` tinyint(1) NOT NULL,
+  `presenta_its_actual` int NOT NULL,
   `conoce_its_actual` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -578,7 +588,8 @@ CREATE TABLE `vih_informacion_clinica` (
 --
 
 INSERT INTO `vih_informacion_clinica` (`id_clinica`, `id_cuestionario`, `fecha_diagnostico_vih`, `tipo_prueba_diagnostico`, `otro_tipo_prueba`, `recibe_tar`, `fecha_inicio_tar`, `ultimo_cd4`, `unidad_cd4`, `ultima_carga_viral`, `unidad_carga_viral`, `presenta_its_actual`, `conoce_its_actual`) VALUES
-(1, 1, NULL, '', '', 0, NULL, 0, 'células/μL', 0, 'copias/mL', 0, 'No');
+(1, 1, NULL, '', '', 0, NULL, 0, 'células/μL', 0, 'copias/mL', 0, 'No'),
+(2, 2, '2025-06-01', 'Otro', 'otra prueba', 1, '2025-06-01', 20, 'células/μL', 50, 'copias/mL', 0, 'No');
 
 -- --------------------------------------------------------
 
@@ -631,7 +642,7 @@ CREATE TABLE `vih_paciente` (
 --
 
 INSERT INTO `vih_paciente` (`id_paciente`, `nombre_completo`, `numero_documento`, `tipo_documento`, `fecha_nacimiento`, `fecha_registro`, `activo`) VALUES
-(1, 'Leenh Alexander Bustamante Fernandez', '76144152', 'DNI', '2001-07-23', '2025-06-25 15:22:02', 1);
+(1, 'Leenh Bustamante', '76144152', 'DNI', '2001-07-23', '2025-06-25 15:22:02', 1);
 
 -- --------------------------------------------------------
 
@@ -729,7 +740,8 @@ CREATE TABLE `vih_riesgo_transmision` (
 --
 
 INSERT INTO `vih_riesgo_transmision` (`id_riesgo`, `id_cuestionario`, `tiene_pareja_activa`, `informa_estado_vih`, `uso_preservativo_actual`, `pareja_prueba_vih`) VALUES
-(1, 1, 0, 'Nunca', 'A_veces', 'No');
+(1, 1, 0, 'Nunca', 'A_veces', 'No'),
+(2, 2, 0, 'Siempre', 'A_veces', 'No');
 
 --
 -- Índices para tablas volcadas
@@ -911,7 +923,7 @@ ALTER TABLE `sis_acciones`
 -- AUTO_INCREMENT de la tabla `sis_centinela`
 --
 ALTER TABLE `sis_centinela`
-  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1406;
+  MODIFY `idcentinela` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1691;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_menus`
@@ -923,7 +935,7 @@ ALTER TABLE `sis_menus`
 -- AUTO_INCREMENT de la tabla `sis_permisos`
 --
 ALTER TABLE `sis_permisos`
-  MODIFY `idpermisos` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `idpermisos` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_permisos_extras`
@@ -959,13 +971,13 @@ ALTER TABLE `sis_server_email`
 -- AUTO_INCREMENT de la tabla `sis_sesiones`
 --
 ALTER TABLE `sis_sesiones`
-  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `idsesion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_submenus`
 --
 ALTER TABLE `sis_submenus`
-  MODIFY `idsubmenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `idsubmenu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `sis_usuarios`
@@ -983,13 +995,13 @@ ALTER TABLE `vih_casos_distrito_mensual`
 -- AUTO_INCREMENT de la tabla `vih_cuestionario_vih`
 --
 ALTER TABLE `vih_cuestionario_vih`
-  MODIFY `id_cuestionario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cuestionario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_datos_sociodemograficos`
 --
 ALTER TABLE `vih_datos_sociodemograficos`
-  MODIFY `id_sociodemografico` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_sociodemografico` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_demograficos_distrito`
@@ -1019,13 +1031,13 @@ ALTER TABLE `vih_factores_distrito`
 -- AUTO_INCREMENT de la tabla `vih_factores_riesgo`
 --
 ALTER TABLE `vih_factores_riesgo`
-  MODIFY `id_factores_riesgo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_factores_riesgo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_informacion_clinica`
 --
 ALTER TABLE `vih_informacion_clinica`
-  MODIFY `id_clinica` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_clinica` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `vih_modelo_prediccion_distrito`
@@ -1061,7 +1073,7 @@ ALTER TABLE `vih_reentrenaminto_modelo`
 -- AUTO_INCREMENT de la tabla `vih_riesgo_transmision`
 --
 ALTER TABLE `vih_riesgo_transmision`
-  MODIFY `id_riesgo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_riesgo` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

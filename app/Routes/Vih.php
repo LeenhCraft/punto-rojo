@@ -7,6 +7,7 @@ use Slim\Routing\RouteCollectorProxy;
 // Controllers
 use App\Middleware\PermissionMiddleware;
 use App\Controllers\Vih\CuestionariosController;
+use App\Controllers\Vih\EntrenarController;
 use App\Controllers\Vih\PacientesController;
 use App\Middleware\LoginAdminMiddleware;
 
@@ -25,9 +26,14 @@ $app->group('/admin', function (RouteCollectorProxy $group) {
         $group->post('', CuestionariosController::class . ':list');
         $group->get('/nuevo', CuestionariosController::class . ':index');
         $group->post('/nuevo', CuestionariosController::class . ':store');
-        $group->post('/update', CuestionariosController::class . ':update');
         $group->get('/search/{id}', CuestionariosController::class . ':search');
         $group->post('/delete', CuestionariosController::class . ':delete');
+    })->add(PermissionMiddleware::class);
+
+    $group->group('/entrenamiento', function (RouteCollectorProxy $group) {
+        $group->get('', EntrenarController::class . ':index');
+        $group->post('', EntrenarController::class . ':list');
+        $group->post('/importar', EntrenarController::class . ':importarDatos');
     })->add(PermissionMiddleware::class);
 
 })->add(new LoginAdminMiddleware());

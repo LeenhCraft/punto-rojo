@@ -215,12 +215,12 @@ class CuestionarioVIH extends Model
         return $factoresModel->create([
             'id_cuestionario' => $id_cuestionario,
             'uso_preservativos_pre_diagnostico' => ucfirst($data['preservativos_antes']),
-            'relaciones_sin_proteccion_post_diagnostico' => $data['relaciones_sin_proteccion'] === 'si' ? 1 : 0,
+            'relaciones_sin_proteccion_post_diagnostico' => $data['relaciones_sin_proteccion'] === 'si' ? 2 : 0,
             'numero_parejas_ultimo_anio' => (int)$data['parejas_sexuales'],
-            'relaciones_mismo_sexo' => $data['mismo_sexo'] === 'si' ? 1 : 0,
-            'uso_drogas_inyectables' => $data['drogas_inyectables'] === 'si' ? 1 : 0,
-            'transfusiones_ultimos_5_anios' => $data['transfusiones'] === 'si' ? 1 : 0,
-            'antecedentes_its' => $data['antecedentes_its'] === 'si' ? 1 : 0,
+            'relaciones_mismo_sexo' => $data['mismo_sexo'] === 'si' ? 2 : 0,
+            'uso_drogas_inyectables' => $data['drogas_inyectables'] === 'si' ? 2 : 1,
+            'transfusiones_ultimos_5_anios' => $data['transfusiones'] === 'si' ? 2 : 0,
+            'antecedentes_its' => $data['antecedentes_its'] === 'si' ? 2 : 0,
             'detalle_its_previas' => $data['its_especificar'] ?? '',
             'relaciones_ocasionales_post_diagnostico' => 0 // Valor por defecto
         ]);
@@ -240,14 +240,15 @@ class CuestionarioVIH extends Model
             'fecha_diagnostico_vih' => empty($data['fecha_diagnostico']) ? null : $data['fecha_diagnostico'],
             'tipo_prueba_diagnostico' => ucfirst(str_replace('_', ' ', $data['tipo_prueba'])),
             'otro_tipo_prueba' => $data['otro_prueba'] ?? '',
-            'recibe_tar' => $data['tar'] === 'si' ? 1 : 0,
+            'recibe_tar' => $data['tar'] === 'si' ? 2 : 0,
             'fecha_inicio_tar' => !empty($data['fecha_inicio_tar']) ? $data['fecha_inicio_tar'] : null,
             'ultimo_cd4' => !empty($data['cd4']) ? (int)$data['cd4'] : 0,
             'unidad_cd4' => 'células/μL',
             'ultima_carga_viral' => !empty($data['carga_viral']) ? (int)$data['carga_viral'] : 0,
             'unidad_carga_viral' => 'copias/mL',
-            'presenta_its_actual' => $data['its_actual'] === 'si' ? 1 : 0,
-            'conoce_its_actual' => $data['its_actual'] === 'si' ? 'Si' : 'No'
+            'presenta_its_actual' => $data['its_actual'] === 'si' ? 2 : ($data['its_actual'] === 'no' ? 0 : 1),
+            // tenemos 3 tipos, si, no y no_sabe
+            'conoce_its_actual' => $data['its_actual'] === 'si' ? "Si" : ($data['its_actual'] === 'no' ? "No" : "No_sabe")
         ]);
     }
 
@@ -262,10 +263,10 @@ class CuestionarioVIH extends Model
 
         return $riesgoModel->create([
             'id_cuestionario' => $id_cuestionario,
-            'tiene_pareja_activa' => $data['pareja_activa'] === 'si' ? 1 : 0,
+            'tiene_pareja_activa' => $data['pareja_activa'] === 'si' ? 2 : 0,
             'informa_estado_vih' => ucfirst($data['informa_parejas']),
             'uso_preservativo_actual' => ucfirst($data['preservativo_actual']),
-            'pareja_prueba_vih' => $data['pareja_prueba'] === 'si' ? 'Si_al_menos_una_vez' : 'No'
+            'pareja_prueba_vih' => $data['pareja_prueba'] === 'si' ? 'Si_al_menos_una_vez' : ($data['pareja_prueba'] === 'no' ? 'No' : 'No_sabe')
         ]);
     }
 

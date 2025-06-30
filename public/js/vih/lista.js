@@ -48,7 +48,7 @@ $(document).ready(function () {
         render: function (data, type, row) {
           return `
           <div class="btn-group" role="group">
-              <button type="button" class="btn btn-info btn-sm" onclick="visualizarCuestionario(${row.id})" title="Visualizar">
+              <button type="button" class="btn btn-info btn-sm" onclick="visualizarCuestionario('${row.num_cuestionario}')" title="Visualizar">
                   <i class="bx bx-window-alt"></i>
               </button>
               <button type="button" class="btn btn-danger btn-sm" onclick="confirmarEliminar(${row.id}, '${row.num_cuestionario}')" title="Eliminar">
@@ -73,25 +73,28 @@ $(document).ready(function () {
 
   // Función para visualizar cuestionario
   window.visualizarCuestionario = function (id) {
-    $("#modalContent").html(
-      '<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>'
-    );
-    $("#visualizarModal").modal("show");
+    // $("#modalContent").html(
+    //   '<div class="text-center"><i class="fas fa-spinner fa-spin"></i> Cargando...</div>'
+    // );
+    // $("#visualizarModal").modal("show");
 
-    $.ajax({
-      url: `/admin/cuestionarios/search/${id}`, // Cambia por tu endpoint
-      method: "GET",
-      success: function (response) {
-        console.log(response);
+    // $.ajax({
+    //   url: `/admin/cuestionarios/search/${id}`, // Cambia por tu endpoint
+    //   method: "GET",
+    //   success: function (response) {
+    //     console.log(response);
 
-        $("#modalContent").html(response);
-      },
-      error: function () {
-        $("#modalContent").html(
-          '<div class="alert alert-danger">Error al cargar el cuestionario</div>'
-        );
-      },
-    });
+    //     $("#modalContent").html(response);
+    //   },
+    //   error: function () {
+    //     $("#modalContent").html(
+    //       '<div class="alert alert-danger">Error al cargar el cuestionario</div>'
+    //     );
+    //   },
+    // });
+
+    // abre una nueva pestaña en el navegador
+    window.open(`/admin/cuestionarios/search/${id}`, '_blank');
   };
 
   // Función para confirmar eliminación

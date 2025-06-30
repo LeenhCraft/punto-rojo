@@ -224,7 +224,7 @@
                 <!-- Sección 2: Datos Sociodemográficos -->
                 <div class="section-header">
                     <i class="fas fa-user"></i>
-                    2. Datos Sociodemográficos
+                    3. Datos Sociodemográficos
                 </div>
 
                 <div class="d-flex gap-3 mb-4">
@@ -292,7 +292,7 @@
                 <!-- Sección 3: Comportamientos y Factores de Riesgo -->
                 <div class="section-header">
                     <i class="fas fa-exclamation-triangle"></i>
-                    3. Comportamientos y Factores de Riesgo
+                    4. Comportamientos y Factores de Riesgo
                 </div>
 
                 <div class="form-group mb-4">
@@ -397,7 +397,7 @@
                 <!-- Sección 4: Información Clínica Relevante -->
                 <div class="section-header">
                     <i class="fas fa-stethoscope"></i>
-                    4. Información Clínica Relevante
+                    5. Información Clínica Relevante
                 </div>
 
                 <div class="d-flex mb-4">
@@ -472,7 +472,7 @@
                 <!-- Sección 5: Riesgo de Transmisión Actual -->
                 <div class="section-header">
                     <i class="fas fa-shield-alt"></i>
-                    5. Riesgo de Transmisión Actual
+                    6. Riesgo de Transmisión Actual
                 </div>
 
                 <div class="form-group mb-4">
