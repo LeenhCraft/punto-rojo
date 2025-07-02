@@ -13,9 +13,21 @@ document
       .then((response) => response.json())
       .then((data) => {
         if (data.status === "success") {
-          alert(data.message);
+          Swal.fire({
+            title: "Importación exitosa",
+            text:
+              "Los datos se han importado correctamente. Total filas procesadas: " +
+              data.data.datos,
+            icon: "success",
+            confirmButtonText: "OK",
+          });
         } else {
-          alert("Error al importar datos.");
+          Swal.fire({
+            title: "Error al importar datos",
+            text: data.message,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
         }
       })
       .catch((error) => {
