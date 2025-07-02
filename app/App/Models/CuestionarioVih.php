@@ -102,7 +102,7 @@ class CuestionarioVIH extends Model
     /**
      * Registra un nuevo paciente o actualiza uno existente
      */
-    private function registrarPaciente($data)
+    public function registrarPaciente($data)
     {
         $pacienteModel = new TableModel();
         $pacienteModel->setTable("vih_paciente");
@@ -137,7 +137,7 @@ class CuestionarioVIH extends Model
     /**
      * Obtiene el establecimiento de salud
      */
-    private function obtenerEstablecimiento($codigo_establecimiento)
+    public function obtenerEstablecimiento($codigo_establecimiento)
     {
         $establecimientoModel = new TableModel();
         $establecimientoModel->setTable("vih_establecimiento_salud");
@@ -165,7 +165,7 @@ class CuestionarioVIH extends Model
     /**
      * Registra el cuestionario principal
      */
-    private function registrarCuestionarioPrincipal($id_paciente, $id_personal_medico, $id_establecimiento)
+    public function registrarCuestionarioPrincipal($id_paciente, $id_personal_medico, $id_establecimiento)
     {
         // Generar número de cuestionario único
         $numeroQuestionario = $this->generarNumeroQuestionario();
@@ -183,7 +183,7 @@ class CuestionarioVIH extends Model
     /**
      * Registra datos sociodemográficos
      */
-    private function registrarDatosSociodemograficos($id_cuestionario, $data)
+    public function registrarDatosSociodemograficos($id_cuestionario, $data)
     {
         $sociodemograficoModel = new TableModel();
         $sociodemograficoModel->setTable("vih_datos_sociodemograficos");
@@ -206,7 +206,7 @@ class CuestionarioVIH extends Model
     /**
      * Registra factores de riesgo
      */
-    private function registrarFactoresRiesgo($id_cuestionario, $data)
+    public function registrarFactoresRiesgo($id_cuestionario, $data)
     {
         $factoresModel = new TableModel();
         $factoresModel->setTable("vih_factores_riesgo");
@@ -229,7 +229,7 @@ class CuestionarioVIH extends Model
     /**
      * Registra información clínica
      */
-    private function registrarInformacionClinica($id_cuestionario, $data)
+    public function registrarInformacionClinica($id_cuestionario, $data)
     {
         $clinicaModel = new TableModel();
         $clinicaModel->setTable("vih_informacion_clinica");
@@ -255,7 +255,7 @@ class CuestionarioVIH extends Model
     /**
      * Registra riesgo de transmisión
      */
-    private function registrarRiesgoTransmision($id_cuestionario, $data)
+    public function registrarRiesgoTransmision($id_cuestionario, $data)
     {
         $riesgoModel = new TableModel();
         $riesgoModel->setTable("vih_riesgo_transmision");
@@ -273,7 +273,7 @@ class CuestionarioVIH extends Model
     /**
      * Determina el grupo de edad según la edad proporcionada
      */
-    private function determinarGrupoEdad($edad)
+    public function determinarGrupoEdad($edad)
     {
         $edad = (int)$edad;
 
@@ -291,7 +291,7 @@ class CuestionarioVIH extends Model
     /**
      * Genera un número único para el cuestionario
      */
-    private function generarNumeroQuestionario()
+    public function generarNumeroQuestionario()
     {
         $prefijo = 'CVIH';
         $timestamp = date('YmdHis');
@@ -342,28 +342,28 @@ class CuestionarioVIH extends Model
     }
 
     // Métodos auxiliares para obtener datos relacionados
-    private function obtenerDatosSociodemograficos($id_cuestionario)
+    public function obtenerDatosSociodemograficos($id_cuestionario)
     {
         $model = new Model();
         $model->table = "datos_sociodemograficos";
         return $model->where('id_cuestionario', $id_cuestionario)->first();
     }
 
-    private function obtenerFactoresRiesgo($id_cuestionario)
+    public function obtenerFactoresRiesgo($id_cuestionario)
     {
         $model = new Model();
         $model->table = "factores_riesgo";
         return $model->where('id_cuestionario', $id_cuestionario)->first();
     }
 
-    private function obtenerInformacionClinica($id_cuestionario)
+    public function obtenerInformacionClinica($id_cuestionario)
     {
         $model = new Model();
         $model->table = "informacion_clinica";
         return $model->where('id_cuestionario', $id_cuestionario)->first();
     }
 
-    private function obtenerRiesgoTransmision($id_cuestionario)
+    public function obtenerRiesgoTransmision($id_cuestionario)
     {
         $model = new Model();
         $model->table = "riesgo_transmision";

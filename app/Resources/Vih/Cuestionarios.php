@@ -546,10 +546,10 @@
                 <!-- Botones de acción -->
                 <div class="text-center">
                     <button type="button" class="btn btn-secondary mr-3" onclick="limpiarFormulario()">
-                        <i class="fas fa-eraser me-2"></i> Limpiar Formulario
+                        <i class="fas fa-eraser me-2"></i>Limpiar Formulario
                     </button>
                     <button type="submit" class="btn btn-submit">
-                        <i class="fas fa-save me-2"></i> Guardar Información
+                        <i class="fas fa-save me-2"></i>Guardar Información
                     </button>
                 </div>
             </form>

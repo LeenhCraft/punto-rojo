@@ -3,6 +3,7 @@
 namespace App\Controllers\Vih;
 
 use App\Core\Controller;
+use App\Models\CuestionarioVIH;
 use Exception;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Csv;
@@ -178,8 +179,11 @@ class EntrenarController extends Controller
                 $nivel_educativo = $this->generarNivelEducativo();
                 // escoger una ocupación al azar de empleado, desempleado, estudiante, jubilado, ama de casa
                 $ocupacion = $this->generarOcupacion();
-                // generar una dirección al azar de 10 caracteres
-                $direccion = $this->generarDireccion();
+                // generar residencia al azar de dos opciones
+                $residencia = $this->generarDireccion();
+
+                // generar fecha de aplicación al azar entre 2020 y 2023
+                $fecha_aplicacion = date('Y-m-d', rand(strtotime('2020-01-01'), strtotime('2023-12-31')));
 
                 // preguntas
 
@@ -200,9 +204,9 @@ class EntrenarController extends Controller
                 // •	Si = 2
                 $p2 = $rows[$i][2];
                 if ($p2 == 0) {
-                    $p2 = 0;
+                    $p2 = "no";
                 } elseif ($p2 == 2) {
-                    $p2 = 1;
+                    $p2 = "si";
                 }
 
                 // Numero estimado de parejas sexuales en el último año
@@ -223,9 +227,9 @@ class EntrenarController extends Controller
                 // •	Si = 2
                 $p4 = $rows[$i][4];
                 if ($p4 == 0) {
-                    $p4 = 0;
+                    $p4 = "no";
                 } elseif ($p4 == 2) {
-                    $p4 = 1;
+                    $p4 = "si";
                 }
 
                 // Ha usado drogas inyectables
@@ -233,9 +237,9 @@ class EntrenarController extends Controller
                 // •	Si = 2
                 $p5 = $rows[$i][5];
                 if ($p5 == 1) {
-                    $p5 = 0;
+                    $p5 = "no";
                 } elseif ($p5 == 2) {
-                    $p5 = 1;
+                    $p5 = "si";
                 }
 
                 // Recibió trasfusiones en lo últimos 5 años
@@ -243,19 +247,31 @@ class EntrenarController extends Controller
                 // •	Si = 2
                 $p6 = $rows[$i][6];
                 if ($p6 == 0) {
-                    $p6 = 0;
+                    $p6 = "no";
                 } elseif ($p6 == 2) {
-                    $p6 = 1;
+                    $p6 = "si";
                 }
 
                 // Tiene antecedentes de ITS
                 // •	No = 0
                 // •	Si = 2
                 $p7 = $rows[$i][7];
+                $its_especificar = "";
                 if ($p7 == 0) {
-                    $p7 = 0;
+                    $p7 = "no";
                 } elseif ($p7 == 2) {
-                    $p7 = 1;
+                    $p7 = "si";
+                }
+
+                if ($p7 == "si") {
+                    $its_especificar = $this->generarITS();
+                }
+
+                // generar tipo de diagnostico al azar de 3 opciones
+                $tipo_diagnostico = $this->generarTipoDiagnostico();
+                $otro_tipo_prueba = "";
+                if ($tipo_diagnostico == "otro") {
+                    $otro_tipo_prueba = $this->generarOtroTipoPrueba();
                 }
 
                 // Recibe tratamiento TAR
@@ -263,10 +279,21 @@ class EntrenarController extends Controller
                 // •	Si = 2
                 $p8 = $rows[$i][9];
                 if ($p8 == 0) {
-                    $p8 = 0;
+                    $p8 = "no";
                 } elseif ($p8 == 2) {
-                    $p8 = 1;
+                    $p8 = "si";
                 }
+
+                // genrar fecha de inicio de TAR al azar entre 2020 y 2023
+                $fecha_inicio_tar = null;
+                $carga_viral = null;
+                $cd4 = null;
+                if ($p8 == "si") {
+                    $fecha_inicio_tar = date('Y-m-d', rand(strtotime('2020-01-01'), strtotime('2023-12-31')));
+                    $carga_viral = rand(100, 1000);
+                    $cd4 = rand(200, 1000);
+                }
+
 
                 // Presenta alguna ITS actualmente
                 // •	No = 0
@@ -274,11 +301,11 @@ class EntrenarController extends Controller
                 // •	Si = 2
                 $p9 = $rows[$i][10];
                 if ($p9 == 0) {
-                    $p9 = 0;
+                    $p9 = "no";
                 } elseif ($p9 == 1) {
-                    $p9 = 1;
+                    $p9 = "no_sabe";
                 } elseif ($p9 == 2) {
-                    $p9 = 2;
+                    $p9 = "si";
                 }
 
                 // Tiene pareja sexual activa actualmente
@@ -286,9 +313,9 @@ class EntrenarController extends Controller
                 // •	Si = 2
                 $p10 = $rows[$i][11];
                 if ($p10 == 0) {
-                    $p10 = 0;
+                    $p10 = "no";
                 } elseif ($p10 == 2) {
-                    $p10 = 1;
+                    $p10 = "si";
                 }
 
                 // Informa a sus parejas sexuales que tiene VIH
@@ -297,20 +324,141 @@ class EntrenarController extends Controller
                 // •	Siempre = 2
                 $p11 = $rows[$i][12];
                 if ($p11 == 0) {
-                    $p11 = 0;
+                    $p11 = "Nunca";
                 } elseif ($p11 == 1) {
-                    $p11 = 1;
+                    $p11 = "A_veces";
                 } elseif ($p11 == 2) {
-                    $p11 = 2;
+                    $p11 = "Siempre";
                 }
 
+                // Utiliza preservativo actualmente en sus relaciones sexuales
+                // •	Nunca = 0
+                // •	A veces = 1
+                // •	Siempre = 2
+                $p12 = $rows[$i][13];
+                if ($p12 == 0) {
+                    $p12 = "Nunca";
+                } elseif ($p12 == 1) {
+                    $p12 = "A_veces";
+                } elseif ($p12 == 2) {
+                    $p12 = "Siempre";
+                }
+
+                // Sabe si su pareja se ha realizado la prueba de VIH
+                // •	No = 0
+                // •	No lo sabe = 1
+                // •	Si = 2
+                $p13 = $rows[$i][14];
+                if ($p13 == 0) {
+                    $p13 = "No";
+                } elseif ($p13 == 1) {
+                    $p13 = "No_sabe";
+                } elseif ($p13 == 2) {
+                    $p13 = "Si";
+                }
+
+                // Agregar fila de datos
+                $datosAsociativos = [
+                    "activo" => "true",
+                    'nombres' => $nombre_completo["nombre"],
+                    "apellidos" => $nombre_completo["apellidos"],
+                    "numero_documento" => $dni,
+                    "tipo_documento" => "DNI",
+                    "fecha_nacimiento" => $fecha_nacimiento,
+                    "zona" => $zona,
+                    "establecimiento" => $centro_salud,
+                    'edad' => $edad,
+                    'sexo' => $sexo,
+                    'estado_civil' => $estado_civil,
+                    'nivel_educativo' => $nivel_educativo,
+                    'ocupacion' => $ocupacion,
+                    'residencia' => $residencia,
+                    'fecha_diagnostico' => $fecha_aplicacion,
+                    'tipo_prueba' => $tipo_diagnostico,
+                    'otro_tipo_prueba' => $otro_tipo_prueba,
+                    'preservativos_antes' => $p1,
+                    'relaciones_sin_proteccion' => $p2,
+                    'parejas_sexuales' => $p3,
+                    'mismo_sexo' => $p4,
+                    'drogas_inyectables' => $p5,
+                    'transfusiones' => $p6,
+                    'antecedentes_its' => $p7,
+                    'its_especificar' => $its_especificar,
+                    'tar' => $p8,
+                    'fecha_inicio_tar' => $fecha_inicio_tar,
+                    'carga_viral' => $carga_viral,
+                    'cd4' => $cd4,
+                    'its_actual' => $p9,
+                    'pareja_activa' => $p10,
+                    'informa_parejas' => $p11,
+                    'preservativo_actual' => $p12,
+                    'pareja_prueba' => $p13
+                ];
+
+                try {
+                    $modelo = new CuestionarioVIH();
+                    $id_personal_medico = 1;
+
+                    $paciente = $modelo->registrarPaciente($datosAsociativos);
+                    if (!$paciente) {
+                        throw new Exception("Error al registrar el paciente");
+                    }
+
+                    $establecimiento = $modelo->obtenerEstablecimiento($datosAsociativos['establecimiento']);
+                    if (!$establecimiento) {
+                        throw new Exception("Establecimiento de salud no encontrado");
+                    }
+
+                    $cuestionario = $modelo->registrarCuestionarioPrincipal(
+                        $paciente['id_paciente'],
+                        $id_personal_medico,
+                        $establecimiento['id_establecimiento']
+                    );
+
+                    if (!$cuestionario) {
+                        throw new Exception("Error al registrar el cuestionario principal");
+                    }
+
+                    $socioDemograficos = $modelo->registrarDatosSociodemograficos($cuestionario['id_cuestionario'], $datosAsociativos);
+                    if (!$socioDemograficos) {
+                        throw new Exception("Error al registrar los datos sociodemográficos");
+                    }
+
+                    $factoresRiesgo = $modelo->registrarFactoresRiesgo($cuestionario['id_cuestionario'], $datosAsociativos);
+                    if (!$factoresRiesgo) {
+                        throw new Exception("Error al registrar los factores de riesgo");
+                    }
+
+                    $informacionClinica = $modelo->registrarInformacionClinica($cuestionario['id_cuestionario'], $datosAsociativos);
+                    if (!$informacionClinica) {
+                        throw new Exception("Error al registrar la información clínica");
+                    }
+
+                    $riesgoTransmision = $modelo->registrarRiesgoTransmision($cuestionario['id_cuestionario'], $datosAsociativos);
+                    if (!$riesgoTransmision) {
+                        throw new Exception("Error al registrar el riesgo de transmisión");
+                    }
+
+                    $resultado = [
+                        'success' => true,
+                        'message' => 'Cuestionario registrado exitosamente',
+                        'data' => [
+                            'cuestionario_id' => $cuestionario['id_cuestionario'],
+                            'paciente_id' => $paciente['id_paciente'],
+                            'numero_cuestionario' => $cuestionario['num_cuestionario']
+                        ]
+                    ];
+
+                    dep($resultado);
+                } catch (Exception $e) {
+                    dep($e->getMessage(), 1);
+                }
             }
 
-            dep("Total filas: " . count($rows), 1);
+            dep("Total filas: " . (count($rows) - 1), 1);
 
             return [
-                'headers' => $headers,
-                'datos' => $datosAsociativos
+                'mensaje' => 'Archivo procesado correctamente',
             ];
         } catch (Exception $e) {
             throw new Exception("Error al procesar archivo: " . $e->getMessage());
@@ -324,7 +472,10 @@ class EntrenarController extends Controller
         $nombre = $nombres[array_rand($nombres)];
         $apellido1 = $apellidos[array_rand($apellidos)];
         $apellido2 = $apellidos[array_rand($apellidos)];
-        return $nombre . ' ' . $apellido1 . ' ' . $apellido2;
+        return [
+            'nombre' => $nombre,
+            'apellidos' => $apellido1 . ' ' . $apellido2
+        ];
     }
 
     private function generarDNI()
@@ -369,6 +520,24 @@ class EntrenarController extends Controller
         $direcciones = ['Calle 1', 'Avenida 2', 'Pasaje 3', 'Callejón 4', 'Avenida 5', 'Pasaje 6'];
         $numero = rand(1, 100);
         return $direcciones[array_rand($direcciones)] . ' ' . $numero;
+    }
+
+    private function generarTipoDiagnostico()
+    {
+        $tipos = ['prueba_rapida', 'elisa', 'western_blot', 'otro'];
+        return $tipos[array_rand($tipos)];
+    }
+
+    private function generarOtroTipoPrueba()
+    {
+        $otrosTipos = ['PCR', 'Antígeno', 'Anticuerpos'];
+        return $otrosTipos[array_rand($otrosTipos)];
+    }
+
+    private function generarITS()
+    {
+        $its = ['gonorrea', 'clamidia', 'sifilis', 'herpes', 'hepatitis'];
+        return $its[array_rand($its)];
     }
 
     /**

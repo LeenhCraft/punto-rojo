@@ -155,7 +155,7 @@ class CuestionariosController extends Controller
             $id_personal_medico = $this->obtenerIdPersonalMedico($request);
 
             if (!$id_personal_medico) {
-                return $this->respondWithError($response, 'Usuario no autorizado para registrar cuestionarios', 401);
+                return $this->respondWithError($response, 'Usuario no autorizado para registrar cuestionarios');
             }
 
             // Registrar el cuestionario completo

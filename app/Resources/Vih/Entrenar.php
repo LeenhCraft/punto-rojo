@@ -4,9 +4,9 @@
     <div class="card">
         <div class="card-body">
             <form id="form-importar-datos" enctype="multipart/form-data">
-                <div class="form-group">
+                <div class="form-group mb-2">
                     <label for="archivoDatos">Seleccionar archivo CSV</label>
-                    <input type="file" class="form-control-file" id="archivoDatos" name="archivoDatos" accept=".csv" required>
+                    <input type="file" class="form-control" id="archivoDatos" name="archivoDatos" accept=".csv" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Importar Datos</button>
             </form>
@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group mb-4">
                     <label for="dataset">Conjunto de datos</label>
                     <select class="form-control" id="dataset" name="dataset">
                         <option value="dataset1.csv">dataset1.csv</option>
@@ -66,7 +66,7 @@
             Seleccionar Modelo Existente
         </div>
         <div class="card-body">
-            <div class="form-group">
+            <div class="form-group mb-4">
                 <label for="modeloSeleccionado">Modelos Entrenados</label>
                 <select class="form-control" id="modeloSeleccionado">
                     <option value="modelo_20250625.pkl">modelo_20250625.pkl</option>
