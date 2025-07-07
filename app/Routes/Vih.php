@@ -32,7 +32,8 @@ $app->group('/admin', function (RouteCollectorProxy $group) {
 
     $group->group('/entrenamiento', function (RouteCollectorProxy $group) {
         $group->get('', EntrenarController::class . ':index');
-        $group->post('', EntrenarController::class . ':list');
+        $group->post('', EntrenarController::class . ':entrenamiento');
+        $group->post('/preparar', EntrenarController::class . ':prepararDatos');
         $group->post('/importar', EntrenarController::class . ':importarDatos');
     })->add(PermissionMiddleware::class);
 
