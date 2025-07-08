@@ -94,7 +94,7 @@ $(document).ready(function () {
     // });
 
     // abre una nueva pestaña en el navegador
-    window.open(`/admin/cuestionarios/search/${id}`, '_blank');
+    window.open(`/admin/cuestionarios/search/${id}`, "_blank");
   };
 
   // Función para confirmar eliminación
@@ -145,3 +145,42 @@ $(document).ready(function () {
     cuestionarioAEliminar = null;
   });
 });
+
+// form-importar-datos
+document
+  .getElementById("form-importar-datos")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+    divLoading.css("display", "flex");
+    var formData = new FormData(this);
+
+    fetch("/admin/cuestionarios/importar", {
+      method: "POST",
+      body: formData,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.status === "success") {
+          Swal.fire({
+            title: "Importación exitosa",
+            text:
+              "Los datos se han importado correctamente. Total filas procesadas: " +
+              data.data.datos,
+            icon: "success",
+            confirmButtonText: "OK",
+          });
+        } else {
+          Swal.fire({
+            title: "Error al importar datos",
+            text: data.message,
+            icon: "error",
+            confirmButtonText: "OK",
+          });
+        }
+        divLoading.css("display", "none");
+      })
+      .catch((error) => {
+        divLoading.css("display", "none");
+        console.error("Error:", error);
+      });
+  });

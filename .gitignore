@@ -17,3 +17,4 @@
 /public/vendor
 /public/node_modules
 /public/temp/
+/app/XGBoost/

@@ -574,4 +574,13 @@ class CuestionariosController extends Controller
             return $this->respondWithJson($response, ['error' => 'Error interno del servidor\n' . $e->getMessage()]);
         }
     }
+
+    /**
+     * Importar datos desde archivo CSV o Excel
+     */
+    public function importarDatos($request, $response)
+    {
+        $clase = new ImportarController();
+        return $clase->importarDatos($request, $response);
+    }
 }

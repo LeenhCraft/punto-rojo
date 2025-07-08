@@ -8,7 +8,9 @@ use Slim\Routing\RouteCollectorProxy;
 use App\Middleware\PermissionMiddleware;
 use App\Controllers\Vih\CuestionariosController;
 use App\Controllers\Vih\EntrenarController;
+use App\Controllers\Vih\MapaController;
 use App\Controllers\Vih\PacientesController;
+use App\Controllers\Vih\PredecirController;
 use App\Middleware\LoginAdminMiddleware;
 
 $app->group('/admin', function (RouteCollectorProxy $group) {
@@ -28,13 +30,25 @@ $app->group('/admin', function (RouteCollectorProxy $group) {
         $group->post('/nuevo', CuestionariosController::class . ':store');
         $group->get('/search/{id}', CuestionariosController::class . ':search');
         $group->post('/delete', CuestionariosController::class . ':delete');
+        $group->post('/importar', CuestionariosController::class . ':importarDatos');
     })->add(PermissionMiddleware::class);
 
     $group->group('/entrenamiento', function (RouteCollectorProxy $group) {
         $group->get('', EntrenarController::class . ':index');
         $group->post('', EntrenarController::class . ':entrenamiento');
         $group->post('/preparar', EntrenarController::class . ':prepararDatos');
-        $group->post('/importar', EntrenarController::class . ':importarDatos');
+        $group->post('/activar', EntrenarController::class . ':activarModelo');
+    })->add(PermissionMiddleware::class);
+
+    $group->group('/predecir', function (RouteCollectorProxy $group) {
+        $group->get('', PredecirController::class . ':index');
+        $group->post('', PredecirController::class . ':predecir');
+    })->add(PermissionMiddleware::class);
+
+
+    $group->group('/mapa', function (RouteCollectorProxy $group) {
+        $group->get('', MapaController::class . ':index');
+        $group->post('/predicciones', MapaController::class . ':getPredictions');
     })->add(PermissionMiddleware::class);
 
 })->add(new LoginAdminMiddleware());

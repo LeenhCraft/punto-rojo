@@ -165,7 +165,7 @@ class CuestionarioVIH extends Model
     /**
      * Registra el cuestionario principal
      */
-    public function registrarCuestionarioPrincipal($id_paciente, $id_personal_medico, $id_establecimiento)
+    public function registrarCuestionarioPrincipal($id_paciente, $id_personal_medico, $id_establecimiento, $fecha_aplicacion = null)
     {
         // Generar número de cuestionario único
         $numeroQuestionario = $this->generarNumeroQuestionario();
@@ -173,7 +173,7 @@ class CuestionarioVIH extends Model
             'id_paciente' => $id_paciente,
             'id_personal' => $id_personal_medico,
             'id_establecimiento' => $id_establecimiento,
-            'fecha_aplicacion' => date('Y-m-d H:i:s'),
+            'fecha_aplicacion' => $fecha_aplicacion,
             'num_cuestionario' => $numeroQuestionario,
             'estado' => 'Completo',
             'observaciones_generales' => ''

@@ -3,6 +3,7 @@
 namespace App\Controllers\Vih;
 
 use App\Core\Controller;
+use App\Models\TableModel;
 use DateTime;
 use Exception;
 
@@ -18,12 +19,20 @@ class EntrenarController extends Controller
 
     public function index($request,  $response, $args)
     {
+        $model = new TableModel();
+        $model->setTable("vih_modelo_prediccion_distrito");
+        $model->setId("id_modelo");
+        $modelos = $model
+            ->orderBy("modelo_activo", "DESC")
+            ->get();
+
         return $this->render($response, "Vih.Entrenar", [
             "titulo_web" => "Entrenamiento del Modelo de VIH",
             "url" => $request->getUri()->getPath(),
             "js" => [
                 "/js/vih/entrenar.js?v=" . time(),
-            ]
+            ],
+            "modelos" => $modelos
         ]);
     }
 
@@ -90,13 +99,43 @@ class EntrenarController extends Controller
             $this->checkPermission(self::ENTRENAR, 'create');
             $data = $this->sanitize($request->getParsedBody());
 
-            $outputFile = $data['dataset'] ?? null;
+            $outputFile = null;
             $outputPath = "../app/XGBoost/Modelos/";
 
             $processor = new VIHDataProcessor();
             $result = $processor->trainXGBoostModel($outputFile, $outputPath);
-            
-            dep($result, 1);
+
+            if (!$result['status']) {
+                throw new Exception($result['message']);
+            }
+
+            return $this->respondWithJson($response, [
+                'success' => true,
+                'message' => 'Modelo entrenado correctamente',
+                'data' => $result
+            ]);
+        } catch (Exception $e) {
+            return $this->respondWithJson($response, [
+                'success' => false,
+                'message' => $e->getMessage()
+            ]);
+        }
+    }
+
+    public function activarModelo($request, $response)
+    {
+        try {
+            $this->checkPermission(self::ENTRENAR, 'create');
+            $data = $this->sanitize($request->getParsedBody());
+
+            $modelId = $data['id'] ?? null;
+
+            if (!$modelId) {
+                throw new Exception("ID de modelo no proporcionado");
+            }
+
+            $processor = new VIHDataProcessor();
+            $result = $processor->activarModelo($modelId);
 
             if (!$result['success']) {
                 throw new Exception($result['message']);
@@ -104,8 +143,8 @@ class EntrenarController extends Controller
 
             return $this->respondWithJson($response, [
                 'success' => true,
-                'message' => 'Modelo entrenado correctamente',
-                'model' => $result['model']
+                'message' => 'Modelo activado correctamente',
+                'data' => $result
             ]);
         } catch (Exception $e) {
             return $this->respondWithJson($response, [

@@ -1,19 +1,5 @@
 <?php header_web('Template.HeaderDashboard', $data); ?>
 <div class="container mt-4">
-    <h2 class="mb-4">Importar datos para entrenamiento</h2>
-
-    <div class="card mb-4">
-        <div class="card-body">
-            <form id="form-importar-datos" enctype="multipart/form-data">
-                <div class="form-group mb-2">
-                    <label for="archivoDatos">Seleccionar archivo CSV</label>
-                    <input type="file" class="form-control" id="archivoDatos" name="archivoDatos" accept=".csv" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Importar Datos</button>
-            </form>
-        </div>
-    </div>
-
     <h2 class="mb-4">Preparación de Datos (Datasets)</h2>
     <div class="card mb-4">
         <div class="card-body">
@@ -70,7 +56,7 @@
                     </div>
                 </div>
 
-                <div class="form-row">
+                <div class="form-row mb-4">
                     <div class="form-group col-md-6">
                         <label for="max_depth">Profundidad máxima (max_depth)</label>
                         <input type="number" class="form-control" id="max_depth" name="max_depth" placeholder="Ej: 6" required value="6">
@@ -82,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="form-group mb-4">
+                <div class="form-group mb-4 d-none">
                     <label for="dataset">Conjunto de datos</label>
                     <select class="form-control" id="dataset" name="dataset">
                         <option value="dataset1.csv">dataset1.csv</option>
@@ -104,8 +90,13 @@
             <div class="form-group mb-4">
                 <label for="modeloSeleccionado">Modelos Entrenados</label>
                 <select class="form-control" id="modeloSeleccionado">
-                    <option value="modelo_20250625.pkl">modelo_20250625.pkl</option>
-                    <option value="modelo_v1_mejorado.pkl">modelo_v1_mejorado.pkl</option>
+                    <?php
+                    foreach ($data["modelos"] as $modelo) {
+                        // agregar la opcion de activo si modelo_activo es 1
+                        $activo = $modelo['modelo_activo'] ? ' (Modelo Actual)' : '';
+                        echo '<option value="' . $modelo['id_modelo'] . '">' . $modelo['nombre_modelo'] . $activo . '</option>';
+                    }
+                    ?>
                 </select>
             </div>
             <button onclick="usarModelo()" class="btn btn-success">Usar este Modelo</button>
@@ -127,20 +118,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>2023-06-25</td>
-                        <td>modelo_20230625.pkl</td>
-                        <td>
-                            <button class="btn btn-info btn-sm" onclick="verDetalles('modelo_20230625.pkl')">Ver Detalles</button>
-                            <button class="btn btn-danger btn-sm" onclick="eliminarModelo('modelo_20230625.pkl')">Eliminar</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2023-06-26</td>
-                        <td>modelo_20230626.pkl</td>
-                        <td>
-                            <button class="btn btn-info btn-sm" onclick="verDetalles('modelo_20230626.pkl')">Ver Detalles</button>
-                            <button class="btn btn-danger btn-sm" onclick="eliminarModelo('modelo_20230626.pkl')">Eliminar</button>
+                    <?php
+                    foreach ($data["modelos"] as $modelo) {
+                        echo '<tr>';
+                        echo '<td>' . $modelo['fecha_entrenamiento'] . '</td>';
+                        echo '<td>' . $modelo['nombre_modelo'] . '</td>';
+                        echo '<td>';
+                        echo '<button class="btn btn-info btn-sm" onclick="verDetalles(\'' . $modelo['id_modelo'] . '\')">Ver Detalles</button>';
+                        echo '<button class="btn btn-danger btn-sm d-none" onclick="eliminarModelo(\'' . $modelo['id_modelo'] . '\')">Eliminar</button>';
+                        echo '</td>';
+                        echo '</tr>';
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

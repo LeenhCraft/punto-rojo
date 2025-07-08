@@ -582,8 +582,9 @@ class VIHDataProcessor
                 'outputFile' => $outputFile
             ]);
 
+            $marcatiempo = date('Y-m-d_H-i-s');
             if (!$outputFile) {
-                $outputFile = 'vih_dataset_' . date('Y-m-d_H-i-s') . '.csv';
+                $outputFile = 'vih_dataset_' . $marcatiempo . '.csv';
             }
 
             $outputFile = $arrConfig["ruta_dataset"] . $outputFile;
@@ -602,9 +603,23 @@ class VIHDataProcessor
 
 
                 $arrConfig["nombre_dataset"] = $result;
-                $arrConfig["ruta_dataset"] = "../app/XGBoost/datasets/";
+                $arrConfig["ruta_dataset"] = "../app/XGBoost/Datasets/";
                 $textConfig['valor'] = json_encode($arrConfig);
                 $this->model->update($textConfig['idconfig'], $textConfig);
+
+                // guardar en datasets
+                $modelDataset = new TableModel();
+                $modelDataset->setTable('vih_datasets');
+                $modelDataset->setId('id_dataset');
+
+                $idDataset = $modelDataset->create([
+                    'nombre_dataset' => $outputFile,
+                    'ruta_datasets' => $arrConfig["nombre_dataset"],
+                    'fecha_generacion' => $marcatiempo,
+                    'dataset_activo' => 1,
+                ]);
+
+                $modelDataset->query("UPDATE vih_datasets SET dataset_activo = 0 WHERE id_dataset != ?", [$idDataset["id_dataset"]]);
 
                 return [
                     'success' => true,
@@ -612,7 +627,7 @@ class VIHDataProcessor
                     'file_path' => $result,
                     'file_size' => $fileSize,
                     'file_size_kb' => round($fileSize / 1024, 2),
-                    'timestamp' => date('Y-m-d H:i:s')
+                    'timestamp' => $marcatiempo
                 ];
             } else {
                 $this->logger->error("Error: El archivo no se generó o está vacío");
@@ -622,7 +637,7 @@ class VIHDataProcessor
                     'file_path' => $result,
                     'file_exists' => file_exists($result),
                     'file_size' => file_exists($result) ? filesize($result) : 0,
-                    'timestamp' => date('Y-m-d H:i:s')
+                    'timestamp' => $marcatiempo
                 ];
             }
         } catch (Exception $e) {
@@ -642,13 +657,22 @@ class VIHDataProcessor
      */
     public function trainXGBoostModel($datasetFile = null, $pathFile = null)
     {
-        // desde este metodo se consumira el archivo Entrenar.py que esta en la misma carpeta
-        // al archivo pasarle le pasamos el path del dataset y el path donde se guardara el modelo entrenado y el nombre del modelo
-
         try {
+            $modelDataset = new TableModel;
+            $modelDataset->setTable("vih_configuracion");
+            $modelDataset->setId("idconfig");
+
             $model2 = new TableModel;
             $model2->setTable("vih_configuracion");
             $model2->setId("idconfig");
+
+            $dataset_activo = $modelDataset->query("SELECT * FROM vih_datasets WHERE dataset_activo = 1 ORDER BY fecha_generacion DESC LIMIT 1")->first();
+
+            $this->logger->setLogPath(__DIR__ . '/../../../XGBoost/Logs/trainXGBoostModel_' . date('Y-m-d_H-i-s') . '.log');
+            $this->logger->info("Iniciando entrenamiento del modelo XGBoost", [
+                'datasetFile' => $datasetFile,
+                'pathFile' => $pathFile
+            ]);
 
             // configuraciones
             $textData = $model2->first();
@@ -658,10 +682,16 @@ class VIHDataProcessor
             $ruta_dataset = $configData["nombre_dataset"];
 
             // rutas para guardar el modelo
-            if (!$datasetFile) {
-                // si esta vacio crear un nombre aleatorio
-                $datasetFile = 'dataset_' . date('Y-m-d_H-i-s');
-            }
+            $log = null;
+            $marcatiempo = date('Y-m-d_H-i-s');
+            // if (!isset($configData["nombre_modelo"]) || empty($configData["nombre_modelo"])) {
+            // si esta vacio crear un nombre para el modelo entrenado
+            $datasetFile = 'modelo_entrenado_' . $marcatiempo;
+            $log = 'log_modelo_entrenado_' . $marcatiempo . '.log';
+            // } else {
+            //     $datasetFile = $configData["nombre_modelo"] . '_' . $marcatiempo;
+            //     $log = 'log_' . $configData["nombre_modelo"] . '_' . $marcatiempo . '.log';
+            // }
 
             // ruta de python
             $pythonPath = $_ENV["PYTHON_PATH"];
@@ -674,7 +704,15 @@ class VIHDataProcessor
                 '--data_file' => $ruta_dataset,
                 '--model_path' => $pathFile,
                 '--model_name' => $datasetFile,
-                '--horizon_months' => 6
+                '--horizon_months' => 6,
+                // '--target_column' => '',
+                // '--config_file' => '',
+                '--output_file' => '../app/XGBoost/Resultados/resultado_' . $datasetFile . '.json',
+                // '--predict_only' => '',
+                // '--load_model' => '',
+                // '--debug' => '',
+                '--log_file' => '../app/XGBoost/Logs/' . $log,
+                // '--skip-lib-check' => ''
             ];
             // agregar el debug
             $debug = $configData["debug"]; // o true para ver logs
@@ -691,46 +729,63 @@ class VIHDataProcessor
                     return sprintf('%s %s', $key, $value);
                 }, array_keys($arg), $arg))
             );
+            // dep($command, 1);
 
             // ejecutar el script de python
             $output = [];
             $returnCode = -1;
 
+            // Configurar locale para UTF-8
+            setlocale(LC_ALL, 'es_ES.UTF-8');
+            putenv('PYTHONIOENCODING=utf-8');
+
             exec($command, $output, $returnCode);
-            dep([$command, $output, $returnCode], 1);
+            // exec($command . " 2>&1", $output, $returnCode);
+            // dep([$command, $output, $returnCode], 1);
 
             // procesar la salida
             if ($returnCode === 0) {
-                $model = new TableModel;
-                $model->setTable("vih_modelo_prediccion_distrito");
-                $model->setId("id_modelo");
+                $result = json_decode(implode("\n", $output), true);
 
-                $modeloCreado = $model->create([
-                    "nombre_modelo" => "",
-                    "version_modelo" => "",
-                    "algoritmo" => "",
-                    "parametros_xgboost" => "",
-                    "accuracy" => "",
-                    "mae_casos" => "",
-                    "rmse_casos" => "",
-                    "mape_porcentual" => "",
-                    "fecha_entrenamiento" => "",
-                    "fecha_actualizacion" => "",
-                    "modelo_activo" => "",
-                    "horizonte_prediccion_meses" => "",
-                    "descripcion" => "",
+                $this->logger->info("Resultado del entrenamiento del modelo XGBoost", [
+                    'result' => $result
                 ]);
 
-                if ($modeloCreado) {
-                    // actualizar el campo modelo_activo de todos menos del modelo $modeloCreado
-                    $model->query("UPDATE vih_modelo_prediccion_distrito SET modelo_activo = 0 WHERE id_modelo != ?", [$modeloCreado]);
-                }
+                if ($result && isset($result['status']) && $result['status']) {
+                    $result['dataset_id'] = $dataset_activo['id_dataset'] ?? 0;
+                    // === PROCESAR Y REGISTRAR EN BASE DE DATOS ===
+                    $registroResult = $this->procesarYRegistrarModelo($result, $datasetFile);
 
-                return json_decode(implode("\n", $output), true);
+                    if ($registroResult['success']) {
+                        $this->logger->info("Modelo registrado exitosamente en base de datos", $registroResult['data']);
+
+                        // Combinar resultado original con información de registro
+                        $result['database_info'] = $registroResult['data'];
+                        $result['message'] = 'Entrenamiento y registro completados exitosamente';
+
+                        return $result;
+                    } else {
+                        $this->logger->error("Error registrando modelo en base de datos: " . ($registroResult['message'] ?? 'Error desconocido'));
+
+                        // Retornar resultado original pero con advertencia
+                        $result['database_warning'] = $registroResult['message'];
+                        $result['message'] = 'Entrenamiento exitoso, pero error en registro de BD';
+
+                        return $result;
+                    }
+                } else {
+                    // Error en el entrenamiento
+                    return [
+                        'status' => false,
+                        'error' => 'Error en el entrenamiento del modelo2',
+                        'output' => $result,
+                        'return_code' => $returnCode
+                    ];
+                }
             } else {
                 // Manejar error
                 return [
-                    'success' => false,
+                    'status' => false,
                     'error' => 'Error ejecutando el entrenamiento',
                     'output' => $output,
                     'return_code' => $returnCode
@@ -745,6 +800,747 @@ class VIHDataProcessor
                 ]
             ]);
             throw $e;
+        }
+    }
+
+    /**
+     * Procesar la salida del entrenamiento XGBoost y registrar en base de datos
+     * 
+     * @param array $result Resultado JSON del entrenamiento XGBoost
+     * @param string $datasetFile Nombre del archivo del modelo
+     * @return array Resultado del procesamiento
+     */
+    public function procesarYRegistrarModelo($result, $datasetFile)
+    {
+        try {
+            // Verificar que el resultado sea exitoso
+            if (!isset($result['status']) || !$result['status']) {
+                return [
+                    'success' => false,
+                    'message' => 'El entrenamiento no fue exitoso',
+                    'error' => $result['message'] ?? 'Error desconocido'
+                ];
+            }
+
+            $this->logger->info("Procesando resultado exitoso del entrenamiento XGBoost");
+
+            // === 1. REGISTRAR INFORMACIÓN DEL MODELO ===
+            $modeloId = $this->registrarModelo($result, $datasetFile);
+
+            if (!$modeloId) {
+                return [
+                    'success' => false,
+                    'message' => 'Error al registrar el modelo principal'
+                ];
+            }
+
+            // === 2. REGISTRAR PREDICCIONES ===
+            $prediccionesRegistradas = $this->registrarPredicciones($result, $modeloId);
+
+            // === 3. REGISTRAR REENTRENAMIENTO ===
+            $reentrenamientoId = $this->registrarReentrenamiento($result, $modeloId);
+
+            $this->logger->info("Modelo procesado exitosamente", [
+                'modelo_id' => $modeloId,
+                'predicciones' => count($prediccionesRegistradas),
+                'reentrenamiento_id' => $reentrenamientoId
+            ]);
+
+            return [
+                'success' => true,
+                'message' => 'Modelo registrado exitosamente',
+                'data' => [
+                    'modelo_id' => $modeloId,
+                    'predicciones_count' => count($prediccionesRegistradas),
+                    'reentrenamiento_id' => $reentrenamientoId,
+                    'archivo_modelo' => $result['model_info']['model_file'] ?? null
+                ]
+            ];
+        } catch (Exception $e) {
+            $this->logger->error("Error procesando modelo XGBoost", $e);
+            return [
+                'success' => false,
+                'message' => 'Error procesando el modelo: ' . $e->getMessage(),
+                'error' => $e->getMessage()
+            ];
+        }
+    }
+
+    /**
+     * Registrar información principal del modelo
+     * 
+     * @param array $result Resultado del entrenamiento
+     * @param string $datasetFile Nombre del archivo
+     * @return int|false ID del modelo creado o false
+     */
+    private function registrarModelo($result, $datasetFile)
+    {
+        try {
+            $model = new TableModel();
+            $model->setTable("vih_modelo_prediccion_distrito");
+            $model->setId("id_modelo");
+
+            // Extraer información del resultado
+            $trainingInfo = $result['training_info'] ?? [];
+            $metrics = $result['metrics'] ?? [];
+            $config = $trainingInfo['config'] ?? [];
+            $params = $trainingInfo['params'] ?? [];
+
+            // Preparar datos para inserción
+            $modelData = [
+                'id_dataset' => $result['dataset_id'] ?? null,
+                'nombre_modelo' => $this->extraerNombreModelo($datasetFile),
+                'version_modelo' => $this->extraerVersionModelo($result),
+                'algoritmo' => 'XGBoost',
+                'parametros_xgboost' => json_encode($params, JSON_UNESCAPED_UNICODE),
+                'accuracy' => $metrics['test_r2'] ?? 0,
+                'mae_casos' => $metrics['test_mae'] ?? 0,
+                'rmse_casos' => $metrics['test_rmse'] ?? 0,
+                'mape_porcentual' => $metrics['test_mape'] ?? 0,
+                'fecha_entrenamiento' => $this->convertirFechaEntrenamiento($trainingInfo['timestamp'] ?? null),
+                'fecha_actualizacion' => date('Y-m-d H:i:s'),
+                'modelo_activo' => 1, // Nuevo modelo activo
+                'horizonte_prediccion_meses' => $config['horizon_months'] ?? 6,
+                'descripcion' => $this->generarDescripcionModelo($result)
+            ];
+
+            $this->logger->info("Registrando modelo en base de datos", $modelData);
+
+            // Crear el modelo
+            $modeloId = $model->create($modelData);
+
+            if ($modeloId) {
+                // Desactivar otros modelos
+                $model->query(
+                    "UPDATE vih_modelo_prediccion_distrito SET modelo_activo = 0 WHERE id_modelo != ?",
+                    [$modeloId["id_modelo"]]
+                );
+
+                // actualiza en vih_configuracion la ruta del modelo
+                $configModel = new TableModel();
+                $configModel->setTable("vih_configuracion");
+                $configModel->setId("idconfig");
+
+                $textData = $configModel->first();
+                $configData = json_decode($textData['valor'], true);
+                $configData["nombre_modelo"] = $datasetFile;
+                $configData["ruta_modelo"] = '../app/XGBoost/Modelos/' . $datasetFile;
+
+                $configModel->update(1, [
+                    'valor' => json_encode($configData, JSON_UNESCAPED_UNICODE),
+                ]);
+
+                $this->logger->info("Modelo registrado con ID: " . $modeloId["id_modelo"]);
+                return $modeloId["id_modelo"];
+            }
+
+            return false;
+        } catch (Exception $e) {
+            $this->logger->error("Error registrando modelo principal", $e);
+            return false;
+        }
+    }
+
+    /**
+     * Registrar predicciones del modelo
+     * 
+     * @param array $result Resultado del entrenamiento
+     * @param int $modeloId ID del modelo
+     * @return array Predicciones registradas
+     */
+    private function registrarPredicciones($result, $modeloId)
+    {
+        try {
+            $modelo  = new TableModel();
+            $modelo->setTable("vih_predicciones");
+            $modelo->setId("id_prediccion_modelo");
+
+            $prediccionRq = $modelo->create([
+                'id_modelo' => $modeloId,
+                'codigo_prediccion' => $modeloId . '-' . date('Ymd-His'),
+                'fecha_prediccion' => date('Y-m-d H:i:s'),
+                'casos_predichos' => count($result['predictions'] ?? []),
+                'horizonte_prediccion_meses' => $result['args']['horizon_months'] ?? 0,
+            ]);
+
+            if (!$prediccionRq) {
+                $this->logger->error("Error al registrar la predicción del modelo");
+                return [];
+            }
+
+            $casosPredichos = new TableModel();
+            $casosPredichos->setTable("vih_prediccion_casos_distrito");
+            $casosPredichos->setId("id_prediccion");
+
+            $predicciones = $result['predictions'] ?? [];
+            $prediccionesRegistradas = [];
+
+            $this->logger->info("Registrando " . count($predicciones) . " predicciones");
+
+            foreach ($predicciones as $prediccion) {
+                $datosPrediccion = [
+                    'id_prediccion_modelo' => $prediccionRq["id_prediccion_modelo"] ?? 0,
+                    'id_distrito' => $prediccion['id_distrito'] ?? null,
+                    'anio_prediccion' => date('Y', strtotime($prediccion['fecha_prediccion'])),
+                    'mes_prediccion' => date('n', strtotime($prediccion['fecha_prediccion'])),
+                    'casos_predichos' => round($prediccion['casos_predichos'], 0),
+                    'casos_minimos_ic95' => round($prediccion['casos_minimos'], 0),
+                    'casos_maximos_ic95' => round($prediccion['casos_maximos'], 0),
+                    'probabilidad_incremento' => $this->calcularProbabilidadIncremento($prediccion),
+                    'tendencia_esperada' => $this->determinarTendencia($prediccion),
+                    'nivel_alerta' => $this->determinarNivelAlerta($prediccion, $result['alerts'] ?? []),
+                    'fecha_prediccion' => date('Y-m-d H:i:s'),
+                    'factores_influyentes' => $this->extraerFactoresInfluyentes($result)
+                ];
+                $prediccionId = $casosPredichos->create($datosPrediccion);
+
+                if ($prediccionId) {
+                    $prediccionesRegistradas[] = $prediccionId;
+                }
+            }
+
+            $this->logger->info("Predicciones registradas: " . count($prediccionesRegistradas));
+            return $prediccionesRegistradas;
+        } catch (Exception $e) {
+            $this->logger->error("Error registrando predicciones", $e);
+            return [];
+        }
+    }
+
+    /**
+     * Registrar información de reentrenamiento
+     * 
+     * @param array $result Resultado del entrenamiento
+     * @param int $modeloId ID del modelo
+     * @return int|false ID del reentrenamiento o false
+     */
+    private function registrarReentrenamiento($result, $modeloId)
+    {
+        try {
+            $reentrenamientoModel = new TableModel();
+            $reentrenamientoModel->setTable("vih_reentrenaminto_modelo");
+            $reentrenamientoModel->setId("id_reentrenamiento");
+
+            $trainingInfo = $result['training_info'] ?? [];
+            $dataInfo = $result['data_info'] ?? [];
+            $metrics = $result['metrics'] ?? [];
+
+            $datosReentrenamiento = [
+                'id_modelo' => $modeloId,
+                'fecha_reentrenamiento' => date('Y-m-d H:i:s'),
+                'motivo_reentrenamiento' => 'Entrenamiento inicial del modelo',
+                'registros_entrenamiento' => $trainingInfo['training_samples'] ?? 0,
+                'meses_datos_utilizados' => $dataInfo['date_range']['months'] ?? 0,
+                'mejora_accuracy' => $metrics['test_r2'] ?? 0,
+                'cambios_hiperparametros' => json_encode($trainingInfo['params'] ?? [], JSON_UNESCAPED_UNICODE),
+                'reentrenamiento_exitoso' => 1
+            ];
+
+            $reentrenamientoId = $reentrenamientoModel->create($datosReentrenamiento);
+
+            if ($reentrenamientoId) {
+                $this->logger->info("Reentrenamiento registrado con ID: " . $reentrenamientoId["id_reentrenamiento"]);
+            }
+
+            return $reentrenamientoId["id_reentrenamiento"];
+        } catch (Exception $e) {
+            $this->logger->error("Error registrando reentrenamiento", $e);
+            return false;
+        }
+    }
+
+    /**
+     * Extraer nombre del modelo
+     */
+    private function extraerNombreModelo($datasetFile)
+    {
+        return pathinfo($datasetFile, PATHINFO_FILENAME) ?: 'Modelo XGBoost VIH';
+    }
+
+    /**
+     * Extraer versión del modelo
+     */
+    private function extraerVersionModelo($result)
+    {
+        $timestamp = $result['timestamp'] ?? date('Y-m-d H:i:s');
+        return 'v' . date('Y.m.d.H.i', strtotime($timestamp));
+    }
+
+    /**
+     * Convertir fecha de entrenamiento
+     */
+    private function convertirFechaEntrenamiento($timestamp)
+    {
+        if (!$timestamp) {
+            return date('Y-m-d H:i:s');
+        }
+
+        try {
+            return date('Y-m-d H:i:s', strtotime($timestamp));
+        } catch (Exception $e) {
+            return date('Y-m-d H:i:s');
+        }
+    }
+
+    /**
+     * Generar descripción del modelo
+     */
+    private function generarDescripcionModelo($result)
+    {
+        $dataInfo = $result['data_info'] ?? [];
+        $metrics = $result['metrics'] ?? [];
+
+        $descripcion = sprintf(
+            "Modelo XGBoost entrenado con %d registros de %d distritos y %d establecimientos. " .
+                "Precisión R²: %.2f%%, Error MAPE: %.2f%%. " .
+                "Período de datos: %s a %s.",
+            $dataInfo['total_records'] ?? 0,
+            $dataInfo['districts'] ?? 0,
+            $dataInfo['establishments'] ?? 0,
+            ($metrics['test_r2'] ?? 0) * 100,
+            $metrics['test_mape'] ?? 0,
+            $dataInfo['date_range']['start'] ?? 'N/A',
+            $dataInfo['date_range']['end'] ?? 'N/A'
+        );
+
+        return $descripcion;
+    }
+
+
+    /**
+     * Calcular probabilidad de incremento
+     */
+    private function calcularProbabilidadIncremento($prediccion)
+    {
+        // Calcular basado en la diferencia entre predicho y mínimo
+        $predicho = $prediccion['casos_predichos'] ?? 1;
+        $minimo = $prediccion['casos_minimos'] ?? 1;
+        $maximo = $prediccion['casos_maximos'] ?? 2;
+
+        if ($maximo <= $minimo) return 0;
+
+        $probabilidad = (($predicho - $minimo) / ($maximo - $minimo)) * 100;
+        return max(0, min(100, $probabilidad));
+    }
+
+    /**
+     * Determinar tendencia esperada
+     */
+    private function determinarTendencia($prediccion)
+    {
+        $predicho = $prediccion['casos_predichos'] ?? 1;
+        $minimo = $prediccion['casos_minimos'] ?? 1;
+        $maximo = $prediccion['casos_maximos'] ?? 2;
+
+        $rango = $maximo - $minimo;
+
+        if ($rango <= 0.5) {
+            return 'estable';
+        } elseif ($predicho > ($minimo + $rango * 0.7)) {
+            return 'ascendente';
+        } elseif ($predicho < ($minimo + $rango * 0.3)) {
+            return 'descendente';
+        } else {
+            return 'variable';
+        }
+    }
+
+    /**
+     * Determinar nivel de alerta
+     */
+    private function determinarNivelAlerta($prediccion, $alerts)
+    {
+        $idDistrito = $prediccion['id_distrito'] ?? null;
+        $fechaPrediccion = $prediccion['fecha_prediccion'] ?? null;
+
+        // Buscar alerta correspondiente
+        foreach ($alerts as $alert) {
+            if (
+                $alert['id_distrito'] == $idDistrito &&
+                $alert['fecha_prediccion'] == $fechaPrediccion
+            ) {
+                return $alert['alert_level'] ?? 'normal';
+            }
+        }
+
+        // Determinar por casos predichos
+        $casos = $prediccion['casos_predichos'] ?? 1;
+
+        if ($casos >= 4) return 'critico';
+        if ($casos >= 3) return 'alto';
+        if ($casos >= 2) return 'medio';
+        return 'bajo';
+    }
+
+    /**
+     * Extraer factores influyentes
+     */
+    private function extraerFactoresInfluyentes($result)
+    {
+        $featureImportance = $result['feature_importance'] ?? [];
+
+        // Tomar las 5 características más importantes
+        $topFeatures = array_slice($featureImportance, 0, 5);
+
+        $factores = array_map(function ($feature) {
+            return $feature['feature'] . ' (' . round($feature['importance_pct'], 1) . '%)';
+        }, $topFeatures);
+
+        return implode(', ', $factores);
+    }
+
+    // Método más directo para tu caso
+    private function simpleExecToJson($output)
+    {
+        $jsonString = implode("", $output);
+
+        // Probar decodificación directa
+        $result = json_decode($jsonString, true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $result;
+        }
+
+        /* // Arreglar encoding y reintentar
+        $cleanedString = mb_convert_encoding($jsonString, 'UTF-8', 'auto');
+        $result = json_decode($cleanedString, true);
+        if (json_last_error() === JSON_ERROR_NONE) {
+            return $result;
+        }*/
+
+        /* // Último intento: reemplazar caracteres problemáticos
+        $cleanedString = str_replace('�', 'o', $jsonString);
+        return json_decode($cleanedString, true); */
+    }
+
+    public function activarModelo($idModelo)
+    {
+        $model = new TableModel();
+        $model->setTable("vih_modelo_prediccion_distrito");
+        $model->setId("id_modelo");
+
+        // Desactivar todos los modelos
+        $model->query("UPDATE vih_modelo_prediccion_distrito SET modelo_activo = 0");
+
+        // Activar el modelo seleccionado
+        $result = $model->update($idModelo, ['modelo_activo' => 1]);
+
+        if ($result) {
+            return [
+                'success' => true,
+                'message' => 'Modelo activado exitosamente',
+                'id_modelo' => $idModelo
+            ];
+        } else {
+            return [
+                'success' => false,
+                'message' => 'Error al activar el modelo'
+            ];
+        }
+    }
+
+    public function predicXGBoostModel($data = [])
+    {
+        try {
+            $model2 = new TableModel;
+            $model2->setTable("vih_configuracion");
+            $model2->setId("idconfig");
+
+            $this->logger->setLogPath(__DIR__ . '/../../../XGBoost/Logs/predictXGBoostModel_' . date('Y-m-d_H-i-s') . '.log');
+            $this->logger->info("Iniciando predicción del modelo XGBoost", [
+                'data' => $data
+            ]);
+
+            // === OBTENER MODELO ACTIVO ===
+            $modeloActivo = $model2->query("SELECT * FROM vih_modelo_prediccion_distrito WHERE modelo_activo = 1 ORDER BY fecha_entrenamiento DESC LIMIT 1")->first();
+            if (!$modeloActivo) {
+                throw new Exception("No hay un modelo activo para realizar la predicción");
+            }
+
+            // === OBTENER CONFIGURACIÓN ===
+            $configRecord = $model2->query("SELECT * FROM vih_configuracion WHERE idconfig = '1' LIMIT 1")->first();
+            if (!$configRecord) {
+                throw new Exception("No se encontró la configuración del sistema");
+            }
+
+            $configData = json_decode($configRecord['valor'], true);
+            if (!$configData) {
+                throw new Exception("Error al decodificar la configuración JSON");
+            }
+
+            // === OBTENER DATASET ACTIVO ===
+            $datasetActivo = $model2->query("SELECT * FROM vih_datasets WHERE dataset_activo = 1 LIMIT 1")->first();
+            if (!$datasetActivo) {
+                throw new Exception("No hay datasets disponibles para la predicción");
+            }
+
+            // === CONFIGURAR RUTAS Y PARÁMETROS ===
+            $marcatiempo = date('Y-m-d_H-i-s');
+            $ruta_dataset = $datasetActivo['ruta_datasets'];
+            $ruta_modelo = dirname($configData["ruta_modelo"]) . '/' . $modeloActivo['nombre_modelo'] . '.pkl';
+            $ruta_prediccion = '../app/XGBoost/Predicciones/prediccion_' . $marcatiempo . '.json';
+            $ruta_log = '../app/XGBoost/Logs/prediccion_' . $marcatiempo . '.log';
+
+            // Verificar que el modelo existe
+            if (!file_exists($ruta_modelo)) {
+                throw new Exception("El archivo del modelo no existe: " . $ruta_modelo);
+            }
+
+            // === CONFIGURAR COMANDO PYTHON ===
+            $pythonPath = $_ENV["PYTHON_PATH"];
+            $scriptPath = __DIR__ . "/Entrenar.py";
+
+            // Parámetros específicos para predicción
+            $horizonMonths = isset($data['meses_futuro']) ? (int)$data['meses_futuro'] : $modeloActivo['horizonte_prediccion_meses'];
+            // $districtId = isset($data['district_id']) ? (int)$data['district_id'] : null;
+            // $establishmentId = isset($data['establishment_id']) ? (int)$data['establishment_id'] : null;
+
+            $arg = [
+                '--data_file' => $ruta_dataset,
+                '--model_path' => dirname($configData["ruta_modelo"]),
+                '--load_model' => $ruta_modelo,
+                '--horizon_months' => $horizonMonths,
+                '--output_file' => $ruta_prediccion,
+                '--log_file' => $ruta_log,
+                '--predict_only' => '', // Modo solo predicción
+            ];
+
+            // Agregar debug si está habilitado
+            if (isset($configData["debug"]) && $configData["debug"]) {
+                $arg['--debug'] = '';
+            }
+
+            // Construir comando
+            $command = sprintf(
+                '%s %s %s',
+                escapeshellarg($pythonPath),
+                escapeshellarg($scriptPath),
+                implode(' ', array_map(function ($key, $value) {
+                    if ($value === '') {
+                        return $key; // Para flags como --debug, --predict_only
+                    }
+                    return sprintf('%s %s', $key, escapeshellarg($value));
+                }, array_keys($arg), $arg))
+            );
+
+            $this->logger->info("Ejecutando comando de predicción", ['command' => $command]);
+
+            // === EJECUTAR SCRIPT PYTHON ===
+            $output = [];
+            $returnCode = -1;
+
+            // Configurar locale para UTF-8
+            setlocale(LC_ALL, 'es_ES.UTF-8');
+            putenv('PYTHONIOENCODING=utf-8');
+
+            // exec($command . " 2>&1", $output, $returnCode);
+            exec($command, $output, $returnCode);
+            // dep(['command' => $command, 'output' => $output, 'return_code' => $returnCode], 1);
+
+            // === PROCESAR RESULTADO ===
+            if ($returnCode === 0) {
+                $outputString = implode("\n", $output);
+                $result = json_decode($outputString, true);
+
+                if (!$result) {
+                    throw new Exception("Error al decodificar la respuesta JSON del modelo: " . $outputString);
+                }
+
+                $this->logger->info("Resultado de la predicción XGBoost", ['result' => $result]);
+
+                if ($result && isset($result['status']) && $result['status']) {
+                    // === PROCESAR Y GUARDAR PREDICCIONES EN BD ===
+                    $registroResult = $this->procesarYGuardarPredicciones($result, $modeloActivo['id_modelo'], $horizonMonths);
+
+                    if ($registroResult['success']) {
+                        $this->logger->info("Predicciones guardadas exitosamente en base de datos", $registroResult['data']);
+
+                        // Combinar resultado original con información de registro
+                        $result['database_info'] = $registroResult['data'];
+                        $result['message'] = 'Predicción completada y guardada exitosamente';
+                        $result['prediction_id'] = $registroResult['data']['id_prediccion'];
+
+                        return $result;
+                    } else {
+                        $this->logger->error("Error guardando predicciones en base de datos: " . ($registroResult['message'] ?? 'Error desconocido'));
+
+                        // Retornar resultado original pero con advertencia
+                        $result['database_warning'] = $registroResult['message'];
+                        $result['message'] = 'Predicción exitosa, pero error en guardado de BD';
+
+                        return $result;
+                    }
+                } else {
+                    // Error en la predicción
+                    return [
+                        'status' => false,
+                        'error' => 'Error en la predicción del modelo',
+                        'details' => $result['message'] ?? 'Error desconocido',
+                        'output' => $result,
+                        'return_code' => $returnCode
+                    ];
+                }
+            } else {
+                // Manejar error de ejecución
+                $errorOutput = implode("\n", $output);
+                $this->logger->info("Error ejecutando la predicción XGBoost", [
+                    'command' => $command,
+                    'output' => $errorOutput,
+                    'return_code' => $returnCode
+                ]);
+                return [
+                    'status' => false,
+                    'error' => 'Error ejecutando la predicción',
+                    'details' => $errorOutput,
+                    'return_code' => $returnCode
+                ];
+            }
+        } catch (Exception $e) {
+            $this->logger->error("Error en la predicción de casos VIH", $e, [
+                'params' => $data
+            ]);
+
+            return [
+                'status' => false,
+                'message' => 'Excepción durante la predicción: ' . $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ];
+        }
+    }
+
+    /**
+     * Procesar y guardar las predicciones en las tablas de base de datos
+     */
+    private function procesarYGuardarPredicciones($result, $idModelo, $horizonMonths)
+    {
+        try {
+            $model = new TableModel;
+
+            // === CREAR REGISTRO PRINCIPAL DE PREDICCIÓN ===
+            $model->setTable("vih_predicciones");
+            $model->setId("id_prediccion_modelo");
+
+            $prediccionData = [
+                'id_modelo' => $idModelo,
+                'codigo_prediccion' => $idModelo . '-' . date('Ymd-His'),
+                'fecha_prediccion' => date('Y-m-d H:i:s'),
+                'casos_predichos' => count($result['predictions']),
+                'horizonte_prediccion_meses' => $horizonMonths,
+            ];
+
+            $idPrediccion = $model->create($prediccionData);
+            if (!$idPrediccion) {
+                throw new Exception("Error al crear el registro principal de predicción");
+            }
+
+            // === PROCESAR PREDICCIONES POR DISTRITO ===
+            $model = new TableModel;
+            $model->setTable("vih_prediccion_casos_distrito");
+            $model->setId("id_prediccion");
+
+            $registrosGuardados = 0;
+            $errores = [];
+
+            if (isset($result['predictions']) && is_array($result['predictions'])) {
+                foreach ($result['predictions'] as $prediccion) {
+                    try {
+                        // Validar datos requeridos
+                        if (!isset($prediccion['id_distrito']) || !isset($prediccion['casos_predichos'])) {
+                            $errores[] = "Predicción sin datos requeridos: " . json_encode($prediccion);
+                            continue;
+                        }
+
+                        // Extraer fecha de predicción
+                        $fechaPrediccion = $prediccion['fecha_prediccion'] ?? date('Y-m-d');
+                        $fechaParts = explode('-', $fechaPrediccion);
+                        $anioPrediccion = (int)$fechaParts[0];
+                        $mesPrediccion = (int)$fechaParts[1];
+
+                        // Determinar nivel de alerta basado en casos predichos
+                        $casosPredichos = (float)$prediccion['casos_predichos'];
+                        $nivelAlerta = $this->determinarNivelAlerta($prediccion, $result['alerts'] ?? []);
+
+                        // Calcular probabilidad de incremento (simplificado)
+                        $probabilidadIncremento = min(100.0, max(0.0, ($casosPredichos - 20) / 50 * 100));
+
+                        // Determinar tendencia
+                        $tendenciaEsperada = $this->determinarTendencia($prediccion);
+
+                        // Preparar factores influyentes
+                        $factoresInfluyentes = json_encode([
+                            'casos_minimos' => $prediccion['casos_minimos'] ?? 0,
+                            'casos_maximos' => $prediccion['casos_maximos'] ?? 0,
+                            'intervalo_confianza' => $prediccion['intervalo_confianza'] ?? '0-0',
+                            'mes_adelante' => $prediccion['mes_adelante'] ?? 1
+                        ]);
+
+                        $prediccionDistrito = [
+                            'id_prediccion_modelo' => $idPrediccion["id_prediccion_modelo"],
+                            'id_distrito' => (int)$prediccion['id_distrito'],
+                            'anio_prediccion' => $anioPrediccion,
+                            'mes_prediccion' => $mesPrediccion,
+                            'casos_predichos' => round($casosPredichos),
+                            'casos_minimos_ic95' => round((float)($prediccion['casos_minimos'] ?? $casosPredichos * 0.8)),
+                            'casos_maximos_ic95' => round((float)($prediccion['casos_maximos'] ?? $casosPredichos * 1.2)),
+                            'probabilidad_incremento' => $probabilidadIncremento,
+                            'tendencia_esperada' => $tendenciaEsperada,
+                            'nivel_alerta' => $nivelAlerta,
+                            'fecha_prediccion' => $fechaPrediccion,
+                            'factores_influyentes' => $factoresInfluyentes
+                        ];
+
+                        $insertResult = $model->create($prediccionDistrito);
+                        if ($insertResult) {
+                            $registrosGuardados++;
+                        } else {
+                            $errores[] = "Error insertando predicción para distrito " . $prediccion['id_distrito'];
+                        }
+                    } catch (Exception $e) {
+                        $errores[] = "Error procesando predicción: " . $e->getMessage();
+                    }
+                }
+            }
+
+            // === PROCESAR ALERTAS SI EXISTEN ===
+            $alertasGuardadas = 0;
+            if (isset($result['alerts']) && is_array($result['alerts'])) {
+                // Aquí podrías guardar las alertas en una tabla separada si existe
+                $alertasGuardadas = count($result['alerts']);
+            }
+
+            // === PROCESAR RANKING DE RIESGO SI EXISTE ===
+            $rankingGuardado = 0;
+            if (isset($result['risk_ranking']) && is_array($result['risk_ranking'])) {
+                // Aquí podrías guardar el ranking en una tabla separada si existe
+                $rankingGuardado = count($result['risk_ranking']);
+            }
+
+            if ($registrosGuardados > 0) {
+                return [
+                    'success' => true,
+                    'data' => [
+                        'id_prediccion' => $idPrediccion,
+                        'id_modelo' => $idModelo,
+                        'predicciones_guardadas' => $registrosGuardados,
+                        'alertas_procesadas' => $alertasGuardadas,
+                        'ranking_procesado' => $rankingGuardado,
+                        'errores' => $errores,
+                        'fecha_guardado' => date('Y-m-d H:i:s')
+                    ],
+                    'message' => "Predicciones guardadas exitosamente: {$registrosGuardados} registros"
+                ];
+            } else {
+                return [
+                    'success' => false,
+                    'message' => "No se pudieron guardar las predicciones",
+                    'errores' => $errores
+                ];
+            }
+        } catch (Exception $e) {
+            return [
+                'success' => false,
+                'message' => "Error guardando predicciones: " . $e->getMessage(),
+                'trace' => $e->getTraceAsString()
+            ];
         }
     }
 }

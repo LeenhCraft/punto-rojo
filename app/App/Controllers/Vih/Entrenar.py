@@ -3,6 +3,7 @@
 Entrenador XGBoost para Predicción de Casos VIH
 Diseñado para predecir aumentos de casos por distrito/establecimiento
 con manejo de errores para integración con PHP
+VERSIÓN CORREGIDA con Logger integrado
 """
 
 import pandas as pd
@@ -15,6 +16,7 @@ import warnings
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple, Optional, Any
 import traceback
+from pathlib import Path
 
 # Librerías de ML
 import xgboost as xgb
@@ -29,9 +31,212 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy import stats
 
+# CONFIGURACIÓN DE CODIFICACIÓN UTF-8
+import locale
+import codecs
+
+# Configurar la codificación del sistema
+if os.name == 'nt':  # Windows
+    try:
+        # Cambiar a UTF-8 sin mostrar mensaje
+        os.system('chcp 65001 > nul 2>&1')
+    except:
+        pass
+    
+# Configurar stdout y stderr para UTF-8
+try:
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.detach())
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.detach())
+except:
+    # Si falla, usar configuración alternativa
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
+# Configurar locale
+try:
+    locale.setlocale(locale.LC_ALL, 'es_ES.UTF-8')
+except locale.Error:
+    try:
+        locale.setlocale(locale.LC_ALL, 'Spanish_Spain.1252')
+    except locale.Error:
+        pass  # Usar locale por defecto
+
 # Configuración
 warnings.filterwarnings('ignore')
 plt.style.use('default')
+
+
+class Logger:
+    """
+    Sistema de logging para el entrenador con soporte para debug y archivos de log
+    """
+    def __init__(self, debug: bool = False, log_file: str = None):
+        """
+        Inicializa el logger con opciones de debug y archivo de log.
+        
+        Args:
+            debug (bool): Si True, imprime mensajes de debug en consola
+            log_file (str): Ruta opcional al archivo de log
+        """
+        self.debug = debug
+        
+        # Si no se especifica archivo de log, crear uno por defecto
+        if log_file is None:
+            timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+            log_dir = Path('logs')
+            log_dir.mkdir(exist_ok=True)
+            self.log_file = str(log_dir / f'training_vih_{timestamp}.log')
+        else:
+            self.log_file = log_file
+            
+        # Crear directorio de logs
+        os.makedirs(os.path.dirname(self.log_file), exist_ok=True)
+        
+        # Registrar inicio de sesión
+        self.log_to_file(f"=== Inicio de sesión: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} ===")
+
+    def print(self, message: str):
+        """
+        Imprime mensaje en consola si debug está activado y siempre lo guarda en el log.
+        
+        Args:
+            message (str): Mensaje a registrar
+        """
+        timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        formatted_message = f'[{timestamp}] {message}'
+        
+        # Siempre escribir al archivo de log
+        self.log_to_file(formatted_message)
+        
+        # Imprimir en consola solo si debug está activado
+        if self.debug:
+            try:
+                print(formatted_message, flush=True)
+            except UnicodeEncodeError:
+                print(formatted_message.encode('utf-8', errors='replace').decode('utf-8'), flush=True)
+
+    def log_to_file(self, message: str):
+        """
+        Escribe mensaje en el archivo de log.
+        
+        Args:
+            message (str): Mensaje a registrar
+        """
+        try:
+            with open(self.log_file, 'a', encoding='utf-8', errors='replace') as f:
+                f.write(message + '\n')
+                f.flush()  # Forzar escritura inmediata
+        except Exception as e:
+            if self.debug:
+                print(f"Error escribiendo en log: {str(e)}")
+                
+    def log_dict(self, data: dict, title: str = None):
+        """
+        Registra un diccionario en formato JSON en el log.
+        
+        Args:
+            data (dict): Diccionario a registrar
+            title (str): Título opcional para la sección
+        """
+        try:
+            if title:
+                self.log_to_file(f"\n=== {title} ===")
+            json_str = json.dumps(data, indent=2, ensure_ascii=False, default=str)
+            self.log_to_file(json_str)
+        except Exception as e:
+            if self.debug:
+                print(f"Error registrando diccionario: {str(e)}")
+
+    def error(self, message: str):
+        """
+        Registra un mensaje de error.
+        
+        Args:
+            message (str): Mensaje de error
+        """
+        error_msg = f"ERROR: {message}"
+        self.print(error_msg)
+
+    def warning(self, message: str):
+        """
+        Registra un mensaje de advertencia.
+        
+        Args:
+            message (str): Mensaje de advertencia
+        """
+        warning_msg = f"WARNING: {message}"
+        self.print(warning_msg)
+
+def check_required_libraries() -> Dict[str, Any]:
+    """
+    Verificar que todas las librerías necesarias estén instaladas
+    
+    Returns:
+        Dict con status y información de librerías
+    """
+    required_libs = {
+        'pandas': '1.3.0',
+        'numpy': '1.20.0', 
+        'xgboost': '1.5.0',
+        'scikit-learn': '1.0.0',
+        'joblib': '1.0.0',
+        'matplotlib': '3.3.0',
+        'seaborn': '0.11.0',
+        'scipy': '1.7.0'
+    }
+    
+    missing_libs = []
+    version_issues = []
+    installed_versions = {}
+    
+    for lib, min_version in required_libs.items():
+        try:
+            if lib == 'scikit-learn':
+                import sklearn
+                installed_version = sklearn.__version__
+                lib_name = 'sklearn'
+            else:
+                module = __import__(lib)
+                installed_version = getattr(module, '__version__', 'unknown')
+                lib_name = lib
+            
+            installed_versions[lib] = installed_version
+            
+            # Verificar versión mínima (simplificado)
+            if installed_version != 'unknown':
+                try:
+                    from packaging import version
+                    if version.parse(installed_version) < version.parse(min_version):
+                        version_issues.append({
+                            'library': lib,
+                            'installed': installed_version,
+                            'required': min_version
+                        })
+                except ImportError:
+                    # Si packaging no está disponible, solo verificar que esté instalado
+                    pass
+                    
+        except ImportError:
+            missing_libs.append({
+                'library': lib,
+                'min_version': min_version
+            })
+    
+    if missing_libs or version_issues:
+        return {
+            'status': False,
+            'missing_libraries': missing_libs,
+            'version_issues': version_issues,
+            'installed_versions': installed_versions,
+            'message': f'Faltan {len(missing_libs)} librerías y {len(version_issues)} tienen versiones incorrectas'
+        }
+    
+    return {
+        'status': True,
+        'installed_versions': installed_versions,
+        'message': 'Todas las librerías están instaladas correctamente'
+    }
 
 class VIHCasePredictor:
     """
@@ -39,14 +244,16 @@ class VIHCasePredictor:
     Optimizado para predicción de aumentos por distrito/establecimiento
     """
     
-    def __init__(self, config: Dict[str, Any] = None):
+    def __init__(self, config: Dict[str, Any] = None, logger: Logger = None):
         """
         Inicializar el predictor
         
         Args:
             config: Configuración del modelo (opcional)
+            logger: Instancia del logger (opcional)
         """
         self.config = config or {}
+        self.logger = logger or Logger()
         self.model = None
         self.scaler = StandardScaler()
         self.label_encoders = {}
@@ -71,6 +278,33 @@ class VIHCasePredictor:
         
         # Combinar configuraciones
         self.config = {**self.default_config, **self.config}
+        
+        # Validar configuración
+        self._validate_config()
+    
+    def _validate_config(self) -> None:
+        """
+        Valida la configuración del modelo
+        """
+        try:
+            # Validar tipos
+            if not isinstance(self.config.get('horizon_months'), int) or self.config['horizon_months'] <= 0:
+                raise ValueError("horizon_months debe ser un entero positivo")
+            
+            if not isinstance(self.config.get('test_size'), (int, float)) or not 0 < self.config['test_size'] < 1:
+                raise ValueError("test_size debe ser un número entre 0 y 1")
+            
+            if not isinstance(self.config.get('min_data_points'), int) or self.config['min_data_points'] <= 0:
+                raise ValueError("min_data_points debe ser un entero positivo")
+            
+            if self.config.get('validation_method') not in ['temporal', 'random']:
+                raise ValueError("validation_method debe ser 'temporal' o 'random'")
+                
+            self.logger.print("Configuración validada exitosamente")
+            
+        except Exception as e:
+            self.logger.error(f"Error en validación de configuración: {str(e)}")
+            raise
     
     def load_data(self, file_path: str) -> Dict[str, Any]:
         """
@@ -83,6 +317,8 @@ class VIHCasePredictor:
             Dict con status y mensaje
         """
         try:
+            self.logger.print(f"Cargando datos desde: {file_path}")
+            
             if not os.path.exists(file_path):
                 return {
                     'status': False,
@@ -90,7 +326,8 @@ class VIHCasePredictor:
                     'error_code': 'FILE_NOT_FOUND'
                 }
             
-            self.data = pd.read_csv(file_path)
+            self.data = pd.read_csv(file_path, encoding='utf-8')
+            self.logger.print(f"Datos cargados: {len(self.data)} registros, {len(self.data.columns)} columnas")
             
             # Validaciones básicas
             if self.data.empty:
@@ -125,6 +362,8 @@ class VIHCasePredictor:
                 'target_stats': self._get_target_stats()
             }
             
+            self.logger.log_dict(data_info, "Información del dataset")
+            
             return {
                 'status': True,
                 'message': 'Datos cargados exitosamente',
@@ -132,12 +371,14 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
-            return {
+            error_result = {
                 'status': False,
                 'message': f'Error al cargar datos: {str(e)}',
                 'error_code': 'LOAD_ERROR',
                 'traceback': traceback.format_exc()
             }
+            self.logger.log_dict(error_result, "Error al cargar datos")
+            return error_result
     
     def _get_date_range(self) -> Dict[str, str]:
         """Obtener rango de fechas del dataset"""
@@ -150,7 +391,8 @@ class VIHCasePredictor:
                     'months': len(dates.dt.to_period('M').unique())
                 }
             return {'start': 'N/A', 'end': 'N/A', 'months': 0}
-        except:
+        except Exception as e:
+            self.logger.warning(f"Error obteniendo rango de fechas: {str(e)}")
             return {'start': 'N/A', 'end': 'N/A', 'months': 0}
     
     def _get_target_stats(self) -> Dict[str, float]:
@@ -164,7 +406,8 @@ class VIHCasePredictor:
                 'max': float(target.max()),
                 'total': float(target.sum())
             }
-        except:
+        except Exception as e:
+            self.logger.warning(f"Error obteniendo estadísticas objetivo: {str(e)}")
             return {'mean': 0, 'std': 0, 'min': 0, 'max': 0, 'total': 0}
     
     def preprocess_data(self) -> Dict[str, Any]:
@@ -175,6 +418,8 @@ class VIHCasePredictor:
             Dict con status y mensaje
         """
         try:
+            self.logger.print("Iniciando preprocesamiento de datos")
+            
             # Crear copia de trabajo
             df = self.data.copy()
             
@@ -182,6 +427,7 @@ class VIHCasePredictor:
             if 'fecha_mes' in df.columns:
                 df['fecha_mes'] = pd.to_datetime(df['fecha_mes'])
                 df = df.sort_values(['id_distrito', 'id_establecimiento', 'fecha_mes'])
+                self.logger.print("Fechas convertidas y datos ordenados")
             
             # Identificar columnas categóricas y numéricas
             categorical_cols = df.select_dtypes(include=['object']).columns.tolist()
@@ -191,6 +437,8 @@ class VIHCasePredictor:
             id_cols = ['id_distrito', 'id_establecimiento', 'id_cuestionario', 'id_paciente']
             categorical_cols = [col for col in categorical_cols if col not in id_cols]
             
+            self.logger.print(f"Columnas categóricas para encoding: {categorical_cols}")
+            
             # Encoding de variables categóricas
             for col in categorical_cols:
                 if col in df.columns:
@@ -199,11 +447,16 @@ class VIHCasePredictor:
                     self.label_encoders[col] = le
             
             # Manejo de valores nulos
+            null_counts_before = df.isnull().sum().sum()
             df = df.fillna(df.median(numeric_only=True))
+            null_counts_after = df.isnull().sum().sum()
+            
+            self.logger.print(f"Valores nulos manejados: {null_counts_before} -> {null_counts_after}")
             
             # Crear features temporales adicionales si hay fechas
             if 'fecha_mes' in df.columns:
                 df = self._create_temporal_features(df)
+                self.logger.print("Features temporales creadas")
             
             # Preparar datos para entrenamiento
             self.processed_data = df
@@ -217,14 +470,19 @@ class VIHCasePredictor:
             self.X = df[feature_cols]
             self.y = df[self.config['target_column']]
             
+            self.logger.print(f"Features seleccionadas: {len(feature_cols)}")
+            self.logger.print(f"Forma de X: {self.X.shape}, Forma de y: {self.y.shape}")
+            
             # Información del preprocesamiento
             preprocessing_info = {
                 'original_features': len(self.data.columns),
                 'processed_features': len(feature_cols),
                 'categorical_encoded': len(categorical_cols),
-                'missing_values_filled': df.isnull().sum().sum(),
+                'missing_values_filled': null_counts_before,
                 'feature_columns': feature_cols
             }
+            
+            self.logger.log_dict(preprocessing_info, "Información de preprocesamiento")
             
             return {
                 'status': True,
@@ -233,12 +491,14 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
-            return {
+            error_result = {
                 'status': False,
                 'message': f'Error en preprocesamiento: {str(e)}',
                 'error_code': 'PREPROCESSING_ERROR',
                 'traceback': traceback.format_exc()
             }
+            self.logger.log_dict(error_result, "Error en preprocesamiento")
+            return error_result
     
     def _create_temporal_features(self, df: pd.DataFrame) -> pd.DataFrame:
         """
@@ -250,6 +510,8 @@ class VIHCasePredictor:
         Returns:
             DataFrame con features temporales
         """
+        self.logger.print("Creando features temporales")
+        
         # Ordenar por entidad y fecha
         df = df.sort_values(['id_distrito', 'id_establecimiento', 'fecha_mes'])
         
@@ -267,16 +529,20 @@ class VIHCasePredictor:
         for lag in [1, 2, 3]:
             df[f'{target_col}_lag_{lag}'] = df.groupby(['id_distrito', 'id_establecimiento'])[target_col].shift(lag)
             
-        # Promedios móviles
+        # Promedios móviles - CORREGIDO
         for window in [3, 6]:
-            df[f'{target_col}_ma_{window}'] = df.groupby(['id_distrito', 'id_establecimiento'])[target_col].rolling(window=window, min_periods=1).mean().reset_index(0, drop=True)
-        
-        # Tendencias
+            ma_values = df.groupby(['id_distrito', 'id_establecimiento'])[target_col].rolling(window=window, min_periods=1).mean()
+            df[f'{target_col}_ma_{window}'] = ma_values.droplevel([0, 1]).reindex(df.index)
+
+        # Tendencias - CORREGIDO
         df[f'{target_col}_trend'] = df.groupby(['id_distrito', 'id_establecimiento'])[target_col].pct_change()
-        df[f'{target_col}_volatility'] = df.groupby(['id_distrito', 'id_establecimiento'])[target_col].rolling(window=3, min_periods=1).std().reset_index(0, drop=True)
+
+        # Volatilidad - CORREGIDO  
+        volatility_values = df.groupby(['id_distrito', 'id_establecimiento'])[target_col].rolling(window=3, min_periods=1).std()
+        df[f'{target_col}_volatility'] = volatility_values.droplevel([0, 1]).reindex(df.index)
         
-        # Llenar NaN resultantes
-        df = df.fillna(method='bfill').fillna(0)
+        # ✅ CORRECCIÓN: Usar método no deprecado
+        df = df.bfill().fillna(0)
         
         return df
     
@@ -291,27 +557,40 @@ class VIHCasePredictor:
             Dict con status y resultados del entrenamiento
         """
         try:
+            self.logger.print("Iniciando entrenamiento del modelo")
+            
             # Dividir datos según método de validación
             if self.config['validation_method'] == 'temporal':
                 X_train, X_test, y_train, y_test = self._temporal_split()
+                self.logger.print("División temporal aplicada")
             else:
                 X_train, X_test, y_train, y_test = train_test_split(
                     self.X, self.y, 
                     test_size=self.config['test_size'],
                     random_state=self.config['random_state']
                 )
+                self.logger.print("División aleatoria aplicada")
+            
+            self.logger.print(f"Datos de entrenamiento: {X_train.shape[0]}, Datos de prueba: {X_test.shape[0]}")
             
             # Configurar parámetros del modelo
             if custom_params:
                 params = custom_params
+                self.logger.print("Usando parámetros personalizados")
             elif self.config['auto_optimize']:
+                self.logger.print("Optimizando hiperparámetros automáticamente...")
                 params = self._optimize_hyperparameters(X_train, y_train)
+                self.logger.print("Optimización de hiperparámetros completada")
             else:
                 params = self._get_default_params()
+                self.logger.print("Usando parámetros por defecto")
+            
+            self.logger.log_dict(params, "Parámetros del modelo")
             
             # Entrenar modelo principal
             self.model = xgb.XGBRegressor(**params)
             self.model.fit(X_train, y_train)
+            self.logger.print("Modelo entrenado exitosamente")
             
             # Evaluar modelo
             y_pred_train = self.model.predict(X_train)
@@ -319,16 +598,20 @@ class VIHCasePredictor:
             
             # Calcular métricas
             metrics = self._calculate_metrics(y_train, y_pred_train, y_test, y_pred_test)
+            self.logger.log_dict(metrics, "Métricas del modelo")
             
             # Calcular importancia de características
             self.feature_importance = self._calculate_feature_importance()
+            self.logger.print("Importancia de características calculada")
             
             # Calcular intervalos de confianza si está habilitado
             if self.config['confidence_intervals']:
+                self.logger.print("Calculando intervalos de confianza...")
                 self.prediction_intervals = self._calculate_prediction_intervals(X_test, y_test)
             
             # Configurar alertas
             self._setup_alert_system()
+            self.logger.print("Sistema de alertas configurado")
             
             # Guardar historial de entrenamiento
             self.training_history = {
@@ -350,12 +633,14 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
-            return {
+            error_result = {
                 'status': False,
                 'message': f'Error en entrenamiento: {str(e)}',
                 'error_code': 'TRAINING_ERROR',
                 'traceback': traceback.format_exc()
             }
+            self.logger.log_dict(error_result, "Error en entrenamiento")
+            return error_result
     
     def _temporal_split(self) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series]:
         """
@@ -369,7 +654,7 @@ class VIHCasePredictor:
             df_sorted = self.processed_data.sort_values('fecha_mes')
             
             # Dividir: 80% para entrenamiento, 20% para prueba
-            split_idx = int(len(df_sorted) * 0.8)
+            split_idx = int(len(df_sorted) * (1 - self.config['test_size']))
             
             train_data = df_sorted.iloc[:split_idx]
             test_data = df_sorted.iloc[split_idx:]
@@ -453,8 +738,8 @@ class VIHCasePredictor:
             'reg_alpha': 0.1,
             'reg_lambda': 0.1,
             'random_state': self.config['random_state'],
-            'objective': 'reg:squarederror',
-            'eval_metric': 'rmse'
+            'objective': 'reg:squarederror'
+            # ✅ REMOVIDO: 'eval_metric': 'rmse' - se maneja en fit() si es necesario
         }
     
     def _calculate_metrics(self, y_train: pd.Series, y_pred_train: np.ndarray, 
@@ -541,15 +826,19 @@ class VIHCasePredictor:
             Dict con información de intervalos
         """
         try:
+            # ✅ CORRECCIÓN: Obtener parámetros sin eval_metric
+            base_params = self._get_default_params()
+            
             # Entrenar modelos para cuantiles
             quantiles = [0.025, 0.975]  # 95% de confianza
             quantile_models = {}
             
             for q in quantiles:
+                base_params_clean = {k: v for k, v in base_params.items() if k != 'objective'}
                 model = xgb.XGBRegressor(
                     objective='reg:quantileerror',
-                    quantile_alpha=q,
-                    **self._get_default_params()
+                    quantile_alpha=q,  # ✅ CORREGIDO: era quantile_alpha
+                    **base_params_clean
                 )
                 model.fit(self.X, self.y)
                 quantile_models[q] = model
@@ -570,6 +859,7 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
+            self.logger.warning(f"Error calculando intervalos de confianza: {str(e)}")
             return {
                 'enabled': False,
                 'error': str(e)
@@ -589,6 +879,8 @@ class VIHCasePredictor:
             'critical': float(np.percentile(historical_values, 95)),
             'percentage_increase': self.config['alert_threshold_pct']
         }
+        
+        self.logger.log_dict(self.alert_thresholds, "Umbrales de alerta configurados")
     
     def predict_future(self, horizon_months: int = None, 
                       district_id: int = None, 
@@ -613,15 +905,18 @@ class VIHCasePredictor:
                 }
             
             horizon = horizon_months or self.config['horizon_months']
+            self.logger.print(f"Generando predicciones para {horizon} meses")
             
             # Filtrar datos si se especifican entidades
             prediction_data = self.processed_data.copy()
             
             if district_id:
                 prediction_data = prediction_data[prediction_data['id_distrito'] == district_id]
+                self.logger.print(f"Filtrando por distrito: {district_id}")
             
             if establishment_id:
                 prediction_data = prediction_data[prediction_data['id_establecimiento'] == establishment_id]
+                self.logger.print(f"Filtrando por establecimiento: {establishment_id}")
             
             if prediction_data.empty:
                 return {
@@ -639,6 +934,9 @@ class VIHCasePredictor:
             # Crear ranking de riesgo
             risk_ranking = self._create_risk_ranking(predictions)
             
+            self.logger.print(f"Predicciones generadas: {len(predictions)} registros")
+            self.logger.print(f"Alertas generadas: {len(alerts)} alertas")
+            
             return {
                 'status': True,
                 'message': 'Predicciones generadas exitosamente',
@@ -650,12 +948,14 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
-            return {
+            error_result = {
                 'status': False,
                 'message': f'Error en predicción: {str(e)}',
                 'error_code': 'PREDICTION_ERROR',
                 'traceback': traceback.format_exc()
             }
+            self.logger.log_dict(error_result, "Error en predicción")
+            return error_result
     
     def _generate_predictions(self, data: pd.DataFrame, horizon: int) -> List[Dict[str, Any]]:
         """
@@ -676,12 +976,15 @@ class VIHCasePredictor:
         else:
             last_date = pd.Timestamp.now()
         
+        # ✅ CORRECCIÓN: Ordenar datos antes de usar groupby().tail()
+        data_sorted = data.sort_values(['id_distrito', 'id_establecimiento', 'fecha_mes']) if 'fecha_mes' in data.columns else data
+        
         # Generar predicciones para cada mes futuro
         for month_ahead in range(1, horizon + 1):
             future_date = last_date + pd.DateOffset(months=month_ahead)
             
             # Preparar datos para predicción
-            future_data = self._prepare_future_data(data, future_date, month_ahead)
+            future_data = self._prepare_future_data(data_sorted, future_date, month_ahead)
             
             # Realizar predicción
             pred_values = self.model.predict(future_data)
@@ -694,23 +997,27 @@ class VIHCasePredictor:
                 lower_bounds = pred_values * 0.8  # Estimación simple
                 upper_bounds = pred_values * 1.2
             
+            # ✅ CORRECCIÓN: Usar índices correctos para las entidades
+            grouped_data = data_sorted.groupby(['id_distrito', 'id_establecimiento']).tail(1)
+            
             # Crear predicciones por entidad
-            for idx, (_, row) in enumerate(future_data.iterrows()):
-                pred_dict = {
-                    'id_distrito': int(data.iloc[idx]['id_distrito']) if 'id_distrito' in data.columns else None,
-                    'id_establecimiento': int(data.iloc[idx]['id_establecimiento']) if 'id_establecimiento' in data.columns else None,
-                    'nombre_distrito': data.iloc[idx].get('nombre_distrito', 'N/A'),
-                    'nombre_establecimiento': data.iloc[idx].get('nombre_establecimiento', 'N/A'),
-                    'fecha_prediccion': future_date.strftime('%Y-%m-%d'),
-                    'mes_adelante': month_ahead,
-                    'casos_predichos': float(pred_values[idx]),
-                    'casos_minimos': float(lower_bounds[idx]),
-                    'casos_maximos': float(upper_bounds[idx]),
-                    'intervalo_confianza': f"{lower_bounds[idx]:.1f} - {upper_bounds[idx]:.1f}",
-                    'nivel_confianza': 95
-                }
-                
-                predictions.append(pred_dict)
+            for idx, (original_idx, row) in enumerate(grouped_data.iterrows()):
+                if idx < len(pred_values):  # Verificar que no excedamos los valores predichos
+                    pred_dict = {
+                        'id_distrito': int(row['id_distrito']) if 'id_distrito' in row and pd.notna(row['id_distrito']) else None,
+                        'id_establecimiento': int(row['id_establecimiento']) if 'id_establecimiento' in row and pd.notna(row['id_establecimiento']) else None,
+                        'nombre_distrito': row.get('nombre_distrito', 'N/A'),
+                        'nombre_establecimiento': row.get('nombre_establecimiento', 'N/A'),
+                        'fecha_prediccion': future_date.strftime('%Y-%m-%d'),
+                        'mes_adelante': month_ahead,
+                        'casos_predichos': float(pred_values[idx]),
+                        'casos_minimos': float(lower_bounds[idx]),
+                        'casos_maximos': float(upper_bounds[idx]),
+                        'intervalo_confianza': f"{lower_bounds[idx]:.1f} - {upper_bounds[idx]:.1f}",
+                        'nivel_confianza': 95
+                    }
+                    
+                    predictions.append(pred_dict)
         
         return predictions
     
@@ -842,21 +1149,22 @@ class VIHCasePredictor:
         risk_ranking = []
         
         for est_id, metrics in establishment_metrics.items():
-            metrics['casos_promedio'] = metrics['casos_total_predichos'] / metrics['predictions_count']
-            
-            # Calcular puntaje de riesgo
-            risk_score = (
-                metrics['casos_promedio'] * 0.4 +
-                metrics['casos_maximo'] * 0.3 +
-                metrics['alertas_criticas'] * 10 +
-                metrics['alertas_altas'] * 5 +
-                metrics['meses_con_alertas'] * 2
-            )
-            
-            metrics['risk_score'] = risk_score
-            metrics['risk_level'] = self._categorize_risk(risk_score)
-            
-            risk_ranking.append(metrics)
+            if metrics['predictions_count'] > 0:  # Evitar división por cero
+                metrics['casos_promedio'] = metrics['casos_total_predichos'] / metrics['predictions_count']
+                
+                # Calcular puntaje de riesgo
+                risk_score = (
+                    metrics['casos_promedio'] * 0.4 +
+                    metrics['casos_maximo'] * 0.3 +
+                    metrics['alertas_criticas'] * 10 +
+                    metrics['alertas_altas'] * 5 +
+                    metrics['meses_con_alertas'] * 2
+                )
+                
+                metrics['risk_score'] = risk_score
+                metrics['risk_level'] = self._categorize_risk(risk_score)
+                
+                risk_ranking.append(metrics)
         
         # Ordenar por puntaje de riesgo (mayor a menor)
         risk_ranking.sort(key=lambda x: x['risk_score'], reverse=True)
@@ -907,6 +1215,8 @@ class VIHCasePredictor:
                     'error_code': 'NO_MODEL_TO_SAVE'
                 }
             
+            self.logger.print(f"Guardando modelo en: {model_path}")
+            
             # Crear directorio si no existe
             os.makedirs(model_path, exist_ok=True)
             
@@ -934,6 +1244,7 @@ class VIHCasePredictor:
             
             # Guardar modelo
             joblib.dump(model_data, model_file)
+            self.logger.print(f"Modelo guardado: {model_file}")
             
             # Guardar configuración separada
             config_data = {
@@ -947,6 +1258,8 @@ class VIHCasePredictor:
             with open(config_file, 'w', encoding='utf-8') as f:
                 json.dump(config_data, f, indent=2, ensure_ascii=False)
             
+            self.logger.print(f"Configuración guardada: {config_file}")
+            
             return {
                 'status': True,
                 'message': 'Modelo guardado exitosamente',
@@ -956,12 +1269,14 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
-            return {
+            error_result = {
                 'status': False,
                 'message': f'Error al guardar modelo: {str(e)}',
                 'error_code': 'SAVE_ERROR',
                 'traceback': traceback.format_exc()
             }
+            self.logger.log_dict(error_result, "Error al guardar modelo")
+            return error_result
     
     def load_model(self, model_file: str) -> Dict[str, Any]:
         """
@@ -981,6 +1296,8 @@ class VIHCasePredictor:
                     'error_code': 'MODEL_FILE_NOT_FOUND'
                 }
             
+            self.logger.print(f"Cargando modelo desde: {model_file}")
+            
             # Cargar modelo
             model_data = joblib.load(model_file)
             
@@ -994,6 +1311,8 @@ class VIHCasePredictor:
             self.alert_thresholds = model_data['alert_thresholds']
             self.config = model_data['config']
             
+            self.logger.print("Modelo cargado exitosamente")
+            
             return {
                 'status': True,
                 'message': 'Modelo cargado exitosamente',
@@ -1005,12 +1324,14 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
-            return {
+            error_result = {
                 'status': False,
                 'message': f'Error al cargar modelo: {str(e)}',
                 'error_code': 'LOAD_ERROR',
                 'traceback': traceback.format_exc()
             }
+            self.logger.log_dict(error_result, "Error al cargar modelo")
+            return error_result
     
     def generate_visualization_data(self) -> Dict[str, Any]:
         """
@@ -1035,6 +1356,8 @@ class VIHCasePredictor:
                 'model_performance': self._get_model_performance_data()
             }
             
+            self.logger.print("Datos de visualización generados")
+            
             return {
                 'status': True,
                 'message': 'Datos de visualización generados',
@@ -1042,12 +1365,14 @@ class VIHCasePredictor:
             }
             
         except Exception as e:
-            return {
+            error_result = {
                 'status': False,
                 'message': f'Error generando datos de visualización: {str(e)}',
                 'error_code': 'VISUALIZATION_ERROR',
                 'traceback': traceback.format_exc()
             }
+            self.logger.log_dict(error_result, "Error en visualización")
+            return error_result
     
     def _get_data_summary(self) -> Dict[str, Any]:
         """
@@ -1125,8 +1450,14 @@ def main():
     parser.add_argument('--output_file', help='Archivo de salida JSON (opcional)')
     parser.add_argument('--predict_only', action='store_true', help='Solo hacer predicciones (requiere modelo existente)')
     parser.add_argument('--load_model', help='Cargar modelo existente')
+    parser.add_argument('--debug', action='store_true', help='Activar modo debug')
+    parser.add_argument('--log_file', help='Archivo de log personalizado (opcional)')
+    parser.add_argument('--skip-lib-check', action='store_true', help='Omitir verificación de librerías')
     
     args = parser.parse_args()
+    
+    # Crear logger
+    logger = Logger(debug=args.debug, log_file=args.log_file)
     
     # Resultado principal
     result = {
@@ -1137,11 +1468,33 @@ def main():
     }
     
     try:
+        # Verificar librerías necesarias (si no se omite)
+        if not args.skip_lib_check:
+            logger.print("Verificando librerías necesarias...")
+            lib_check = check_required_libraries()
+            logger.log_dict(lib_check, "Verificación de librerías")
+
+            if not lib_check['status']:
+                result['message'] = lib_check['message']
+                result['error_code'] = 'MISSING_LIBRARIES'
+                result['library_info'] = lib_check
+                logger.error("Faltan librerías necesarias")
+                print(json.dumps(result, indent=2, ensure_ascii=False, default=str))
+                return
+            else:
+                logger.print("Todas las librerías verificadas correctamente")
+        else:
+            logger.print("Verificación de librerías omitida")
+    
+        logger.print("=== Iniciando entrenador VIH ===")
+        logger.log_dict(vars(args), "Argumentos de entrada")
+        
         # Cargar configuración personalizada si existe
         config = {}
         if args.config_file and os.path.exists(args.config_file):
             with open(args.config_file, 'r', encoding='utf-8') as f:
                 config = json.load(f)
+            logger.print(f"Configuración cargada desde: {args.config_file}")
         
         # Actualizar configuración con argumentos
         config.update({
@@ -1150,13 +1503,14 @@ def main():
         })
         
         # Crear predictor
-        predictor = VIHCasePredictor(config)
+        predictor = VIHCasePredictor(config, logger)
         
         # Modo solo predicción
         if args.predict_only:
             if not args.load_model:
                 result['message'] = 'Modo predict_only requiere --load_model'
                 result['error_code'] = 'MISSING_MODEL_FOR_PREDICTION'
+                logger.error(result['message'])
             else:
                 # Cargar modelo
                 load_result = predictor.load_model(args.load_model)
@@ -1184,7 +1538,8 @@ def main():
                 load_result = predictor.load_model(args.load_model)
                 if not load_result['status']:
                     result = load_result
-                    print(json.dumps(result, indent=2, ensure_ascii=False))
+                    logger.log_dict(result, "Error cargando modelo")
+                    print(json.dumps(result, indent=2, ensure_ascii=False, default=str))
                     return
             
             # Cargar datos
@@ -1231,6 +1586,7 @@ def main():
                                 
                                 result['status'] = True
                                 result['message'] = 'Entrenamiento y predicción completados exitosamente'
+                                logger.print("Proceso completado exitosamente")
                             else:
                                 result = pred_result
     
@@ -1238,17 +1594,25 @@ def main():
         result['message'] = f'Error inesperado: {str(e)}'
         result['error_code'] = 'UNEXPECTED_ERROR'
         result['traceback'] = traceback.format_exc()
+        logger.log_dict(result, "Error inesperado")
     
     # Guardar resultado en archivo si se especifica
     if args.output_file:
         try:
-            with open(args.output_file, 'w', encoding='utf-8') as f:
-                json.dump(result, f, indent=2, ensure_ascii=False)
+            output_path = Path(args.output_file)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            with open(output_path, 'w', encoding='utf-8') as f:
+                json.dump(result, f, indent=2, ensure_ascii=False, default=str)
+            logger.print(f"Resultado guardado en: {args.output_file}")
         except Exception as e:
             result['output_file_error'] = f'Error guardando archivo de salida: {str(e)}'
+            logger.error(result['output_file_error'])
+    
+    # Registrar resultado final
+    logger.log_dict(result, "Resultado final")
     
     # Imprimir resultado JSON
-    print(json.dumps(result, indent=2, ensure_ascii=False))
+    print(json.dumps(result, indent=2, ensure_ascii=False, default=str))
 
 
 if __name__ == '__main__':

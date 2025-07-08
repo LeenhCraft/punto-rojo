@@ -145,7 +145,7 @@ class ImportarController extends Controller
             $headers = array_map(function ($header) {
                 return str_replace(' ', '_', strtolower($header));
             }, $headers);
-            
+
             $registros_insertados = 0;
             for ($i = 1; $i < count($rows); $i++) {
                 // generar nombres y apellidos al azar
@@ -409,7 +409,8 @@ class ImportarController extends Controller
                     $cuestionario = $modelo->registrarCuestionarioPrincipal(
                         $paciente['id_paciente'],
                         $id_personal_medico,
-                        $establecimiento['id_establecimiento']
+                        $establecimiento['id_establecimiento'],
+                        $fecha_aplicacion
                     );
 
                     if (!$cuestionario) {

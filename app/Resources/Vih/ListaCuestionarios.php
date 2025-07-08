@@ -1,4 +1,20 @@
 <?php header_web('Template.HeaderDashboard', $data); ?>
+<div class="container mb-4 mx-0 px-0">
+    <h2 class="mb-4">Importar datos para entrenamiento</h2>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <form id="form-importar-datos" enctype="multipart/form-data">
+                <div class="form-group mb-2">
+                    <label for="archivoDatos">Seleccionar archivo CSV</label>
+                    <input type="file" class="form-control" id="archivoDatos" name="archivoDatos" accept=".csv" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Importar Datos</button>
+            </form>
+        </div>
+    </div>
+
+</div>
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Lista de Cuestionarios</h3>
