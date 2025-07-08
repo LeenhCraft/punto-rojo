@@ -599,6 +599,10 @@
             </div>
 
             <div class="sidebar-content">
+                <!-- boton para volver al dashboard -->
+                <a href="/admin" class="btn btn-primary btn-block mb-3">
+                    <i class="fas fa-arrow-left mr-1"></i>Volver al Dashboard
+                </a>
                 <!-- PERÍODO DE TIEMPO -->
                 <div class="section-title">
                     <i class="fas fa-calendar-range"></i>
